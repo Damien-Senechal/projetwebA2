@@ -33,10 +33,10 @@ Il n’y a pas de rapport à écrire, ni de présentation à préparer. Vous dev
 
 # 3. Par où commencer ?
 
-**Définir les produits que vous souhaitez vendre.
-Créer la table SQL correspondante.
-Conseil: Préfixez vos noms de tables de projet, e.g. p_utilisateur, p_produit, pour vous y retrouver dans PHPMyAdmin.
-La première séance doit vous permettre d’implémenter quelques actions du MVC Produit.**
+**Définir les produits que vous souhaitez vendre.**
+**Créer la table SQL correspondante.**
+**Conseil: Préfixez vos noms de tables de projet, e.g. p_utilisateur, p_produit, pour vous y retrouver dans PHPMyAdmin.**
+**La première séance doit vous permettre d’implémenter quelques actions du MVC Produit.**
 
 Ce que ce projet n’est pas :
 Un site vitrine joli avec beaucoup d’images par exemple. Vous n’aurez pas de point sur cet aspect. Par contre, vous êtes autorisés à repartir de votre projet de HTML/CSS de l’an dernier.
