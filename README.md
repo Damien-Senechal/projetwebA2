@@ -82,3 +82,5 @@ setfacl -R -m d:u:loginetudiant2:rwx eCommerce (défini des droits par défaut :
 Rappel du TD 1 : Les ACL permettent d’avoir des droits spécifiques à plusieurs utilisateurs et à plusieurs groupes quand les droits classiques sont limités à un utilisateur et un groupe. Pour lire les droits ACL d’un fichier ou dossier, on tape getfacl nom_du_fichier.
 
 **lien critere de notation :** https://docs.google.com/spreadsheets/d/1oUd7fe0K8WZhI2TPRRvgZ2xPZf5H22CUvlpcXEMD3Ao/edit#gid=0
+
+# ON PEUT UTILISER CA : https://materializecss.com/
