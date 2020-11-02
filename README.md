@@ -18,12 +18,19 @@ Le jour de la soutenance, le site devra être déployé sur webinfo sous l’un 
 Emploi du temps prévisionnel :
 
 Semaine du 19 Octobre 2020 – Début projet
+
 Semaine du 02 Novembre 2020 – Projet
+
 Semaines du 09 Novembre 2020 – TD 7 – Cookies & Sessions
+
 Semaine du 16 Novembre 2020 – TD 8 – Authentification & Validation par email puis projet
+
 Semaine du 23 Novembre 2020 – 3h projet
+
 Semaine du 30 Novembre 2020 – 3h projet
+
 Semaine du 07 Décembre 2020 – soutenances du projet
+
 17 ou 18 décembre – examen
 
 
