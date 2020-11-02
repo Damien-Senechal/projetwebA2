@@ -33,10 +33,10 @@ Il n’y a pas de rapport à écrire, ni de présentation à préparer. Vous dev
 
 # 3. Par où commencer ?
 
-# Définir les produits que vous souhaitez vendre.
-# Créer la table SQL correspondante.
-# Conseil: Préfixez vos noms de tables de projet, e.g. p_utilisateur, p_produit, pour vous y retrouver dans PHPMyAdmin.
-# La première séance doit vous permettre d’implémenter quelques actions du MVC Produit.
+**Définir les produits que vous souhaitez vendre.
+Créer la table SQL correspondante.
+Conseil: Préfixez vos noms de tables de projet, e.g. p_utilisateur, p_produit, pour vous y retrouver dans PHPMyAdmin.
+La première séance doit vous permettre d’implémenter quelques actions du MVC Produit.**
 
 Ce que ce projet n’est pas :
 Un site vitrine joli avec beaucoup d’images par exemple. Vous n’aurez pas de point sur cet aspect. Par contre, vous êtes autorisés à repartir de votre projet de HTML/CSS de l’an dernier.
@@ -69,4 +69,4 @@ setfacl -R -m u:loginetudiant2:rwx eCommerce (donne récursivement les droits à
 setfacl -R -m d:u:loginetudiant2:rwx eCommerce (défini des droits par défaut : les nouveaux fichiers créés prendront ces droits)
 Rappel du TD 1 : Les ACL permettent d’avoir des droits spécifiques à plusieurs utilisateurs et à plusieurs groupes quand les droits classiques sont limités à un utilisateur et un groupe. Pour lire les droits ACL d’un fichier ou dossier, on tape getfacl nom_du_fichier.
 
-# lien critere de notation : https://docs.google.com/spreadsheets/d/1oUd7fe0K8WZhI2TPRRvgZ2xPZf5H22CUvlpcXEMD3Ao/edit#gid=0
+**lien critere de notation :** https://docs.google.com/spreadsheets/d/1oUd7fe0K8WZhI2TPRRvgZ2xPZf5H22CUvlpcXEMD3Ao/edit#gid=0
