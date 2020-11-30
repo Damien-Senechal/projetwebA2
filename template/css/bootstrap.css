@@ -553,26 +553,35 @@ pre code {
   margin-left: auto;
 }
 
+.container2 {
+  width: 100%;
+  padding-right: 15px;
+  padding-left: 15px;
+  margin-right: auto;
+  margin-left: auto;
+  margin-top: 10%;
+}
+
 @media (min-width: 576px) {
-  .container {
+  .container, .container2 {
     max-width: 540px;
   }
 }
 
 @media (min-width: 768px) {
-  .container {
+  .container, .container2 {
     max-width: 720px;
   }
 }
 
 @media (min-width: 992px) {
-  .container {
+  .container, .container2 {
     max-width: 960px;
   }
 }
 
 @media (min-width: 1200px) {
-  .container {
+  .container, .container2 {
     max-width: 1140px;
   }
 }
@@ -583,6 +592,7 @@ pre code {
   padding-left: 15px;
   margin-right: auto;
   margin-left: auto;
+  margin-top: 10%;
 }
 
 .row {
@@ -592,6 +602,7 @@ pre code {
   flex-wrap: wrap;
   margin-right: -15px;
   margin-left: -15px;
+  margin-top: 10%;
 }
 
 .no-gutters {
@@ -4157,7 +4168,8 @@ input[type="button"].btn-block {
   padding: 0.5rem 1rem;
 }
 
-.navbar > .container,
+.navbar > .container, 
+.navbar > .container2,
 .navbar > .container-fluid {
   display: -ms-flexbox;
   display: flex;
@@ -4243,6 +4255,7 @@ input[type="button"].btn-block {
 
 @media (max-width: 575.98px) {
   .navbar-expand-sm > .container,
+  .navbar-expand-sm > .container2,
   .navbar-expand-sm > .container-fluid {
     padding-right: 0;
     padding-left: 0;
@@ -4268,6 +4281,7 @@ input[type="button"].btn-block {
     padding-left: 0.5rem;
   }
   .navbar-expand-sm > .container,
+  .navbar-expand-sm > .container2,
   .navbar-expand-sm > .container-fluid {
     -ms-flex-wrap: nowrap;
     flex-wrap: nowrap;
@@ -4285,6 +4299,7 @@ input[type="button"].btn-block {
 
 @media (max-width: 767.98px) {
   .navbar-expand-md > .container,
+  .navbar-expand-md > .container2,
   .navbar-expand-md > .container-fluid {
     padding-right: 0;
     padding-left: 0;
@@ -4310,6 +4325,7 @@ input[type="button"].btn-block {
     padding-left: 0.5rem;
   }
   .navbar-expand-md > .container,
+  .navbar-expand-md > .container2,
   .navbar-expand-md > .container-fluid {
     -ms-flex-wrap: nowrap;
     flex-wrap: nowrap;
@@ -4327,6 +4343,7 @@ input[type="button"].btn-block {
 
 @media (max-width: 991.98px) {
   .navbar-expand-lg > .container,
+  .navbar-expand-lg > .container2,
   .navbar-expand-lg > .container-fluid {
     padding-right: 0;
     padding-left: 0;
@@ -4352,6 +4369,7 @@ input[type="button"].btn-block {
     padding-left: 0.5rem;
   }
   .navbar-expand-lg > .container,
+  .navbar-expand-lg > .container2,
   .navbar-expand-lg > .container-fluid {
     -ms-flex-wrap: nowrap;
     flex-wrap: nowrap;
@@ -4369,6 +4387,7 @@ input[type="button"].btn-block {
 
 @media (max-width: 1199.98px) {
   .navbar-expand-xl > .container,
+  .navbar-expand-xl > .container2,
   .navbar-expand-xl > .container-fluid {
     padding-right: 0;
     padding-left: 0;
@@ -4394,6 +4413,7 @@ input[type="button"].btn-block {
     padding-left: 0.5rem;
   }
   .navbar-expand-xl > .container,
+  .navbar-expand-xl > .container2,
   .navbar-expand-xl > .container-fluid {
     -ms-flex-wrap: nowrap;
     flex-wrap: nowrap;
@@ -4417,6 +4437,7 @@ input[type="button"].btn-block {
 }
 
 .navbar-expand > .container,
+.navbar-expand > .container2,
 .navbar-expand > .container-fluid {
   padding-right: 0;
   padding-left: 0;
@@ -4437,6 +4458,7 @@ input[type="button"].btn-block {
 }
 
 .navbar-expand > .container,
+.navbar-expand > .container2,
 .navbar-expand > .container-fluid {
   -ms-flex-wrap: nowrap;
   flex-wrap: nowrap;
@@ -10002,6 +10024,9 @@ a.text-dark:hover, a.text-dark:focus {
     min-width: 992px !important;
   }
   .container {
+    min-width: 992px !important;
+  }
+  .container2 {
     min-width: 992px !important;
   }
   .navbar {
