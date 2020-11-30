@@ -249,11 +249,11 @@
     <!--Controls-->
     <a class="carousel-control-prev" href="#carousel-example-1z" role="button" data-slide="prev">
       <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-      <span class="sr-only">Previous</span>
+      <span class="sr-only">Précédente</span>
     </a>
     <a class="carousel-control-next" href="#carousel-example-1z" role="button" data-slide="next">
       <span class="carousel-control-next-icon" aria-hidden="true"></span>
-      <span class="sr-only">Next</span>
+      <span class="sr-only">Suivante</span>
     </a>
     <!--/.Controls-->
 
@@ -294,15 +294,11 @@
             </div>
 
             <p class="lead">
-              <span class="mr-1">
-                <del>2,00€</del>
-              </span>
-              <span>1,83€</span>
+              <span>prix : 1,83€</span>
             </p>
 
             <p class="lead font-weight-bold">Description</p>
-
-            <p></p>
+            <p>Alo?</p>
 
             
 
