@@ -59,7 +59,7 @@
     <div class="container">
 
       <!-- Brand -->
-      <a class="navbar-brand waves-effect" href="#">
+      <a class="navbar-brand waves-effect" href="home-page.php">
         <strong class="blue-text">Cookie Paradise</strong>
       </a>
 
@@ -75,12 +75,12 @@
         <!-- Left -->
         <ul class="navbar-nav mr-auto">
           <li class="nav-item active">
-            <a class="nav-link waves-effect" href="home-page.html">Acceuil
+            <a class="nav-link waves-effect" href="home-page.php">Acceuil
               <span class="sr-only"></span>
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link waves-effect" href="magasin-page.html">Magasin</a>
+            <a class="nav-link waves-effect" href="magasin-page.php">Magasin</a>
           </li>
           <li class="nav-item">
             <a class="nav-link waves-effect" href="#">oui</a>
