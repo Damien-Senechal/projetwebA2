@@ -1,9 +1,8 @@
 <?php
 
-require_once 'Model.php';
-require_once '../config/Conf.php';
+require_once File::build_path(array('model', 'Model.php'));
 
-class ModelVoiture {
+class ModelUtilisateurs extends Model {
    
   private $id_utilisateur;
   private $nom_utilisateur;
@@ -26,26 +25,10 @@ class ModelVoiture {
     }
   }
    
-  public function getId() {
-    	return $this->id_utilisateur;  
-  }
-  public function getNom()  {
-    	return $this->nom_utilisateur;
-  }
-  public function getPrenom()  {
-    	return $this->prenom_utilisateur;
-  }
-  public function getMail() {
-    	return $this->mail_utilisateur;  
-  }
-  public function getMdp()  {
-    	return $this->mdp_utilisateur;
-  }
-  public function getAdresse()  {
-    	return $this->adresse_utilisateur;
-  }
-  public function getDdn()  {
-    	return $this->ddn_utilisateur;
+  public function get($nom_attribut) {
+      if (property_exists($this, $nom_attribut))
+          return $this->$nom_attribut;
+      return false;
   }
  
   public function setId($id2) {
@@ -108,7 +91,7 @@ class ModelVoiture {
 
   // une methode d'affichage.
   public function afficher() {
-    	echo "L'utilisateur $this->id_utilisateur, $this->nom_utilisateur, $this->prenom_utilisateurde, adresse mail : $this->mail_utilisateur, mot de passe : $this->mdp_utilisateur, adresse $this->adresse_utilisateur, date de naissance : $this->ddn_utilisateur";
+    	echo "L'utilisateur $this->id_utilisateur, $this->nom_utilisateur, $this->prenom_utilisateur, adresse mail : $this->mail_utilisateur, mot de passe : $this->mdp_utilisateur, adresse $this->adresse_utilisateur, date de naissance : $this->ddn_utilisateur";
   }
 
   public function save() {
@@ -120,7 +103,7 @@ class ModelVoiture {
     try {
 	      $rep = Model::$pdo->query('SELECT * FROM p_utilisateurs');
 
-	      $rep->setFetchMode(PDO::FETCH_CLASS, 'ModelUtilisateur');
+	      $rep->setFetchMode(PDO::FETCH_CLASS, 'ModelUtilisateurs');
 	      $tab_uti = $rep->fetchAll();
 
 	      return $tab_uti;
@@ -130,7 +113,7 @@ class ModelVoiture {
                 echo $e->getMessage(); // affiche un message d'erreur
             } 
             else {
-                echo 'Une erreur est survenue <a href=""> retour a la page d\'accueil </a>';
+                echo 'Une erreur est survenue <a href="../index.php"> retour a la page d\'accueil </a>';
             }
             die();
         }
@@ -149,11 +132,30 @@ class ModelVoiture {
       $req_prep->execute($values);
 
       // On récupère les résultats comme précédemment
-      $req_prep->setFetchMode(PDO::FETCH_CLASS, 'ModelUtilisateur');
+      $req_prep->setFetchMode(PDO::FETCH_CLASS, 'ModelUtilisateurs');
       $tab_uti = $req_prep->fetchAll();
       // Attention, si il n'y a pas de résultats, on renvoie false
       if (empty($tab_uti)) return false;
       return $tab_uti[0];
+  }
+
+  public function delete()
+    {
+        try {
+            $sql = "DELETE FROM p_utilisateurs WHERE id_utilisateur = :id_utilisateur;";
+            $req_prep = Model::$pdo->prepare($sql);
+            $values = array(
+              "id_utilisateur"=>$this->id_utilisateur,
+            );
+            $req_prep->execute($values);
+          } catch (PDOException $e) {
+            if (Conf::getDebug()) {
+              echo $e->getMessage(); // affiche un message d'erreur
+            }else {
+              echo 'Une erreur est survenue <a href="../index.php"> retour a la page d\'accueil </a>';
+            }
+            die();
+          }
   }
 
 }
