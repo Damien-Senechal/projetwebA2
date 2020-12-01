@@ -1,12 +1,13 @@
 <?php
 
-require_once File::build_path(array('model','ModelUtilisateur.php'));
+require_once File::build_path(array('model','ModelUtilisateurs.php'));
+
 class ControllerUtilisateur
 {
     protected static $object = "utilisateur";
     public static function readAll()
     {
-        $tab_u = ModelUtilisateur::selectAll();
+        $tab_u = ModelUtilisateur::getAllUtilisateur();
         $pagetitle = "Liste des Utilisateurs";
         $view = 'list';
         require File::build_path(array('view', 'view.php'));
