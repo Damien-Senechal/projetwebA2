@@ -59,7 +59,7 @@
     <div class="container">
 
       <!-- Brand -->
-      <a class="navbar-brand waves-effect" href="home-page.php">
+      <a class="navbar-brand waves-effect" href="../index.php">
         <strong class="blue-text">Cookie Paradise</strong>
       </a>
 
@@ -74,19 +74,19 @@
 
         <!-- Left -->
         <ul class="navbar-nav mr-auto">
-          <li class="nav-item active">
-            <a class="nav-link waves-effect" href="home-page.php">Acceuil
+          <li class="nav-item">
+            <a class="nav-link waves-effect" href="../index.php">Acceuil
               <span class="sr-only"></span>
             </a>
           </li>
-          <li class="nav-item">
+          <li class="nav-item active">
             <a class="nav-link waves-effect" href="magasin-page.php">Magasin</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link waves-effect" href="#">oui</a>
+            <a class="nav-link waves-effect" href="#">Se connecter</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link waves-effect" href="#">oui</a>
+            <a class="nav-link waves-effect" href="#">Nous contacter</a>
           </li>
         </ul>
 
@@ -94,7 +94,7 @@
         <ul class="navbar-nav nav-flex-icons">
           <li class="nav-item">
             <a class="nav-link waves-effect">
-              <span class="badge red z-depth-1 mr-1"> 2 </span>
+              <span class="badge red z-depth-1 mr-1"> ? </span>
               <i class="fas fa-shopping-cart"></i>
               <span class="clearfix d-none d-sm-inline-block"> Panier </span>
             </a>
@@ -140,10 +140,10 @@
 
               <!--Card image-->
               <div class="view overlay">
-                <img src="https://mdbootstrap.com/img/Photos/Horizontal/E-commerce/Vertical/12.jpg" class="card-img-top"
+                <img src="../template/img/cookiesMagasin/cookie2Baz.png" class="card-img-top"
                   alt="">
                 <a>
-                  <div class="mask rgba-white-slight"></div>
+                  <div class="mask rgba-white-slight">Acheter</div>
                 </a>
               </div>
               <!--Card image-->
@@ -152,18 +152,61 @@
               <div class="card-body text-center">
                 <!--Category & Title-->
                 <a href="" class="grey-text">
-                  <h5>Shirt</h5>
+                  <h5> catégorie ?</h5>
                 </a>
                 <h5>
                   <strong>
-                    <a href="" class="dark-grey-text">Denim shirt
+                    <a href="" class="dark-grey-text"> nom ?
+                       <span class="badge badge-pill primary-color">bestseller</span>
+                    </a>
+                  </strong>
+                </h5>
+
+                <h4 class="font-weight-bold blue-text">
+                  <strong>prix ?</strong>
+                </h4>
+
+              </div>
+              <!--Card content-->
+
+            </div>
+            <!--Card-->
+
+          </div>
+          <!--Grid column-->
+
+          <!--Grid column-->
+          <div class="col-lg-3 col-md-6 mb-4">
+
+            <!--Card-->
+            <div class="card">
+
+              <!--Card image-->
+              <div class="view overlay">
+                <img src="../template/img/cookiesMagasin/cookieCubique.png" class="card-img-top"
+                  alt="">
+                <a>
+                  <div class="mask rgba-white-slight">Acheter</div>
+                </a>
+              </div>
+              <!--Card image-->
+
+              <!--Card content-->
+              <div class="card-body text-center">
+                <!--Category & Title-->
+                <a href="" class="grey-text">
+                  <h5>catégorie ?</h5>
+                </a>
+                <h5>
+                  <strong>
+                    <a href="" class="dark-grey-text"> nom ? 
                       <span class="badge badge-pill danger-color">NEW</span>
                     </a>
                   </strong>
                 </h5>
 
                 <h4 class="font-weight-bold blue-text">
-                  <strong>120$</strong>
+                  <strong>prix ?</strong>
                 </h4>
 
               </div>
@@ -183,10 +226,10 @@
 
               <!--Card image-->
               <div class="view overlay">
-                <img src="https://mdbootstrap.com/img/Photos/Horizontal/E-commerce/Vertical/13.jpg" class="card-img-top"
+                <img src="../template/img/cookiesMagasin/cookieNul.png" class="card-img-top"
                   alt="">
                 <a>
-                  <div class="mask rgba-white-slight"></div>
+                  <div class="mask rgba-white-slight">Acheter</div>
                 </a>
               </div>
               <!--Card image-->
@@ -195,59 +238,18 @@
               <div class="card-body text-center">
                 <!--Category & Title-->
                 <a href="" class="grey-text">
-                  <h5>Sport wear</h5>
+                  <h5>catégorie ?</h5>
                 </a>
                 <h5>
                   <strong>
-                    <a href="" class="dark-grey-text">Sweatshirt</a>
-                  </strong>
-                </h5>
-
-                <h4 class="font-weight-bold blue-text">
-                  <strong>139$</strong>
-                </h4>
-
-              </div>
-              <!--Card content-->
-
-            </div>
-            <!--Card-->
-
-          </div>
-          <!--Grid column-->
-
-          <!--Grid column-->
-          <div class="col-lg-3 col-md-6 mb-4">
-
-            <!--Card-->
-            <div class="card">
-
-              <!--Card image-->
-              <div class="view overlay">
-                <img src="https://mdbootstrap.com/img/Photos/Horizontal/E-commerce/Vertical/14.jpg" class="card-img-top"
-                  alt="">
-                <a>
-                  <div class="mask rgba-white-slight"></div>
-                </a>
-              </div>
-              <!--Card image-->
-
-              <!--Card content-->
-              <div class="card-body text-center">
-                <!--Category & Title-->
-                <a href="" class="grey-text">
-                  <h5>Sport wear</h5>
-                </a>
-                <h5>
-                  <strong>
-                    <a href="" class="dark-grey-text">Grey blouse
-                      <span class="badge badge-pill primary-color">bestseller</span>
+                    <a href="" class="dark-grey-text">nom ?
+                     <span class="badge badge-pill primary-color">pafou</span>
                     </a>
                   </strong>
                 </h5>
 
                 <h4 class="font-weight-bold blue-text">
-                  <strong>99$</strong>
+                  <strong>prix ?</strong>
                 </h4>
 
               </div>
@@ -267,10 +269,10 @@
 
               <!--Card image-->
               <div class="view overlay">
-                <img src="https://mdbootstrap.com/img/Photos/Horizontal/E-commerce/Vertical/15.jpg" class="card-img-top"
+                <img src="../template/img/cookiesMagasin/cookieDeluxe.png" class="card-img-top"
                   alt="">
                 <a>
-                  <div class="mask rgba-white-slight"></div>
+                  <div class="mask rgba-white-slight">Acheter</div>
                 </a>
               </div>
               <!--Card image-->
@@ -279,16 +281,17 @@
               <div class="card-body text-center">
                 <!--Category & Title-->
                 <a href="" class="grey-text">
-                  <h5>Outwear</h5>
+                  <h5>Catégorie ?</h5>
                 </a>
                 <h5>
                   <strong>
-                    <a href="" class="dark-grey-text">Black jacket</a>
+                    <a href="" class="dark-grey-text">nom ?
+                    <span class="badge badge-pill primary-color">troShèr</span></a>
                   </strong>
                 </h5>
 
                 <h4 class="font-weight-bold blue-text">
-                  <strong>219$</strong>
+                  <strong>prix : ?</strong>
                 </h4>
 
               </div>
@@ -314,10 +317,10 @@
 
               <!--Card image-->
               <div class="view overlay">
-                <img src="https://mdbootstrap.com/img/Photos/Horizontal/E-commerce/Vertical/13.jpg" class="card-img-top"
+                <img src="../template/img/cookiesMagasin/cookieGalac.png" class="card-img-top"
                   alt="">
                 <a>
-                  <div class="mask rgba-white-slight"></div>
+                  <div class="mask rgba-white-slight">Acheter</div>
                 </a>
               </div>
               <!--Card image-->
@@ -326,18 +329,18 @@
               <div class="card-body text-center">
                 <!--Category & Title-->
                 <a href="" class="grey-text">
-                  <h5>Shirt</h5>
+                  <h5>Catégorie : ?</h5>
                 </a>
                 <h5>
                   <strong>
-                    <a href="" class="dark-grey-text">Denim shirt
-                      <span class="badge badge-pill danger-color">NEW</span>
+                    <a href="" class="dark-grey-text">Nom : ?
+                      
                     </a>
                   </strong>
                 </h5>
 
                 <h4 class="font-weight-bold blue-text">
-                  <strong>120$</strong>
+                  <strong>prix : ?</strong>
                 </h4>
 
               </div>
@@ -357,10 +360,10 @@
 
               <!--Card image-->
               <div class="view overlay">
-                <img src="https://mdbootstrap.com/img/Photos/Horizontal/E-commerce/Vertical/14.jpg" class="card-img-top"
+                <img src="../template/img/cookiesMagasin/cookieCute.png" class="card-img-top"
                   alt="">
                 <a>
-                  <div class="mask rgba-white-slight"></div>
+                  <div class="mask rgba-white-slight">Acheter</div>
                 </a>
               </div>
               <!--Card image-->
@@ -369,16 +372,16 @@
               <div class="card-body text-center">
                 <!--Category & Title-->
                 <a href="" class="grey-text">
-                  <h5>Sport wear</h5>
+                  <h5>Catégorie : ?</h5>
                 </a>
                 <h5>
                   <strong>
-                    <a href="" class="dark-grey-text">Sweatshirt</a>
+                    <a href="" class="dark-grey-text">nom : ?</a>
                   </strong>
                 </h5>
 
                 <h4 class="font-weight-bold blue-text">
-                  <strong>139$</strong>
+                  <strong>prix : ?</strong>
                 </h4>
 
               </div>
@@ -398,10 +401,10 @@
 
               <!--Card image-->
               <div class="view overlay">
-                <img src="https://mdbootstrap.com/img/Photos/Horizontal/E-commerce/Vertical/15.jpg" class="card-img-top"
+                <img src="../template/img/cookiesMagasin/cookieOCoca.png" class="card-img-top"
                   alt="">
                 <a>
-                  <div class="mask rgba-white-slight"></div>
+                  <div class="mask rgba-white-slight">Acheter</div>
                 </a>
               </div>
               <!--Card image-->
@@ -410,18 +413,18 @@
               <div class="card-body text-center">
                 <!--Category & Title-->
                 <a href="" class="grey-text">
-                  <h5>Sport wear</h5>
+                  <h5>Catégorie : ?</h5>
                 </a>
                 <h5>
                   <strong>
-                    <a href="" class="dark-grey-text">Grey blouse
-                      <span class="badge badge-pill primary-color">bestseller</span>
+                    <a href="" class="dark-grey-text">nom : ?
+                      <span class="badge badge-pill danger-color">Illégal</span>
                     </a>
                   </strong>
                 </h5>
 
                 <h4 class="font-weight-bold blue-text">
-                  <strong>99$</strong>
+                  <strong>prix : ?</strong>
                 </h4>
 
               </div>
@@ -441,10 +444,10 @@
 
               <!--Card image-->
               <div class="view overlay">
-                <img src="https://mdbootstrap.com/img/Photos/Horizontal/E-commerce/Vertical/12.jpg" class="card-img-top"
+                <img src="../template/img/cookiesMagasin/cookieCookie.png" class="card-img-top"
                   alt="">
                 <a>
-                  <div class="mask rgba-white-slight"></div>
+                  <div class="mask rgba-white-slight">Acheter</div>
                 </a>
               </div>
               <!--Card image-->
@@ -453,16 +456,16 @@
               <div class="card-body text-center">
                 <!--Category & Title-->
                 <a href="" class="grey-text">
-                  <h5>Outwear</h5>
+                  <h5>Catégorie : ?</h5>
                 </a>
                 <h5>
                   <strong>
-                    <a href="" class="dark-grey-text">Black jacket</a>
+                    <a href="" class="dark-grey-text">nom : ?</a>
                   </strong>
                 </h5>
 
                 <h4 class="font-weight-bold blue-text">
-                  <strong>219$</strong>
+                  <strong>prix : ?</strong>
                 </h4>
 
               </div>
@@ -480,48 +483,72 @@
       </section>
       <!--Section: Products v.3-->
 
-      <!--Pagination-->
-      <nav class="d-flex justify-content-center wow fadeIn">
-        <ul class="pagination pg-blue">
-
-          <!--Arrow left-->
-          <li class="page-item disabled">
-            <a class="page-link" href="#" aria-label="Previous">
-              <span aria-hidden="true">&laquo;</span>
-              <span class="sr-only">Previous</span>
-            </a>
-          </li>
-
-          <li class="page-item active">
-            <a class="page-link" href="#">1
-              <span class="sr-only">(current)</span>
-            </a>
-          </li>
-          <li class="page-item">
-            <a class="page-link" href="#">2</a>
-          </li>
-          <li class="page-item">
-            <a class="page-link" href="#">3</a>
-          </li>
-          <li class="page-item">
-            <a class="page-link" href="#">4</a>
-          </li>
-          <li class="page-item">
-            <a class="page-link" href="#">5</a>
-          </li>
-
-          <li class="page-item">
-            <a class="page-link" href="#" aria-label="Next">
-              <span aria-hidden="true">&raquo;</span>
-              <span class="sr-only">Next</span>
-            </a>
-          </li>
-        </ul>
-      </nav>
-      <!--Pagination-->
+            
 
     </div>
   </main>
+
   <!--Main layout--> 
+  <!--Footer-->
+  <footer class="page-footer text-center font-small mt-4 wow fadeIn">
+
+    <!--Call to action-->
+    <div class="pt-4">
+      
+      <p><strong> Regalez vous :D </strong></p>
+    </div>
+    <!--/.Call to action-->
+
+    <hr class="my-4">
+
+    <!-- Social icons -->
+    <div class="pb-4">
+      <a href="https://fb.watch/256tEI8fKq/" target="_blank">
+        <i class="fab fa-facebook-f mr-3"></i>
+      </a>
+
+      <a href="https://twitter.com/Granola" target="_blank">
+        <i class="fab fa-twitter mr-3"></i>
+      </a>
+
+      <a href="https://www.youtube.com/watch?v=awmQrt_AERY" target="_blank">
+        <i class="fab fa-youtube mr-3"></i>
+      </a>
+
+      <a href="https://www.pinterest.fr/pin/549509592032222133/" target="_blank">
+        <i class="fab fa-pinterest mr-3"></i>
+      </a>
+
+      <a href="https://github.com/Damien-Senechal/projetwebA2" target="_blank">
+        <i class="fab fa-github mr-3"></i>
+      </a>
+    </div>
+    <!-- Social icons -->
+
+    
+    <div class="footer-copyright py-3">
+      vive les cookies
+      <a href="https://m.media-amazon.com/images/I/81tSnVvcnSL._SS500_.jpg" target="_blank"> tiakapté </a>
+    </div>
+    
+
+  </footer>
+  <!--/.Footer-->
+
+  <!-- SCRIPTS -->
+  <!-- JQuery -->
+  <script type="text/javascript" src="template/js/jquery-3.4.1.min.js"></script>
+  <!-- Bootstrap tooltips -->
+  <script type="text/javascript" src="template/js/popper.min.js"></script>
+  <!-- Bootstrap core JavaScript -->
+  <script type="text/javascript" src="template/js/bootstrap.min.js"></script>
+  <!-- MDB core JavaScript -->
+  <script type="text/javascript" src="template/js/mdb.min.js"></script>
+  <!-- Initializations -->
+  <script type="text/javascript">
+    // Animations initialization
+    new WOW().init();
+
+  </script>
 </body>
 </html>
