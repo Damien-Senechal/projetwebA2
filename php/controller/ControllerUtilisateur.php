@@ -1,75 +1,86 @@
 <?php
-require_once File::build_path(array('model', 'ModelUtilisateur.php'));
 
-class ControllerUtilisateur {
-
-	protected static $object = 'utilisateur';
-
-    public static function readAll() {
-        $tab_v = ModelUtilisateur::selectAll();
+require_once File::build_path(array('model','ModelUtilisateur.php'));
+class ControllerUtilisateur
+{
+    protected static $object = "utilisateur";
+    public static function readAll()
+    {
+        $tab_u = ModelUtilisateur::selectAll();
+        $pagetitle = "Liste des Utilisateurs";
         $view = 'list';
         require File::build_path(array('view', 'view.php'));
     }
 
-    public static function read($login)
-    {
-    	$u = ModelUtilisateur::select($login);
-    	$view = 'detail';
-    	require File::build_path(array('view', 'view.php'));
-    }
-
-    public static function delete()
-    {
-    	ModelUtilisateur::deleteGen();
-    	$view = 'deleted';
-        require File::build_path(array('view', 'view.php'));
-    }
-
-    public static function create()
-    {
-    	$view = 'update';
-        $login = '';
-        $prenom = '';
-        $nom = '';
-        $read = 'required';
-        $name = 'created';
-        require File::build_path(array('view', 'view.php'));
-    }
-
-    public static function created()
-    {
-		$login = $_GET["login"];
-		$prenom = $_GET["prenom"];
-		$nom = $_GET["nom"];
-		$user = new ModelVoiture($login, $nom, $prenom);
-		$user->save();
-	    $view = 'created';
-	    require File::build_path(array('view', 'view.php'));
-    
-    }
-
-    public static function update()
-    {
+    public static function read(){
         $u = ModelUtilisateur::select($_GET['login']);
+        $pagetitle = "Détail Utilisateur";
+        if ($u != null){
+            $view = 'detail';
+        }else{
+            self::error("Utilisateur inexistant");
+        }
+        require File::build_path(array('view','view.php'));
+    }
+
+    public static function create(){
+        $pagetitle = "Créer Utilisateur";
         $view = 'update';
-        $login = $u->get('login');
-        $nom = $u->get('nom');
-        $prenom = $u->get('prenom');
-        $read = 'readonly';
-        $name = 'updated';
-        require File::build_path(array('view', 'view.php'));
+        require File::build_path(array('view','view.php'));
     }
 
-    public static function updated()
-    {
-        $u = ModelUtilisateur::select($_GET['login']);
-        $data = array(
-            'login' => $_GET['login'],
-            'nom' => $_GET['nom'],
-            'prenom' => $_GET['prenom']);
-        $u->update($data);
+    public static function created(){
+        $utilisateur = new ModelUtilisateur($_GET);
+        if ($utilisateur->save(array("login" => $utilisateur->get("login"),"nom" => $utilisateur->get("nom"),"prenom" => $utilisateur->get("prenom"),"mdp" => $utilisateur->get("mdp"))) == false){
+            self::error("utilisateur déjà créé");
+        }
+        else if($_GET["mdp"]!=$_GET["mdp2"]){
+            self::error("les mdp sont different");
+        }
+        else {
+            $pagetitle = "Modifier Utilisateur";
+            $view = 'created';
+            require File::build_path(array('view','view.php'));
+        }
+    }
+
+    public static function update(){
+        $pagetitle = "Modifier Utilisateur";
+        $view = 'update';
+        require File::build_path(array('view','view.php'));
+    }
+
+    public static function updated(){
+        $htmlSpecialNom = htmlspecialchars($_GET['nom']);
+        $htmlSpecialPrenom = htmlspecialchars($_GET['prenom']);
+        $htmlSpecialLogin = htmlspecialchars($_GET['login']);
+        $utilisateur = ModelUtilisateur::select($htmlSpecialLogin);
+        if($_GET["mdp"]==$_GET["mdp2"])
+        {
+        $utilisateur->update(array('login' => $htmlSpecialLogin, 'nom' => $htmlSpecialNom, 'prenom' => $htmlSpecialPrenom, 'mdp' => $_GET['mdp']));
+        $pagetitle = "Modifier Utilisateur";
         $view = 'updated';
-        require File::build_path(array('view', 'view.php'));
+        require File::build_path(array('view','view.php'));
+        }
+        else{
+           self::error("les mdp sont different"); 
+        }
+    }
+
+    public static function delete(){
+        if (isset($_GET["login"])) {
+            ModelUtilisateur::delete($_GET["login"]);
+            $pagetitle = "Delete Utilisateur";
+            $view = 'deleted';
+            require File::build_path(array('view','view.php'));
+        }else{
+            self::error("login non défini");
+        }
+    }
+
+    public static function error($message){
+        $pagetitle = "Delete Utilisateur";
+        $view = 'error';
+        require File::build_path(array('view','view.php'));
     }
 }
-?>
