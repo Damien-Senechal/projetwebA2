@@ -317,7 +317,7 @@
 
               <!--Card image-->
               <div class="view overlay">
-                <img src="../template/img/cookiesMagasin/cookieGalac.png" class="card-img-top"
+                <img src="../template/img/cookiesMagasin/cookieGalak.png" class="card-img-top"
                   alt="">
                 <a>
                   <div class="mask rgba-white-slight">Acheter</div>
