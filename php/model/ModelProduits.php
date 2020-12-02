@@ -103,7 +103,7 @@ class ModelProduits extends Model {
                     echo $e->getMessage(); // affiche un message d'erreur
                 } 
                 else {
-                    echo 'Une erreur est survenue <a href=""> retour a la page d\'accueil </a>';
+                    echo 'Une erreur est survenue <a href="File::build_path(array())"> retour a la page d\'accueil </a>';
                 }
                 die();
             }

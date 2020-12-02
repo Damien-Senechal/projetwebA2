@@ -6,14 +6,14 @@ class ControllerProduits
     protected static $object = "Produits";
     public static function readAll()
     {
-        $tab_u = ModelProduits::selectAll();
+        $tab_u = ModelProduits::getAllProduits();
         $pagetitle = "Liste des Produits";
         $view = 'list';
         require File::build_path(array('view', 'view.php'));
     }
 
     public static function read(){
-        $u = ModelProduits::select($_GET['id_produit']);
+        $u = ModelProduits::getProduitById($_GET['id_produit']);
         $pagetitle = "Détail Produits";
         if ($u != null){
             $view = 'detail';
@@ -36,12 +36,12 @@ class ControllerProduits
     }
 
     public static function updated(){
+        $htmlSpecialid_produit = htmlspecialchars($_GET['id_produit']);
         $htmlSpecialnom_produit = htmlspecialchars($_GET['nom_produit']);
         $htmlSpecialprix_produit = htmlspecialchars($_GET['prix_produit']);
-        $htmlSpecialid_produit = htmlspecialchars($_GET['id_produit']);
         $htmlSpecialstock_produit = htmlspecialchars($_GET['stock_produit']);
         $htmlSpecialdesc_produit = htmlspecialchars($_GET['desc_produit']);
-        $Produits = ModelProduits::select($htmlSpecialid_produit);
+        $Produits = ModelProduits::getProduitById($htmlSpecialid_produit);
         if($_GET["mdp"]==$_GET["mdp2"])
         {
         $Produits->update(array('id_produit' => $htmlSpecialid_produit, 'nom_produit' => $htmlSpecialnom_produit, 'prix_produit' => $htmlSpecialprix_produit, 'desc_produit' => $htmlSpecialdesc_produit, 'stock_produit' => $htmlSpecialstock_produit,'mdp' => $_GET['mdp']));
