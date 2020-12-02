@@ -1,0 +1,84 @@
+body{
+    display: flex;
+    flex-direction: column;
+    height: 98vh;
+    justify-content: space-between;
+}
+
+nav a{
+    text-decoration: none;
+    color: #000;
+    border: 2px solid #000;
+    border-radius: 24px;
+    box-sizing: border-box;
+    padding: 5px;
+    width: 10vh;
+}
+
+main{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-decoration: none;
+    height: 80vh;
+}
+
+.listeDiv{
+    display: flex;
+}
+main a{
+    text-decoration: none;
+    border: 2px solid #000;
+    border-radius: 24px;
+    box-sizing: border-box;
+    padding: 5px;
+    margin: 5px;
+}
+
+.immatListe{
+    color: #00f;
+    border-color: #00f;
+}
+
+.detailDiv{
+    color: #00f;
+    border: 2px solid #00f;
+    border-radius: 24px;
+    display: flex;
+    align-items: center;
+    padding: 0 5px;
+}
+
+.immatListe:hover{
+    background-color: rgba(0,0,255,0.5);
+}
+
+.supprButton:hover{
+    background-color: rgba(255,0,0,0.5);
+}
+
+.supprButton{
+    color: #f00;
+    border-color: #f00;
+}
+
+.updateButton:hover{
+    background-color: rgba(0,255,0,0.5);
+}
+
+.updateButton{
+    color: #0f0;
+    border-color: #0f0;
+}
+nav a:hover{
+    background-color: rgba(0,0,0,0.5);
+}
+
+footer{
+    height: 10vh;
+}
+footer p{
+    border: 1px solid black;
+    text-align:right;
+    padding-right:1em;
+}

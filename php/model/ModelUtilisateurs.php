@@ -14,7 +14,7 @@ class ModelUtilisateurs extends Model {
       
   // un constructeur
   public function __construct($id = NULL, $nom = NULL, $pre = NULL, $mail = NULL, $mdp = NULL, $adr = NULL, $ddn = NULL) {
-    if (!is_null($id) && !is_null($nom) && !is_null($pre) !is_null($mail) && !is_null($mdp) && !is_null($adr) !is_null($ddn)) {
+    if (!is_null($id) && !is_null($nom) && !is_null($pre) && !is_null($mail) && !is_null($mdp) && !is_null($adr) && !is_null($ddn)) {
       $this->id_utilisateur = $id;
       $this->nom_utilisateur = $nom;
       $this->prenom_utilisateur = $pre;

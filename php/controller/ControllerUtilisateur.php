@@ -7,14 +7,14 @@ class ControllerUtilisateur
     protected static $object = "utilisateur";
     public static function readAll()
     {
-        $tab_u = ModelUtilisateur::getAllUtilisateur();
+        $tab_u = ModelUtilisateurs::getAllUtilisateur();
         $pagetitle = "Liste des Utilisateurs";
         $view = 'list';
         require File::build_path(array('view', 'view.php'));
     }
 
     public static function read(){
-        $u = ModelUtilisateur::select($_GET['id_utilisateur']);
+        $u = ModelUtilisateurs::select($_GET['id_utilisateur']);
         $pagetitle = "Détail Utilisateur";
         if ($u != null){
             $view = 'detail';
@@ -31,7 +31,7 @@ class ControllerUtilisateur
     }
 
     public static function created(){
-        $utilisateur = new ModelUtilisateur($_GET);
+        $utilisateur = new ModelUtilisateurs($_GET);
         if($_GET["mdp_utilisateur"]!=$_GET["mdp_utilisateur2"]){
             self::error("les mdp sont different");
         }
@@ -66,7 +66,7 @@ class ControllerUtilisateur
 
     public static function delete(){
         if (isset($_GET["id_utilisateur"])) {
-            ModelUtilisateur::delete($_GET["id_utilisateur"]);
+            ModelUtilisateurs::delete($_GET["id_utilisateur"]);
             $pagetitle = "Delete Utilisateur";
             $view = 'deleted';
             require File::build_path(array('view','view.php'));
