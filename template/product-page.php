@@ -160,10 +160,32 @@
       <!--Grid row-->
       <div class="row d-flex justify-content-center wow fadeIn">
 
+      	<?php 
+          $tab_produits = ModelProduits::getAllProduits();
+          $tailleTab = sizeof($tab_produits);
+
+          $premierCookie = rand(1, $tailleTab);
+
+          $deuxiemeCoockie = rand(1, $tailleTab);
+          while ($premierCookie == $deuxiemeCoockie) {
+          	$deuxiemeCoockie = rand(1, $tailleTab);
+          }
+
+          $troisiemeCoockie = rand(1, $tailleTab);
+          while ($premierCookie == $troisiemeCoockie | $deuxiemeCoockie == $troisiemeCoockie) {
+          	$troisiemeCoockie = rand(1, $tailleTab);
+          }
+
+          $image1 = $tab_produits[$premierCookie ]->get('urlImage_produit');
+          $image2 = $tab_produits[$deuxiemeCoockie ]->get('urlImage_produit');
+          $image3 = $tab_produits[$troisiemeCoockie]->get('urlImage_produit');
+
+         
+          echo '
         <!--Grid column-->
         <div class="col-md-6 text-center">
 
-          <h4 class="my-4 h4">T'as capté?</h4>
+          <h4 class="my-4 h4">Tas capté?</h4>
 
           <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Natus suscipit modi sapiente illo soluta odit
             voluptates,
@@ -181,7 +203,7 @@
         <!--Grid column-->
         <div class="col-lg-4 col-md-12 mb-4">
 
-          <img src="" class="img-fluid" alt="">
+          <img src= '.$image1.' class="img-fluid" alt="">
 
         </div>
         <!--Grid column-->
@@ -189,7 +211,7 @@
         <!--Grid column-->
         <div class="col-lg-4 col-md-6 mb-4">
 
-          <img src="img/cookiesMagasin/cookieCT.png" class="img-fluid" alt="">
+          <img src= '.$image2.' class="img-fluid" alt="">
 
         </div>
         <!--Grid column-->
@@ -197,11 +219,11 @@
         <!--Grid column-->
         <div class="col-lg-4 col-md-6 mb-4">
 
-          <img src="" class="img-fluid" alt="">
+          <img src='.$image3.' class="img-fluid" alt="">
 
         </div>
-        <!--Grid column-->
-
+        <!--Grid column-->'
+        ?>
       </div>
       <!--Grid row-->
 
