@@ -6,7 +6,7 @@ class ControllerCommande
     protected static $object = "commande";
     public static function readAll()
     {
-        $tab_u = ModelCommande::selectAll();
+        $tab_u = ModelCommande::getAllCommandes();
         $pagetitle = "Liste des Commandes";
         $view = 'list';
         require File::build_path(array('view', 'view.php'));
