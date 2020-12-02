@@ -3,9 +3,9 @@
       static private $debug = True; 
 
       static private $databases = array(
-        'hostname' => 'localhost',
-        'database' => 'ecommerce',
-        'login' => 'coockieMan',
+        'hostname' => 'https://webinfo.iutmontp.univ-montp2.fr/',
+        'database' => 'garcial',
+        'login' => 'garcial',
         'password' => '9mOrBmdVioRje8Q4'
       );
 
