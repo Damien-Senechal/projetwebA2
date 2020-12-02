@@ -2,6 +2,10 @@
 <html lang="en">
 
 <head>
+  <?php
+    require_once '../php/lib/File.php';
+    require_once File::build_path(array("model","ModelProduits.php"));
+  ?>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
@@ -23,8 +27,8 @@
     <div class="container">
 
       <!-- Brand -->
-      <a class="navbar-brand waves-effect" href="https://mdbootstrap.com/docs/jquery/" target="_blank">
-        <strong class="blue-text">MDB</strong>
+      <a class="navbar-brand waves-effect" href="../index.php">
+        <strong class="blue-text">Cookie Paradise</strong>
       </a>
 
       <!-- Collapse -->
@@ -38,21 +42,16 @@
 
         <!-- Left -->
         <ul class="navbar-nav mr-auto">
-          <li class="nav-item active">
-            <a class="nav-link waves-effect" href="#">Home
-              <span class="sr-only">(current)</span>
+          <li class="nav-item">
+            <a class="nav-link waves-effect" href="../index.php">Acceuil
+              <span class="sr-only"></span>
             </a>
           </li>
-          <li class="nav-item">
-            <a class="nav-link waves-effect" href="https://mdbootstrap.com/docs/jquery/" target="_blank">About MDB</a>
+          <li class="nav-item active">
+            <a class="nav-link waves-effect" href="magasin-page.php">Magasin</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link waves-effect" href="https://mdbootstrap.com/docs/jquery/getting-started/download/"
-              target="_blank">Free download</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link waves-effect" href="https://mdbootstrap.com/education/bootstrap/" target="_blank">Free
-              tutorials</a>
+            <a class="nav-link waves-effect" href="#">Compte</a>
           </li>
         </ul>
 
@@ -60,36 +59,44 @@
         <ul class="navbar-nav nav-flex-icons">
           <li class="nav-item">
             <a class="nav-link waves-effect">
-              <span class="badge red z-depth-1 mr-1"> 1 </span>
+              <span class="badge red z-depth-1 mr-1"> ? </span>
               <i class="fas fa-shopping-cart"></i>
-              <span class="clearfix d-none d-sm-inline-block"> Cart </span>
+              <span class="clearfix d-none d-sm-inline-block"> Panier </span>
             </a>
           </li>
           <li class="nav-item">
-            <a href="https://www.facebook.com/mdbootstrap" class="nav-link waves-effect" target="_blank">
-              <i class="fab fa-facebook-f"></i>
-            </a>
+            
           </li>
           <li class="nav-item">
-            <a href="https://twitter.com/MDBootstrap" class="nav-link waves-effect" target="_blank">
-              <i class="fab fa-twitter"></i>
-            </a>
+            
           </li>
           <li class="nav-item">
-            <a href="https://github.com/mdbootstrap/bootstrap-material-design" class="nav-link border border-light rounded waves-effect"
+            <a href="https://github.com/Damien-Senechal/projetwebA2" class="nav-link border border-light rounded waves-effect"
               target="_blank">
-              <i class="fab fa-github mr-2"></i>MDB GitHub
+              <i class=""></i>S'enregistrer
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="https://github.com/Damien-Senechal/projetwebA2" class="nav-link border border-light rounded waves-effect"
+              target="_blank">
+              <i class=""></i>Se connecter
             </a>
           </li>
         </ul>
-
       </div>
-
     </div>
   </nav>
   <!-- Navbar -->
 
   <!--Main layout-->
+  <?php
+    $id_produit = $_GET['id_produit'];
+    $produit = ModelProduits::getProduitById($id_produit);
+    $image = $produit->get('urlImage_produit');
+    $categorie_produit = $produit->get('categorie_produit');
+    $description_produit = $produit->get('desc_produit');
+    $prix_produit = $produit->get('prix_produit');
+  ?>
   <main class="mt-5 pt-4">
     <div class="container dark-grey-text mt-5">
 
@@ -99,7 +106,7 @@
         <!--Grid column-->
         <div class="col-md-6 mb-4">
 
-          <img src="https://mdbootstrap.com/img/Photos/Horizontal/E-commerce/Products/14.jpg" class="img-fluid" alt="">
+          <?php  echo '<img src="'.$image.'" class="img-fluid" alt="">'?>
 
         </div>
         <!--Grid column-->
@@ -111,29 +118,24 @@
           <div class="p-4">
 
             <div class="mb-3">
-              <a href="">
-                <span class="badge purple mr-1">Category 2</span>
+              <a>
+                <span class="badge purple mr-1"><?php echo $categorie_produit ?></span>
               </a>
-              <a href="">
-                <span class="badge blue mr-1">New</span>
-              </a>
-              <a href="">
-                <span class="badge red mr-1">Bestseller</span>
+              <a>
+                <span class="badge orange mr-1"> -25% </span>
               </a>
             </div>
 
             <p class="lead">
               <span class="mr-1">
-                <del>$200</del>
+                <del><?php echo $prix_produit * 1.5 . '$' ?></del>
               </span>
-              <span>$100</span>
+              <span><?php echo $prix_produit . '$' ?> </span>
             </p>
 
             <p class="lead font-weight-bold">Description</p>
 
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Et dolor suscipit libero eos atque quia ipsa
-              sint voluptatibus!
-              Beatae sit assumenda asperiores iure at maxime atque repellendus maiores quia sapiente.</p>
+            <?php echo '<p>'. $description_produit . '</p>' ?> 
 
             <form class="d-flex justify-content-left">
               <!-- Default input -->
@@ -161,7 +163,7 @@
         <!--Grid column-->
         <div class="col-md-6 text-center">
 
-          <h4 class="my-4 h4">Additional information</h4>
+          <h4 class="my-4 h4">T'as capté?</h4>
 
           <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Natus suscipit modi sapiente illo soluta odit
             voluptates,
@@ -179,7 +181,7 @@
         <!--Grid column-->
         <div class="col-lg-4 col-md-12 mb-4">
 
-          <img src="https://mdbootstrap.com/img/Photos/Horizontal/E-commerce/Products/11.jpg" class="img-fluid" alt="">
+          <img src="" class="img-fluid" alt="">
 
         </div>
         <!--Grid column-->
@@ -187,7 +189,7 @@
         <!--Grid column-->
         <div class="col-lg-4 col-md-6 mb-4">
 
-          <img src="https://mdbootstrap.com/img/Photos/Horizontal/E-commerce/Products/12.jpg" class="img-fluid" alt="">
+          <img src="img/cookiesMagasin/cookieCT.png" class="img-fluid" alt="">
 
         </div>
         <!--Grid column-->
@@ -195,7 +197,7 @@
         <!--Grid column-->
         <div class="col-lg-4 col-md-6 mb-4">
 
-          <img src="https://mdbootstrap.com/img/Photos/Horizontal/E-commerce/Products/13.jpg" class="img-fluid" alt="">
+          <img src="" class="img-fluid" alt="">
 
         </div>
         <!--Grid column-->
@@ -212,14 +214,8 @@
 
     <!--Call to action-->
     <div class="pt-4">
-      <a class="btn btn-outline-white" href="https://mdbootstrap.com/docs/jquery/getting-started/download/" target="_blank"
-        role="button">Download MDB
-        <i class="fas fa-download ml-2"></i>
-      </a>
-      <a class="btn btn-outline-white" href="https://mdbootstrap.com/education/bootstrap/" target="_blank" role="button">Start
-        free tutorial
-        <i class="fas fa-graduation-cap ml-2"></i>
-      </a>
+      
+      <p><strong> Regalez vous :D </strong></p>
     </div>
     <!--/.Call to action-->
 
@@ -227,46 +223,34 @@
 
     <!-- Social icons -->
     <div class="pb-4">
-      <a href="https://www.facebook.com/mdbootstrap" target="_blank">
+      <a href="https://fb.watch/256tEI8fKq/" target="_blank">
         <i class="fab fa-facebook-f mr-3"></i>
       </a>
 
-      <a href="https://twitter.com/MDBootstrap" target="_blank">
+      <a href="https://twitter.com/Granola" target="_blank">
         <i class="fab fa-twitter mr-3"></i>
       </a>
 
-      <a href="https://www.youtube.com/watch?v=7MUISDJ5ZZ4" target="_blank">
+      <a href="https://www.youtube.com/watch?v=awmQrt_AERY" target="_blank">
         <i class="fab fa-youtube mr-3"></i>
       </a>
 
-      <a href="https://plus.google.com/u/0/b/107863090883699620484" target="_blank">
-        <i class="fab fa-google-plus-g mr-3"></i>
-      </a>
-
-      <a href="https://dribbble.com/mdbootstrap" target="_blank">
-        <i class="fab fa-dribbble mr-3"></i>
-      </a>
-
-      <a href="https://pinterest.com/mdbootstrap" target="_blank">
+      <a href="https://www.pinterest.fr/pin/549509592032222133/" target="_blank">
         <i class="fab fa-pinterest mr-3"></i>
       </a>
 
-      <a href="https://github.com/mdbootstrap/bootstrap-material-design" target="_blank">
+      <a href="https://github.com/Damien-Senechal/projetwebA2" target="_blank">
         <i class="fab fa-github mr-3"></i>
-      </a>
-
-      <a href="http://codepen.io/mdbootstrap/" target="_blank">
-        <i class="fab fa-codepen mr-3"></i>
       </a>
     </div>
     <!-- Social icons -->
 
-    <!--Copyright-->
+    
     <div class="footer-copyright py-3">
-      © 2019 Copyright:
-      <a href="https://mdbootstrap.com/education/bootstrap/" target="_blank"> MDBootstrap.com </a>
+      vive les cookies
+      <a href="https://m.media-amazon.com/images/I/81tSnVvcnSL._SS500_.jpg" target="_blank"> tiakapté </a>
     </div>
-    <!--/.Copyright-->
+    
 
   </footer>
   <!--/.Footer-->

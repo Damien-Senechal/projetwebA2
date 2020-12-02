@@ -92,10 +92,7 @@
             <a class="nav-link waves-effect" href="template/magasin-page.php">Magasin</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link waves-effect" href="template/checkout-page.php">Se connecter</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link waves-effect" href="#">Nous contacter</a>
+            <a class="nav-link waves-effect" href="#">Compte</a>
           </li>
         </ul>
 
@@ -117,7 +114,13 @@
           <li class="nav-item">
             <a href="https://github.com/Damien-Senechal/projetwebA2" class="nav-link border border-light rounded waves-effect"
               target="_blank">
-              <i class="fab fa-github mr-2"></i>Github projetWeb
+              <i class=""></i>S'enregistrer
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="https://github.com/Damien-Senechal/projetwebA2" class="nav-link border border-light rounded waves-effect"
+              target="_blank">
+              <i class=""></i>Se connecter
             </a>
           </li>
         </ul>
@@ -257,67 +260,24 @@
     <!--/.Controls-->
 
   </div>
-  <!--/.Carousel Wrapper-->
+  
 
-  <!--Main layout-->
-  <main class="mt-5 pt-4">
-    <div class="container dark-grey-text mt-5">
-
-      <!--Grid row-->
-      <div class="row wow fadeIn">
-
-        <!--Grid column-->
-        <div class="col-md-6 mb-4">
-
-          <img src="template/img/slides/cookies1slide.jpg" class="img-fluid" alt="">
-
-        </div>
-        <!--Grid column-->
-
-        <!--Grid column-->
-        <div class="col-md-6 mb-4">
-
-          <!--Content-->
-          <div class="p-4">
-
-            <div class="mb-3">
-              <a href="">
-                <span class="badge purple mr-1">Allégé en sucre</span>
-              </a>
-              <a href="">
-                <span class="badge blue mr-1">Peu calorique</span>
-              </a>
-              <a href="">
-                <span class="badge red mr-1">Bestseller</span>
-              </a>
-            </div>
-
-            <p class="lead">
-              <span>prix : ? €</span>
-            </p>
-
-            <p class="lead font-weight-bold">Description</p>
-            
-            <p> ? </p>
-
-            
-
-          </div>
-          <!--Content-->
-
-        </div>
-        <!--Grid column-->
-
-      </div>
-      <!--Grid row-->
-
-      <hr>
-
-      
-    </div>
-  </main>
-  <!--Main layout-->
-
+  <!--/.Faites pas attention a ca-->
+            <h1><center><strong>Lorem</strong></center></h1>
+            <h2><center><strong>Ipsum</strong></center></h2>
+            <h3><center><strong>takapté</strong></center></h3>
+            <h3><center><strong>takapté</strong></center></h3>
+            <h3><center><strong>takapté</strong></center></h3>
+            <h3><center><strong>takapté</strong></center></h3>
+            <h3><center><strong>takapté</strong></center></h3>
+            <h3><center><strong>takapté</strong></center></h3>
+            <h3><center><strong>takapté</strong></center></h3>
+            <h3><center><strong>takapté</strong></center></h3>
+            <h3><center><strong>takapté</strong></center></h3>
+            <h3><center><strong>takapté</strong></center></h3>
+            <h3><center><strong>takapté</strong></center></h3>
+            <h3><center><strong>takapté</strong></center></h3>
+  <!--/.Faites pas attention a ca-->
 
   <!--Footer-->
   <footer class="page-footer text-center font-small mt-4 wow fadeIn">

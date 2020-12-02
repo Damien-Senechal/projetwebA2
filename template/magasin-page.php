@@ -1,11 +1,15 @@
 <!DOCTYPE html>
 <html>
 <head>
+  <?php
+    require_once '../php/lib/File.php';
+    require_once File::build_path(array("model","ModelProduits.php"));
+  ?>
 	<meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
   <title>Magasin</title>
-  <link rel="icon" href="img/Shop.ico" />
+  <link rel="icon" href="img/cookie.ico" />
 
   <!--Import Google Icon Font-->
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
@@ -83,10 +87,7 @@
             <a class="nav-link waves-effect" href="magasin-page.php">Magasin</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link waves-effect" href="#">Se connecter</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link waves-effect" href="#">Nous contacter</a>
+            <a class="nav-link waves-effect" href="#">Compte</a>
           </li>
         </ul>
 
@@ -100,19 +101,21 @@
             </a>
           </li>
           <li class="nav-item">
-            <a href="#" class="nav-link waves-effect">
-              <i class="fab fa-facebook-f"></i>
-            </a>
+            
           </li>
           <li class="nav-item">
-            <a href="#" class="nav-link waves-effect">
-              <i class="fab fa-twitter"></i>
+            
+          </li>
+          <li class="nav-item">
+            <a href="https://github.com/Damien-Senechal/projetwebA2" class="nav-link border border-light rounded waves-effect"
+              target="_blank">
+              <i class=""></i>S'enregistrer
             </a>
           </li>
           <li class="nav-item">
             <a href="https://github.com/Damien-Senechal/projetwebA2" class="nav-link border border-light rounded waves-effect"
               target="_blank">
-              <i class="fab fa-github mr-2"></i>Github projetWeb
+              <i class=""></i>Se connecter
             </a>
           </li>
         </ul>
@@ -120,6 +123,7 @@
     </div>
   </nav>
   <!-- Navbar -->
+
   <!--Main layout-->
   <main>
     <div class="container" style="margin-top: 5%">
@@ -128,357 +132,60 @@
 
       <!--Section: Products v.3-->
       <section class="text-center mb-4">
-
-        <!--Grid row-->
         <div class="row wow fadeIn">
+        <?php 
+          $tab_produits = ModelProduits::getAllProduits();
+          foreach ($tab_produits as $key => $value) {
+            $produit = ModelProduits::getProduitById($value->get('id_produit'));
+            $image = $produit->get('urlImage_produit');
+            $id = $produit->get('id_produit');
+            $stock = $produit->get('stock_produit');
+            $nom = $produit->get('nom_produit');
+            $prix = $produit->get('prix_produit');
+            $categorie = $produit->get('categorie_produit');
 
-          <!--Grid column-->
-          <div class="col-lg-3 col-md-6 mb-4">
+            echo '<div class="col-lg-3 col-md-6 mb-4">
 
-            <!--Card-->
-            <div class="card">
+              <!--Card-->
+              <div class="card">
+                <!--Card image-->
+                <div class="view overlay">
+                  <img src="'.$image.'" class="card-img-top"
+                    alt="">
+                  <a href="product-page.php?id_produit='.$id.'">
+                    <div class="mask rgba-white-slight">Acheter</div>
+                  </a>
+                </div>
+                <!--Card image-->
 
-              <!--Card image-->
-              <div class="view overlay">
-                <img src="../template/img/cookiesMagasin/cookie2Baz.png" class="card-img-top"
-                  alt="">
-                <a>
-                  <div class="mask rgba-white-slight">Acheter</div>
-                </a>
-              </div>
-              <!--Card image-->
+                <!--Card content-->
+                <div class="card-body text-center">
+                  <!--Category & Title-->
+                  <a href="product-page.php?id_produit='.$id.'" class="grey-text">
+                    <h5>Stock : '.$stock.' unités</h5>
+                  </a>
+                  <h5>
+                    <strong>
+                      <a href="product-page.php?id_produit='.$id.'" class="dark-grey-text"> ' .$nom. '
+                        <span class="badge badge-pill danger-color">'.$categorie.'</span>
+                      </a>
+                    </strong>
+                  </h5>
 
-              <!--Card content-->
-              <div class="card-body text-center">
-                <!--Category & Title-->
-                <a href="" class="grey-text">
-                  <h5> catégorie ?</h5>
-                </a>
-                <h5>
-                  <strong>
-                    <a href="" class="dark-grey-text"> nom ?
-                       <span class="badge badge-pill primary-color">bestseller</span>
-                    </a>
-                  </strong>
-                </h5>
+                  <h4 class="font-weight-bold blue-text">
+                    <strong>prix : '.$prix.' €</strong>
+                  </h4>
 
-                <h4 class="font-weight-bold blue-text">
-                  <strong>prix ?</strong>
-                </h4>
-
-              </div>
-              <!--Card content-->
-
-            </div>
-            <!--Card-->
-
-          </div>
-          <!--Grid column-->
-
-          <!--Grid column-->
-          <div class="col-lg-3 col-md-6 mb-4">
-
-            <!--Card-->
-            <div class="card">
-
-              <!--Card image-->
-              <div class="view overlay">
-                <img src="../template/img/cookiesMagasin/cookieCubique.png" class="card-img-top"
-                  alt="">
-                <a>
-                  <div class="mask rgba-white-slight">Acheter</div>
-                </a>
-              </div>
-              <!--Card image-->
-
-              <!--Card content-->
-              <div class="card-body text-center">
-                <!--Category & Title-->
-                <a href="" class="grey-text">
-                  <h5>catégorie ?</h5>
-                </a>
-                <h5>
-                  <strong>
-                    <a href="" class="dark-grey-text"> nom ? 
-                      <span class="badge badge-pill danger-color">NEW</span>
-                    </a>
-                  </strong>
-                </h5>
-
-                <h4 class="font-weight-bold blue-text">
-                  <strong>prix ?</strong>
-                </h4>
+                </div>
+                <!--Card content-->
 
               </div>
-              <!--Card content-->
+              <!--Card-->
 
-            </div>
-            <!--Card-->
-
-          </div>
-          <!--Grid column-->
-
-          <!--Grid column-->
-          <div class="col-lg-3 col-md-6 mb-4">
-
-            <!--Card-->
-            <div class="card">
-
-              <!--Card image-->
-              <div class="view overlay">
-                <img src="../template/img/cookiesMagasin/cookieNul.png" class="card-img-top"
-                  alt="">
-                <a>
-                  <div class="mask rgba-white-slight">Acheter</div>
-                </a>
-              </div>
-              <!--Card image-->
-
-              <!--Card content-->
-              <div class="card-body text-center">
-                <!--Category & Title-->
-                <a href="" class="grey-text">
-                  <h5>catégorie ?</h5>
-                </a>
-                <h5>
-                  <strong>
-                    <a href="" class="dark-grey-text">nom ?
-                     <span class="badge badge-pill primary-color">pafou</span>
-                    </a>
-                  </strong>
-                </h5>
-
-                <h4 class="font-weight-bold blue-text">
-                  <strong>prix ?</strong>
-                </h4>
-
-              </div>
-              <!--Card content-->
-
-            </div>
-            <!--Card-->
-
-          </div>
-          <!--Grid column-->
-
-          <!--Fourth column-->
-          <div class="col-lg-3 col-md-6 mb-4">
-
-            <!--Card-->
-            <div class="card">
-
-              <!--Card image-->
-              <div class="view overlay">
-                <img src="../template/img/cookiesMagasin/cookieDeluxe.png" class="card-img-top"
-                  alt="">
-                <a>
-                  <div class="mask rgba-white-slight">Acheter</div>
-                </a>
-              </div>
-              <!--Card image-->
-
-              <!--Card content-->
-              <div class="card-body text-center">
-                <!--Category & Title-->
-                <a href="" class="grey-text">
-                  <h5>Catégorie ?</h5>
-                </a>
-                <h5>
-                  <strong>
-                    <a href="" class="dark-grey-text">nom ?
-                    <span class="badge badge-pill primary-color">troShèr</span></a>
-                  </strong>
-                </h5>
-
-                <h4 class="font-weight-bold blue-text">
-                  <strong>prix : ?</strong>
-                </h4>
-
-              </div>
-              <!--Card content-->
-
-            </div>
-            <!--Card-->
-
-          </div>
-          <!--Fourth column-->
-
+            </div>';
+          }
+        ?>
         </div>
-        <!--Grid row-->
-
-        <!--Grid row-->
-        <div class="row wow fadeIn">
-
-          <!--Grid column-->
-          <div class="col-lg-3 col-md-6 mb-4">
-
-            <!--Card-->
-            <div class="card">
-
-              <!--Card image-->
-              <div class="view overlay">
-                <img src="../template/img/cookiesMagasin/cookieGalak.png" class="card-img-top"
-                  alt="">
-                <a>
-                  <div class="mask rgba-white-slight">Acheter</div>
-                </a>
-              </div>
-              <!--Card image-->
-
-              <!--Card content-->
-              <div class="card-body text-center">
-                <!--Category & Title-->
-                <a href="" class="grey-text">
-                  <h5>Catégorie : ?</h5>
-                </a>
-                <h5>
-                  <strong>
-                    <a href="" class="dark-grey-text">Nom : ?
-                      
-                    </a>
-                  </strong>
-                </h5>
-
-                <h4 class="font-weight-bold blue-text">
-                  <strong>prix : ?</strong>
-                </h4>
-
-              </div>
-              <!--Card content-->
-
-            </div>
-            <!--Card-->
-
-          </div>
-          <!--Grid column-->
-
-          <!--Grid column-->
-          <div class="col-lg-3 col-md-6 mb-4">
-
-            <!--Card-->
-            <div class="card">
-
-              <!--Card image-->
-              <div class="view overlay">
-                <img src="../template/img/cookiesMagasin/cookieCute.png" class="card-img-top"
-                  alt="">
-                <a>
-                  <div class="mask rgba-white-slight">Acheter</div>
-                </a>
-              </div>
-              <!--Card image-->
-
-              <!--Card content-->
-              <div class="card-body text-center">
-                <!--Category & Title-->
-                <a href="" class="grey-text">
-                  <h5>Catégorie : ?</h5>
-                </a>
-                <h5>
-                  <strong>
-                    <a href="" class="dark-grey-text">nom : ?</a>
-                  </strong>
-                </h5>
-
-                <h4 class="font-weight-bold blue-text">
-                  <strong>prix : ?</strong>
-                </h4>
-
-              </div>
-              <!--Card content-->
-
-            </div>
-            <!--Card-->
-
-          </div>
-          <!--Grid column-->
-
-          <!--Grid column-->
-          <div class="col-lg-3 col-md-6 mb-4">
-
-            <!--Card-->
-            <div class="card">
-
-              <!--Card image-->
-              <div class="view overlay">
-                <img src="../template/img/cookiesMagasin/cookieOCoca.png" class="card-img-top"
-                  alt="">
-                <a>
-                  <div class="mask rgba-white-slight">Acheter</div>
-                </a>
-              </div>
-              <!--Card image-->
-
-              <!--Card content-->
-              <div class="card-body text-center">
-                <!--Category & Title-->
-                <a href="" class="grey-text">
-                  <h5>Catégorie : ?</h5>
-                </a>
-                <h5>
-                  <strong>
-                    <a href="" class="dark-grey-text">nom : ?
-                      <span class="badge badge-pill danger-color">Illégal</span>
-                    </a>
-                  </strong>
-                </h5>
-
-                <h4 class="font-weight-bold blue-text">
-                  <strong>prix : ?</strong>
-                </h4>
-
-              </div>
-              <!--Card content-->
-
-            </div>
-            <!--Card-->
-
-          </div>
-          <!--Grid column-->
-
-          <!--Fourth column-->
-          <div class="col-lg-3 col-md-6 mb-4">
-
-            <!--Card-->
-            <div class="card">
-
-              <!--Card image-->
-              <div class="view overlay">
-                <img src="../template/img/cookiesMagasin/cookieCookie.png" class="card-img-top"
-                  alt="">
-                <a>
-                  <div class="mask rgba-white-slight">Acheter</div>
-                </a>
-              </div>
-              <!--Card image-->
-
-              <!--Card content-->
-              <div class="card-body text-center">
-                <!--Category & Title-->
-                <a href="" class="grey-text">
-                  <h5>Catégorie : ?</h5>
-                </a>
-                <h5>
-                  <strong>
-                    <a href="" class="dark-grey-text">nom : ?</a>
-                  </strong>
-                </h5>
-
-                <h4 class="font-weight-bold blue-text">
-                  <strong>prix : ?</strong>
-                </h4>
-
-              </div>
-              <!--Card content-->
-
-            </div>
-            <!--Card-->
-
-          </div>
-          <!--Fourth column-->
-
-        </div>
-        <!--Grid row-->
 
       </section>
       <!--Section: Products v.3-->

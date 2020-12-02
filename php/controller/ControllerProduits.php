@@ -36,14 +36,10 @@ class ControllerProduits
     }
 
     public static function updated(){
-        $htmlSpecialid_produit = ($_GET['id_produit']);
-        $htmlSpecialnom_produit = ($_GET['nom_produit']);
-        $htmlSpecialprix_produit = ($_GET['prix_produit']);
-        $htmlSpecialstock_produit = ($_GET['stock_produit']);
-        $htmlSpecialdesc_produit = ($_GET['desc_produit']);
+
         $Produits = ModelProduits::getProduitById($htmlSpecialid_produit);
         
-        $Produits->update(array('id_produit' => $htmlSpecialid_produit, 'nom_produit' => $htmlSpecialnom_produit, 'prix_produit' => $htmlSpecialprix_produit, 'desc_produit' => $htmlSpecialdesc_produit, 'stock_produit' => $htmlSpecialstock_produit));
+        $Produits->update(array('id_produit' => $_GET['id_produit'], 'nom_produit' => $_GET['nom_produit'], 'prix_produit' => $_GET['prix_produit'], 'desc_produit' => $_GET['desc_produit'], 'stock_produit' => $_GET['stock_produit']);
         $pagetitle = "Modifier Produits";
         $view = 'updated';
         require File::build_path(array('view','view.php'));
