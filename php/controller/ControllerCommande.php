@@ -13,7 +13,7 @@ class ControllerCommande
     }
 
     public static function read(){
-        $u = ModelCommande::select($_GET['login']);
+        $u = ModelCommande::select($_GET['id_commande']);
         $pagetitle = "Détail Commande";
         if ($u != null){
             $view = 'detail';
