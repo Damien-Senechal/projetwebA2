@@ -36,22 +36,17 @@ class ControllerProduits
     }
 
     public static function updated(){
-        $htmlSpecialid_produit = htmlspecialchars($_GET['id_produit']);
-        $htmlSpecialnom_produit = htmlspecialchars($_GET['nom_produit']);
-        $htmlSpecialprix_produit = htmlspecialchars($_GET['prix_produit']);
-        $htmlSpecialstock_produit = htmlspecialchars($_GET['stock_produit']);
-        $htmlSpecialdesc_produit = htmlspecialchars($_GET['desc_produit']);
+        $htmlSpecialid_produit = ($_GET['id_produit']);
+        $htmlSpecialnom_produit = ($_GET['nom_produit']);
+        $htmlSpecialprix_produit = ($_GET['prix_produit']);
+        $htmlSpecialstock_produit = ($_GET['stock_produit']);
+        $htmlSpecialdesc_produit = ($_GET['desc_produit']);
         $Produits = ModelProduits::getProduitById($htmlSpecialid_produit);
-        if($_GET["mdp"]==$_GET["mdp2"])
-        {
-        $Produits->update(array('id_produit' => $htmlSpecialid_produit, 'nom_produit' => $htmlSpecialnom_produit, 'prix_produit' => $htmlSpecialprix_produit, 'desc_produit' => $htmlSpecialdesc_produit, 'stock_produit' => $htmlSpecialstock_produit,'mdp' => $_GET['mdp']));
+        
+        $Produits->update(array('id_produit' => $htmlSpecialid_produit, 'nom_produit' => $htmlSpecialnom_produit, 'prix_produit' => $htmlSpecialprix_produit, 'desc_produit' => $htmlSpecialdesc_produit, 'stock_produit' => $htmlSpecialstock_produit));
         $pagetitle = "Modifier Produits";
         $view = 'updated';
         require File::build_path(array('view','view.php'));
-        }
-        else{
-           self::error("les mdp sont different"); 
-        }
     }
 
     public static function delete(){

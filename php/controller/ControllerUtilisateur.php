@@ -52,16 +52,9 @@ class ControllerUtilisateur
     }
 
     public static function updated(){
-        $htmlSpecialId = htmlspecialchars($_GET['id_utilisateur']);
-        $htmlSpecialNom = htmlspecialchars($_GET['nom_utilisateur']);
-        $htmlSpecialPrenom = htmlspecialchars($_GET['prenom_utilisateur']);
-        $htmlSpecialMail = htmlspecialchars($_GET['mail_utilisateur']);
-        $htmlSpecialAdresse = htmlspecialchars($_GET['adresse_utilisateur']);
-        $htmlSpecialDdn = htmlspecialchars($_GET['ddn_utilisateur']);
-        $utilisateur = ModelUtilisateur::select($htmlSpecialId);
         if($_GET["mdp_utilisateur"]==$_GET["mdp_utilisateur2"])
         {
-        $utilisateur->update(array('id_utilisateur' => $htmlSpecialId, 'nom_utilisateur' => $htmlSpecialNom, 'prenom_utilisateur' => $htmlSpecialPrenom, 'mail_utilisateur' => $htmlSpecialMail, 'adresse_utilisateur' => $htmlSpecialAdresse, 'ddn_utilisateur' => $htmlSpecialDdn, 'mdp_utilisateur' => $_GET['mdp_utilisateur']));
+        $utilisateur->update(array('id_utilisateur' => $_GET['id_utilisateur'], 'nom_utilisateur' => $htmlSpecialNom, 'prenom_utilisateur' => $_GET['nom_utilisateur'], 'mail_utilisateur' => $_GET['mail_utilisateur'], 'adresse_utilisateur' => $_GET['adresse_utilisateur'], 'ddn_utilisateur' => $_GET['ddn_utilisateur'], 'mdp_utilisateur' => $_GET['mdp_utilisateur']));
         $pagetitle = "Modifier Utilisateur";
         $view = 'updated';
         require File::build_path(array('view','view.php'));
@@ -72,13 +65,13 @@ class ControllerUtilisateur
     }
 
     public static function delete(){
-        if (isset($_GET["login"])) {
-            ModelUtilisateur::delete($_GET["login"]);
+        if (isset($_GET["id_utilisateur"])) {
+            ModelUtilisateur::delete($_GET["id_utilisateur"]);
             $pagetitle = "Delete Utilisateur";
             $view = 'deleted';
             require File::build_path(array('view','view.php'));
         }else{
-            self::error("login non défini");
+            self::error("Id non défini");
         }
     }
 
