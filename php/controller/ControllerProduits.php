@@ -13,7 +13,7 @@ class ControllerProduits
     }
 
     public static function read(){
-        $u = ModelProduits::select($_GET['login']);
+        $u = ModelProduits::select($_GET['id_produit']);
         $pagetitle = "Détail Produits";
         if ($u != null){
             $view = 'detail';
@@ -36,13 +36,15 @@ class ControllerProduits
     }
 
     public static function updated(){
-        $htmlSpecialNom = htmlspecialchars($_GET['nom']);
-        $htmlSpecialPrenom = htmlspecialchars($_GET['prenom']);
-        $htmlSpecialLogin = htmlspecialchars($_GET['login']);
-        $Produits = ModelProduits::select($htmlSpecialLogin);
+        $htmlSpecialnom_produit = htmlspecialchars($_GET['nom_produit']);
+        $htmlSpecialprix_produit = htmlspecialchars($_GET['prix_produit']);
+        $htmlSpecialid_produit = htmlspecialchars($_GET['id_produit']);
+        $htmlSpecialstock_produit = htmlspecialchars($_GET['stock_produit']);
+        $htmlSpecialdesc_produit = htmlspecialchars($_GET['desc_produit']);
+        $Produits = ModelProduits::select($htmlSpecialid_produit);
         if($_GET["mdp"]==$_GET["mdp2"])
         {
-        $Produits->update(array('login' => $htmlSpecialLogin, 'nom' => $htmlSpecialNom, 'prenom' => $htmlSpecialPrenom, 'mdp' => $_GET['mdp']));
+        $Produits->update(array('id_produit' => $htmlSpecialid_produit, 'nom_produit' => $htmlSpecialnom_produit, 'prix_produit' => $htmlSpecialprix_produit, 'desc_produit' => $htmlSpecialdesc_produit, 'stock_produit' => $htmlSpecialstock_produit,'mdp' => $_GET['mdp']));
         $pagetitle = "Modifier Produits";
         $view = 'updated';
         require File::build_path(array('view','view.php'));
@@ -53,13 +55,13 @@ class ControllerProduits
     }
 
     public static function delete(){
-        if (isset($_GET["login"])) {
-            ModelProduits::delete($_GET["login"]);
+        if (isset($_GET["id_produit"])) {
+            ModelProduits::delete($_GET["id_produit"]);
             $pagetitle = "Delete Produits";
             $view = 'deleted';
             require File::build_path(array('view','view.php'));
         }else{
-            self::error("login non défini");
+            self::error("id_produit non défini");
         }
     }
 
