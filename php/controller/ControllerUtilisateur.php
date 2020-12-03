@@ -35,7 +35,7 @@ class ControllerUtilisateur
         if($_GET["mdp_utilisateur"]!=$_GET["mdp_utilisateur2"]){
             self::error("les mdp sont different");
         }
-        else if ($utilisateur->save(array("id_utilisateur" => $utilisateur->get("id_utilisateur"),"nom_utilisateur" => $utilisateur->get("nom_utilisateur"),"prenom_utilisateur" => $utilisateur->get("prenom_utilisateur"),"mail_utilisateur" => $utilisateur->get("mail_utilisateur"), "mdp_utilisateur" => $utilisateur->get("mdp_utilisateur"), "adresse_utilisateur" => $utilisateur->get("adresse_utilisateur"), "ddn_utilisateur" => $utilisateur->get("ddn_utilisateur"))) == false){
+        else if ($utilisateur->save(array("id_utilisateur" => $utilisateur->get("id_utilisateur"),"nom_utilisateur" => $utilisateur->get("nom_utilisateur"),"prenom_utilisateur" => $utilisateur->get("prenom_utilisateur"),"mail_utilisateur" => $utilisateur->get("mail_utilisateur"), "mdp_utilisateur" => $utilisateur->get("mdp_utilisateur"), "adresse_utilisateur" => $utilisateur->get("adresse_utilisateur"), "ddn_utilisateur" => $utilisateur->get("ddn_utilisateur"), "admin_utilisateur" => $utilisateur->get("admin_utilisateur"))) == false){
             self::error("utilisateur déjà créé");
         }
         else {
@@ -54,7 +54,7 @@ class ControllerUtilisateur
     public static function updated(){
         if($_GET["mdp_utilisateur"]==$_GET["mdp_utilisateur2"])
         {
-        $utilisateur->update(array('id_utilisateur' => $_GET['id_utilisateur'], 'nom_utilisateur' => $htmlSpecialNom, 'prenom_utilisateur' => $_GET['nom_utilisateur'], 'mail_utilisateur' => $_GET['mail_utilisateur'], 'adresse_utilisateur' => $_GET['adresse_utilisateur'], 'ddn_utilisateur' => $_GET['ddn_utilisateur'], 'mdp_utilisateur' => $_GET['mdp_utilisateur']));
+        $utilisateur->update(array('id_utilisateur' => $_GET['id_utilisateur'], 'nom_utilisateur' => $htmlSpecialNom, 'prenom_utilisateur' => $_GET['nom_utilisateur'], 'mail_utilisateur' => $_GET['mail_utilisateur'], 'adresse_utilisateur' => $_GET['adresse_utilisateur'], 'ddn_utilisateur' => $_GET['ddn_utilisateur'], 'admin_utilisateur' => $_GET['admin_utilisateur'], 'mdp_utilisateur' => $_GET['mdp_utilisateur']));
         $pagetitle = "Modifier Utilisateur";
         $view = 'updated';
         require File::build_path(array('view','view.php'));
