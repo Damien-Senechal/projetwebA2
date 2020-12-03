@@ -11,6 +11,12 @@ class ControllerUtilisateur
         require File::build_path(array('view','view.php'));
     }
 
+    public static function utilisateurDetail(){
+        $pagetitle = ModelUtilisateurs::getUtilisateurById($_GET['id_utilisateur'])->get('nom_utilisateur')." ";
+        $view = "viewUtilisateur";
+        require File::build_path(array('view','view.php'));
+    }
+
     public static function create(){
         $pagetitle = "Créer Utilisateur";
         $view = 'update';

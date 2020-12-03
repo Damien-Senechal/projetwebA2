@@ -165,21 +165,62 @@
   </div>
   
 
-  <!--/.Faites pas attention a ca-->
-            <h1><center><strong>Lorem</strong></center></h1>
-            <h2><center><strong>Ipsum</strong></center></h2>
-            <h3><center><strong>takapté</strong></center></h3>
-            <h3><center><strong>takapté</strong></center></h3>
-            <h3><center><strong>takapté</strong></center></h3>
-            <h3><center><strong>takapté</strong></center></h3>
-            <h3><center><strong>takapté</strong></center></h3>
-            <h3><center><strong>takapté</strong></center></h3>
-            <h3><center><strong>takapté</strong></center></h3>
-            <h3><center><strong>takapté</strong></center></h3>
-            <h3><center><strong>takapté</strong></center></h3>
-            <h3><center><strong>takapté</strong></center></h3>
-            <h3><center><strong>takapté</strong></center></h3>
-            <h3><center><strong>takapté</strong></center></h3>
-  <!--/.Faites pas attention a ca-->
+  <!--/.Faites  attention a ca-->
+    <div class="container" style="margin-top: 5%">
+      <!--Section: Products v.3-->
+      <h1 class="dark-grey-text"><strong><center> EKIP : </center></strong></h1>
+      <section class="text-center mb-4">
+        <div class="row wow fadeIn">
+          <?php
+            $tab_utilisateurs = ModelUtilisateurs::getAllUtilisateurs();
+            foreach ($tab_utilisateurs as $key => $value) {
+              $utilisateur = ModelUtilisateurs::getUtilisateurById($value->get('id_utilisateur'));
+              $admin = $utilisateur->get('admin_utilisateur');
+              if ($admin == TRUE) {
+                $id = $utilisateur->get('id_utilisateur');
+                $nom = $utilisateur->get('nom_utilisateur');
+                $prenom = $utilisateur->get('prenom_utilisateur');
+                $mail = $utilisateur->get('mail_utilisateur');
+                $ddn = $utilisateur->get('ddn_utilisateur');
+                $image = $utilisateur->get('pp_utilisateur');
+
+                echo '<div class="col-lg-3 col-md-6 mb-4">
+                  <div class="card">
+                    <div class="view overlay">
+                      <img src="'.$image.'" class="card-img-top"
+                        alt="">
+                      <a href="index?action=utilisateurDetail&controller=utilisateur&id_utilisateur='.$id.'">
+                        <div class="mask rgba-white-slight">Présentation</div>
+                      </a>
+                    </div>
+                    <div class="card-body text-center">
+                     
+                      <a href="index?action=utilisateurDetail&controller=utilisateur&id_utilisateur='.$id.'" class="grey-text">
+                        <h5>'.$nom.'</h5>
+                      </a>
+                      <h5>
+                        <strong>
+                          <a href="index?action=utilisateurDetail&controller=utilisateur&id_utilisateur='.$id.'" class="dark-grey-text"> ' .$prenom. '
+                            <br>
+                            <span class="badge badge-pill danger-color">'.$mail.'</span>
+                          </a>
+                        </strong>
+                      </h5>
+
+                      <h4 class="font-weight-bold blue-text">
+                        <strong> '.$ddn.' </strong>
+                      </h4>
+
+                    </div>
+                  </div>
+                </div>';
+            }
+          }
+        ?>
+        </div>
+      </section>
+      <!--Section: Products v.3-->
+    </div>
+  <!--/.Faites  attention a ca-->
   </body>
 </html>

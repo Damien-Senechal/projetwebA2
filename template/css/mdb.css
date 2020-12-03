@@ -1133,7 +1133,7 @@
 
 .rgba-black-strong,
 .rgba-black-strong:after {
-  background-color: rgba(0, 0, 0, 0.7); }
+  background-color: rgba(0, 0, 0, 0.4); }
 
 .white {
   background-color: #fff !important; }

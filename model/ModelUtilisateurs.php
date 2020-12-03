@@ -109,7 +109,7 @@ class ModelUtilisateurs extends Model {
   }
 
 
-  public static function getAllUtilisateur() {
+  public static function getAllUtilisateurs() {
     try {
 	      $rep = Model::$pdo->query('SELECT * FROM p_utilisateurs');
 

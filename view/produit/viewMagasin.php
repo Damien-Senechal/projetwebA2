@@ -5,11 +5,14 @@
 </head>
 <body>
   <!--Main layout-->
+
   <main>
+
     <div class="container" style="margin-top: 5%">
       <!--Section: Products v.3-->
       <section class="text-center mb-4">
         <div class="row wow fadeIn">
+
           <?php
             $tab_produits = ModelProduits::getAllProduits();
             foreach ($tab_produits as $key => $value) {
@@ -20,7 +23,6 @@
             $nom = $produit->get('nom_produit');
             $prix = $produit->get('prix_produit');
             $categorie = $produit->get('categorie_produit');
-
             echo '<div class="col-lg-3 col-md-6 mb-4">
 
               <!--Card-->

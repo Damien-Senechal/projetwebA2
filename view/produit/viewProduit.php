@@ -75,7 +75,7 @@
       </div>
       <!--Grid row-->
 
-      <hr>
+      <hr> <!--c kwa?-->
 
       <!--Grid row-->
       <div class="row d-flex justify-content-center wow fadeIn">
