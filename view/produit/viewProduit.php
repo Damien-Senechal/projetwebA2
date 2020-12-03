@@ -2,22 +2,7 @@
 <html lang="en">
 
 <head>
-  <?php
-    require_once '../php/lib/File.php';
-    require_once File::build_path(array("model","ModelProduits.php"));
-  ?>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta http-equiv="x-ua-compatible" content="ie=edge">
-  <title>Material Design Bootstrap</title>
-  <!-- Font Awesome -->
-  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css">
-  <!-- Bootstrap core CSS -->
-  <link href="css/bootstrap.min.css" rel="stylesheet">
-  <!-- Material Design Bootstrap -->
-  <link href="css/mdb.min.css" rel="stylesheet">
-  <!-- Your custom styles (optional) -->
-  <link href="css/style.min.css" rel="stylesheet">
+  
 </head>
 
 <body>
@@ -29,6 +14,7 @@
     $categorie_produit = $produit->get('categorie_produit');
     $description_produit = $produit->get('desc_produit');
     $prix_produit = $produit->get('prix_produit');
+    $nom_produit = $produit->get('nom_produit');
   ?>
   <main class="mt-5 pt-4">
     <div class="container dark-grey-text mt-5">
@@ -49,6 +35,7 @@
 
           <!--Content-->
           <div class="p-4">
+            <h4 class="my-4 h4"><?php echo $nom_produit ?></h4>
 
             <div class="mb-3">
               <a>
@@ -97,21 +84,26 @@
           $tab_produits = ModelProduits::getAllProduits();
           $tailleTab = sizeof($tab_produits);
 
-          $premierCookie = rand(1, $tailleTab);
-
-          $deuxiemeCoockie = rand(1, $tailleTab);
-          while ($premierCookie == $deuxiemeCoockie) {
-          	$deuxiemeCoockie = rand(1, $tailleTab);
+          $premierCookie = rand(0, $tailleTab-1);
+          while ($tab_produits[$premierCookie ]->get('id_produit') == $id_produit) {
+            $premierCookie = rand(0, $tailleTab-1);
+          }
+          $deuxiemeCookie = rand(0, $tailleTab-1);
+          while ($premierCookie == $deuxiemeCookie | $tab_produits[$deuxiemeCookie ]->get('id_produit') == $id_produit) {
+          	$deuxiemeCookie = rand(0, $tailleTab-1);
           }
 
-          $troisiemeCoockie = rand(1, $tailleTab);
-          while ($premierCookie == $troisiemeCoockie | $deuxiemeCoockie == $troisiemeCoockie) {
-          	$troisiemeCoockie = rand(1, $tailleTab);
+          $troisiemeCookie = rand(0, $tailleTab-1);
+          while ($premierCookie == $troisiemeCookie | $deuxiemeCookie == $troisiemeCookie | $tab_produits[$troisiemeCookie ]->get('id_produit') == $id_produit) {
+          	$troisiemeCookie = rand(0, $tailleTab-1);
           }
 
-          $image1 = $tab_produits[$premierCookie ]->get('urlImage_produit');
-          $image2 = $tab_produits[$deuxiemeCoockie ]->get('urlImage_produit');
-          $image3 = $tab_produits[$troisiemeCoockie]->get('urlImage_produit');
+          $image1 = $tab_produits[$premierCookie]->get('urlImage_produit');
+          $image2 = $tab_produits[$deuxiemeCookie]->get('urlImage_produit');
+          $image3 = $tab_produits[$troisiemeCookie]->get('urlImage_produit');
+          $id1 = $tab_produits[$premierCookie]->get('id_produit');
+          $id2 = $tab_produits[$deuxiemeCookie]->get('id_produit');
+          $id3 = $tab_produits[$troisiemeCookie]->get('id_produit');
 
          
           echo '
@@ -120,9 +112,11 @@
 
           <h4 class="my-4 h4">Tas capté?</h4>
 
-          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Natus suscipit modi sapiente illo soluta odit
-            voluptates,
-            quibusdam officia. Neque quibusdam quas a quis porro? Molestias illo neque eum in laborum.</p>
+          <p>
+          T\'AS CAPTÉ QUE C\'EST QUE DE LA QUALITÉ FRÉROT ! <br>
+          Les cookies, ils viennet des meilleurs régions de france, et tmtc que nos régions ont du talent takapté
+
+          </p>
 
         </div>
         <!--Grid column-->
@@ -135,24 +129,27 @@
 
         <!--Grid column-->
         <div class="col-lg-4 col-md-12 mb-4">
-
-          <img src= '.$image1.' class="img-fluid" alt="">
-
-        </div>
-        <!--Grid column-->
-
-        <!--Grid column-->
-        <div class="col-lg-4 col-md-6 mb-4">
-
-          <img src= '.$image2.' class="img-fluid" alt="">
+          <h4 class="my-4 h4"><center>'.$tab_produits[$premierCookie]->get('nom_produit').'</center></h4>
+          <a href="index?action=produitDetail&controller=produits&id_produit='.$id1.'"> <img src= '.$image1.' class="img-fluid"> </a>
+          <h4 class="my-4 h4"><center>'.$tab_produits[$premierCookie]->get('prix_produit').' €</center></h4>
 
         </div>
         <!--Grid column-->
 
         <!--Grid column-->
         <div class="col-lg-4 col-md-6 mb-4">
+          <h4 class="my-4 h4"><center>'.$tab_produits[$deuxiemeCookie]->get('nom_produit').'</center></h4>
+          <a href="index?action=produitDetail&controller=produits&id_produit='.$id2.'"> <img src= '.$image2.' class="img-fluid"> </a>
+          <h4 class="my-4 h4"><center>'.$tab_produits[$deuxiemeCookie]->get('prix_produit').' €</center></h4>
 
-          <img src='.$image3.' class="img-fluid" alt="">
+        </div>
+        <!--Grid column-->
+
+        <!--Grid column-->
+        <div class="col-lg-4 col-md-6 mb-4">
+          <h4 class="my-4 h4"><center>'.$tab_produits[$troisiemeCookie]->get('nom_produit').'</center></h4>
+          <a href="index?action=produitDetail&controller=produits&id_produit='.$id3.'"> <img src= '.$image3.' class="img-fluid"> </a>
+          <h4 class="my-4 h4"><center>'.$tab_produits[$troisiemeCookie]->get('prix_produit').' €</center></h4>
 
         </div>
         <!--Grid column-->'

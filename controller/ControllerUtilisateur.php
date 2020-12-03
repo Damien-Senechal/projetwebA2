@@ -5,22 +5,9 @@ require_once File::build_path(array('model','ModelUtilisateurs.php'));
 class ControllerUtilisateur
 {
     protected static $object = "utilisateur";
-    public static function readAll()
-    {
-        $tab_u = ModelUtilisateurs::getAllUtilisateur();
-        $pagetitle = "Liste des Utilisateurs";
-        $view = 'list';
-        require File::build_path(array('view', 'view.php'));
-    }
-
-    public static function read(){
-        $u = ModelUtilisateurs::select($_GET['id_utilisateur']);
-        $pagetitle = "Détail Utilisateur";
-        if ($u != null){
-            $view = 'detail';
-        }else{
-            self::error("Utilisateur inexistant");
-        }
+    public static function accueil(){
+        $pagetitle = "Cookie paradise";
+        $view = 'viewAccueil';
         require File::build_path(array('view','view.php'));
     }
 

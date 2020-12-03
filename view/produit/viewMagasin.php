@@ -10,9 +10,9 @@
       <!--Section: Products v.3-->
       <section class="text-center mb-4">
         <div class="row wow fadeIn">
-        <?php 
-          $tab_produits = ModelProduits::getAllProduits();
-          foreach ($tab_produits as $key => $value) {
+          <?php
+            $tab_produits = ModelProduits::getAllProduits();
+            foreach ($tab_produits as $key => $value) {
             $produit = ModelProduits::getProduitById($value->get('id_produit'));
             $image = $produit->get('urlImage_produit');
             $id = $produit->get('id_produit');
@@ -29,7 +29,7 @@
                 <div class="view overlay">
                   <img src="'.$image.'" class="card-img-top"
                     alt="">
-                  <a href="product-page.php?id_produit='.$id.'">
+                  <a href="index?action=produitDetail&controller=produits&id_produit='.$id.'">
                     <div class="mask rgba-white-slight">Acheter</div>
                   </a>
                 </div>
@@ -38,12 +38,12 @@
                 <!--Card content-->
                 <div class="card-body text-center">
                   <!--Category & Title-->
-                  <a href="product-page.php?id_produit='.$id.'" class="grey-text">
+                  <a href="index?action=produitDetail&controller=produits&id_produit='.$id.'" class="grey-text">
                     <h5>Stock : '.$stock.' unités</h5>
                   </a>
                   <h5>
                     <strong>
-                      <a href="product-page.php?id_produit='.$id.'" class="dark-grey-text"> ' .$nom. '
+                      <a href="index?action=produitDetail&controller=produits&id_produit='.$id.'" class="dark-grey-text"> ' .$nom. '
                         <span class="badge badge-pill danger-color">'.$categorie.'</span>
                       </a>
                     </strong>

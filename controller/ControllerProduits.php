@@ -4,15 +4,15 @@ require_once File::build_path(array('model','ModelProduits.php'));
 class ControllerProduits
 {
     protected static $object = "produit";
-    public static function accueil(){
-        $pagetitle = "Cookie paradise";
-        $view = 'viewAccueil';
-        require File::build_path(array('view','view.php'));
-    }
-
     public static function magasinProduit(){
         $pagetitle = "Magasin";
         $view = "viewMagasin";
+        require File::build_path(array('view', 'view.php'));
+    }
+
+    public static function produitDetail(){
+        $pagetitle = "Achat d'un ".ModelProduits::getProduitById($_GET['id_produit'])->get('nom_produit')." ";
+        $view = "viewProduit";
         require File::build_path(array('view', 'view.php'));
     }
 

@@ -16,7 +16,7 @@
             ControllerProduits::error("class doesn't exist");
         }
     }else{
-        ControllerProduits::accueil();
+        ControllerUtilisateur::accueil();
     }
 ?>
 
