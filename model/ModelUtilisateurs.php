@@ -12,10 +12,11 @@ class ModelUtilisateurs extends Model {
   private $adresse_utilisateur;
   private $ddn_utilisateur;
   private $admin_utilisateur;
+  private $histoire_utilisateur;
       
   // un constructeur
-  public function __construct($id = NULL, $nom = NULL, $pre = NULL, $mail = NULL, $mdp = NULL, $adr = NULL, $ddn = NULL, $admin = NULL) {
-    if (!is_null($id) && !is_null($nom) && !is_null($pre) && !is_null($mail) && !is_null($mdp) && !is_null($adr) && !is_null($ddn) && !is_null($admin)) {
+  public function __construct($id = NULL, $nom = NULL, $pre = NULL, $mail = NULL, $mdp = NULL, $adr = NULL, $ddn = NULL, $admin = NULL, $histoire = NULL) {
+    if (!is_null($id) && !is_null($nom) && !is_null($pre) && !is_null($mail) && !is_null($mdp) && !is_null($adr) && !is_null($ddn) && !is_null($admin) && !is_null($histoire)) {
       $this->id_utilisateur = $id;
       $this->nom_utilisateur = $nom;
       $this->prenom_utilisateur = $pre;
@@ -24,6 +25,7 @@ class ModelUtilisateurs extends Model {
       $this->adresse_utilisateur = $adr;
       $this->ddn_utilisateur = $ddn;
       $this->admin_utilisateur = $admin;
+      $this->histoire_utilisateur = $histoire;
     }
   }
    
@@ -98,6 +100,14 @@ class ModelUtilisateurs extends Model {
         $this->admin_utilisateur = $admin2;
       }
   }
+  public function setADmin($histoire2)  {
+      if (strlen($histoire2) > 2000) {
+        echo "Histoire non valide (taille > 2000)\n";
+      }
+      else {
+        $this->histoire_utilisateur = $histoire2;
+      }
+  }
 
   // une methode d'affichage.
   public function afficher() {
@@ -105,7 +115,7 @@ class ModelUtilisateurs extends Model {
   }
 
   public function save() {
-    Model::$pdo->query("INSERT INTO p_utilisateurs VALUES ('$this->id_utilisateur', '$this->nom_utilisateur', '$this->prenom_utilisateur', '$this->mail_utilisateur', '$this->mdp_utilisateur', '$this->adresse_utilisateur', '$this->ddn_utilisateur'), '$this->admin_utilisateur')");
+    Model::$pdo->query("INSERT INTO p_utilisateurs VALUES ('$this->id_utilisateur', '$this->nom_utilisateur', '$this->prenom_utilisateur', '$this->mail_utilisateur', '$this->mdp_utilisateur', '$this->adresse_utilisateur', '$this->ddn_utilisateur'), '$this->histoire_utilisateur', '$this->admin_utilisateur')");
   }
 
 
