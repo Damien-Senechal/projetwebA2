@@ -183,6 +183,7 @@
                 $mail = $utilisateur->get('mail_utilisateur');
                 $ddn = $utilisateur->get('ddn_utilisateur');
                 $image = $utilisateur->get('pp_utilisateur');
+                $age = ModelUtilisateurs::age($ddn); 
 
                 echo '<div class="col-lg-3 col-md-6 mb-4">
                   <div class="card">
@@ -208,7 +209,7 @@
                       </h5>
 
                       <h4 class="font-weight-bold blue-text">
-                        <strong> '.$ddn.' </strong>
+                        <strong> '.$age. ' ans </strong>
                       </h4>
 
                     </div>

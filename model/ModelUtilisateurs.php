@@ -118,6 +118,13 @@ class ModelUtilisateurs extends Model {
     Model::$pdo->query("INSERT INTO p_utilisateurs VALUES ('$this->id_utilisateur', '$this->nom_utilisateur', '$this->prenom_utilisateur', '$this->mail_utilisateur', '$this->mdp_utilisateur', '$this->adresse_utilisateur', '$this->ddn_utilisateur'), '$this->histoire_utilisateur', '$this->admin_utilisateur')");
   }
 
+  public static function age($date) { 
+         $age = date("Y") - date('Y', strtotime($date)); 
+        if (date('md') < date('md', strtotime($date))) { 
+            return $age - 1; 
+        } 
+        return $age; 
+    }
 
   public static function getAllUtilisateurs() {
     try {
