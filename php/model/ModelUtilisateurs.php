@@ -23,6 +23,7 @@ class ModelUtilisateurs extends Model {
       $this->mdp_utilisateur = $mdp;
       $this->adresse_utilisateur = $adr;
       $this->ddn_utilisateur = $ddn;
+      $this->admin_utilisateur = $admin;
     }
   }
    
