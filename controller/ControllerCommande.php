@@ -18,7 +18,7 @@ class ControllerCommande
         if ($u != null){
             $view = 'detail';
         }else{
-            self::error("Commande inexistant");
+            self::error("Commande inexistante");
         }
         require File::build_path(array('view','view.php'));
     }

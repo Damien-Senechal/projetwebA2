@@ -9,6 +9,7 @@
   <!--Main layout-->
   <?php
     $utilisateur = ModelUtilisateurs::getUtilisateurById($_GET['id_utilisateur']);
+    $id = $utilisateur->get('id_utilisateur');
     $admin = $utilisateur->get('admin_utilisateur');
     $nom = $utilisateur->get('nom_utilisateur');
     $prenom = $utilisateur->get('prenom_utilisateur');
@@ -16,6 +17,7 @@
     $ddn = $utilisateur->get('ddn_utilisateur');
     $image = $utilisateur->get('pp_utilisateur');
     $histoire = $utilisateur->get('histoire_utilisateur');
+    $nbrCommandes = $utilisateur->getNbrCommandeUtilisateur($id);
   ?>
   <main class="mt-5 pt-4">
     <div class="container dark-grey-text mt-5">
@@ -57,6 +59,7 @@
         
 
             <p class="lead font-weight-bold">Mail :  <?php echo $mail; ?></p>
+            <p class="lead font-weight-bold">Nb commandes :  <?php echo $nbrCommandes; ?></p>
             
 
 

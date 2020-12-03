@@ -17,6 +17,8 @@ class ControllerUtilisateur
         require File::build_path(array('view','view.php'));
     }
 
+    
+
     public static function create(){
         $pagetitle = "Créer Utilisateur";
         $view = 'update';
@@ -67,6 +69,8 @@ class ControllerUtilisateur
             self::error("Id non défini");
         }
     }
+
+
 
     public static function error($message){
         $pagetitle = "Delete Utilisateur";

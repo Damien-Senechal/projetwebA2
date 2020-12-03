@@ -92,7 +92,7 @@ class ModelUtilisateurs extends Model {
 	        die();
 	    }
   }
-  public function setADmin($admin2)  {
+  public function setAdmin($admin2)  {
       if (strlen($admin2) > 1) {
         echo "Admin non valide (taille > 1)\n";
       }
@@ -100,7 +100,7 @@ class ModelUtilisateurs extends Model {
         $this->admin_utilisateur = $admin2;
       }
   }
-  public function setADmin($histoire2)  {
+  public function setHistoire($histoire2)  {
       if (strlen($histoire2) > 2000) {
         echo "Histoire non valide (taille > 2000)\n";
       }
@@ -157,6 +157,29 @@ class ModelUtilisateurs extends Model {
       // Attention, si il n'y a pas de résultats, on renvoie false
       if (empty($tab_uti)) return false;
       return $tab_uti[0];
+  }
+
+  public static function getNbrCommandeUtilisateur($id) {
+      try {
+      $sql = "SELECT COUNT(id_commande) AS nbCommande FROM p_commandes c JOIN p_utilisateurs u ON c.id_client = u.id_utilisateur WHERE id_utilisateur = :id_utilisateur;";
+
+      $req_prep = Model::$pdo->prepare($sql); 
+
+      $values = array(
+        "id_utilisateur" => $id, 
+      );
+      $req_prep->execute($values);
+      $tab_uti = $req_prep->fetch();
+      return $tab_uti[0];
+
+       }catch (PDOException $e) {
+            if (Conf::getDebug()) {
+              echo $e->getMessage(); // affiche un message d'erreur
+            }else {
+              echo 'Une erreur est survenue <a href="../index.php"> retour a la page d\'accueil </a>';
+            }
+            die();
+          }
   }
 
   public function delete()
