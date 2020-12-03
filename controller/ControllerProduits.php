@@ -3,24 +3,17 @@
 require_once File::build_path(array('model','ModelProduits.php'));
 class ControllerProduits
 {
-    protected static $object = "Produits";
-    public static function readAll()
-    {
-        $tab_u = ModelProduits::getAllProduits();
-        $pagetitle = "Liste des Produits";
-        $view = 'list';
-        require File::build_path(array('view', 'view.php'));
+    protected static $object = "produit";
+    public static function accueil(){
+        $pagetitle = "Cookie paradise";
+        $view = 'viewAccueil';
+        require File::build_path(array('view','view.php'));
     }
 
-    public static function read(){
-        $u = ModelProduits::getProduitById($_GET['id_produit']);
-        $pagetitle = "Détail Produits";
-        if ($u != null){
-            $view = 'detail';
-        }else{
-            self::error("Produits inexistant");
-        }
-        require File::build_path(array('view','view.php'));
+    public static function magasinProduit(){
+        $pagetitle = "Magasin";
+        $view = "viewMagasin";
+        require File::build_path(array('view', 'view.php'));
     }
 
     public static function create(){
@@ -39,7 +32,7 @@ class ControllerProduits
 
         $Produits = ModelProduits::getProduitById($htmlSpecialid_produit);
         
-        $Produits->update(array('id_produit' => $_GET['id_produit'], 'nom_produit' => $_GET['nom_produit'], 'prix_produit' => $_GET['prix_produit'], 'desc_produit' => $_GET['desc_produit'], 'stock_produit' => $_GET['stock_produit']);
+        $Produits->update(array('id_produit' => $_GET['id_produit'], 'nom_produit' => $_GET['nom_produit'], 'prix_produit' => $_GET['prix_produit'], 'desc_produit' => $_GET['desc_produit'], 'stock_produit' => $_GET['stock_produit']));
         $pagetitle = "Modifier Produits";
         $view = 'updated';
         require File::build_path(array('view','view.php'));
