@@ -114,7 +114,7 @@
 
           <p>
           T\'AS CAPTÉ QUE C\'EST QUE DE LA QUALITÉ FRÉROT ! <br>
-          Les cookies, ils viennet des meilleurs régions de france, et tmtc que nos régions ont du talent takapté
+          Les cookies, ils viennent des meilleures régions de France, et tmtc que nos régions ont du talent takapté
 
           </p>
 
