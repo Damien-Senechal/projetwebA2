@@ -13,10 +13,11 @@ class ModelUtilisateurs extends Model {
   private $ddn_utilisateur;
   private $admin_utilisateur;
   private $histoire_utilisateur;
+  private $nonce_utilisateur;
       
   // un constructeur
-  public function __construct($id = NULL, $nom = NULL, $pre = NULL, $mail = NULL, $mdp = NULL, $adr = NULL, $ddn = NULL, $admin = NULL, $histoire = NULL) {
-    if (!is_null($id) && !is_null($nom) && !is_null($pre) && !is_null($mail) && !is_null($mdp) && !is_null($adr) && !is_null($ddn) && !is_null($admin) && !is_null($histoire)) {
+  public function __construct($id = NULL, $nom = NULL, $pre = NULL, $mail = NULL, $mdp = NULL, $adr = NULL, $ddn = NULL, $admin = NULL, $histoire = NULL, $nonce = NULL) {
+    if (!is_null($id) && !is_null($nom) && !is_null($pre) && !is_null($mail) && !is_null($mdp) && !is_null($adr) && !is_null($ddn) && !is_null($admin) && !is_null($histoire) && !is_null($nonce)) {
       $this->id_utilisateur = $id;
       $this->nom_utilisateur = $nom;
       $this->prenom_utilisateur = $pre;
@@ -26,6 +27,7 @@ class ModelUtilisateurs extends Model {
       $this->ddn_utilisateur = $ddn;
       $this->admin_utilisateur = $admin;
       $this->histoire_utilisateur = $histoire;
+      $this->nonce_utilisateur = $nonce;
     }
   }
    
@@ -106,6 +108,14 @@ class ModelUtilisateurs extends Model {
       }
       else {
         $this->histoire_utilisateur = $histoire2;
+      }
+  }
+  public function setNonce($nonce2)  {
+      if (strlen($nonce2) > 2000) {
+        echo "Nonce non valide (taille > 32)\n";
+      }
+      else {
+        $this->nonce_utilisateur = $nonce2;
       }
   }
 
