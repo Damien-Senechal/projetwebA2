@@ -91,8 +91,10 @@
           $image_utilisateur = $u->get('pp_utilisateur');
           echo '<li style = "margin-left : 10px;" class="nav-item">
                 Bonjour ' . $prenom_utilisateur .' ' . 
-          '<img style = "width : 40px; height : 40px;" src="'.$image_utilisateur.'" class="card-img-top"
+          '<a href="index?action=utilisateurDetail&controller=utilisateur&id_utilisateur='.$id.'">
+          <img style = "width : 40px; height : 40px;" src="'.$image_utilisateur.'" class="card-img-top"
                         alt="imageUtilisateur">
+          </a>
           </li>';
           }
           ?>
