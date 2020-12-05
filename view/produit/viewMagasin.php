@@ -24,7 +24,6 @@
             $prix = $produit->get('prix_produit');
             $categorie = $produit->get('categorie_produit');
             echo '<div class="col-lg-3 col-md-6 mb-4">
-
               <!--Card-->
               <div class="card">
                 <!--Card image-->

@@ -48,9 +48,9 @@
 
             <p class="lead">
               <span class="mr-1">
-                <del><?php echo $prix_produit * 1.5 . '$' ?></del>
+                <del><?php echo $prix_produit * 1.5 . '€' ?></del>
               </span>
-              <span><?php echo $prix_produit . '$' ?> </span>
+              <span><?php echo $prix_produit . '€' ?> </span>
             </p>
 
             <p class="lead font-weight-bold">Description</p>
