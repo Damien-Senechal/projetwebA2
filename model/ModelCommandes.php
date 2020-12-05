@@ -148,7 +148,7 @@ class ModelCommandes extends Model {
         "id_utilisateur" => $id, 
       );
       $req_prep->execute($values);
-      $tab_uti = $req_prep->fetch();
+      $tab_uti = $req_prep->fetchAll();
       return $tab_uti;
 
        }catch (PDOException $e) {

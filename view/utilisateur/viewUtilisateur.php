@@ -61,13 +61,18 @@
             ?> 
         
 			<?php 
-			echo '
-            <p class="lead">
+			echo '<p class="lead">
               <span class="mr-1">
                 <br> Adresse mail - ' .$mail .'
               </span>       
-            </p>
-            <a href="index?action=listeCommande&controller=commande&id_utilisateur='.$id.'" class="lead font-weight-bold">Nb commandes : '. $nbrCommandes  . '</a>'
+            </p> ';
+            if ($nbrCommandes > 0) {
+              echo '
+            <a href="index?action=listeCommande&controller=commande&id_utilisateur='.$id.'" class="lead font-weight-bold">Nb commandes : '. $nbrCommandes  . '</a>';
+            }
+            else {
+              echo '<a class="lead font-weight-bold"> Aucune commande </a>';
+            }
             ?>
             <div>  
             <br>

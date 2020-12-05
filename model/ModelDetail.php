@@ -132,7 +132,8 @@ class ModelDetail extends Model {
         "id_commande" => $id, 
       );
       $req_prep->execute($values);
-      $tab_det = $req_prep->fetch();
+      $tab_det = $req_prep->fetchAll();
+
       return $tab_det;
 
        }catch (PDOException $e) {
