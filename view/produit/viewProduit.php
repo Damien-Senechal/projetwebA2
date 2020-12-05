@@ -60,7 +60,7 @@
             <form class="d-flex justify-content-left">
               <!-- Default input -->
               <input type="number" value="1" aria-label="Search" class="form-control" style="width: 100px">
-              <button class="btn btn-primary btn-md my-0 p" type="submit">Add to cart
+              <button class="btn btn-primary btn-md my-0 p" type="submit">Ajouter au panier 
                 <i class="fas fa-shopping-cart ml-1"></i>
               </button>
 
@@ -114,7 +114,7 @@
 
           <p>
           T\'AS CAPTÉ QUE C\'EST QUE DE LA QUALITÉ FRÉROT ! <br>
-          Les cookies, ils viennet des meilleurs régions de france, et tmtc que nos régions ont du talent takapté
+          Les cookies, ils viennent des meilleures régions de France, et tmtc que nos régions ont du talent takapté
 
           </p>
 
