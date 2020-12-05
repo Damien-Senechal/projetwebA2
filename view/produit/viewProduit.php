@@ -11,10 +11,10 @@
     $id_produit = $_GET['id_produit'];
     $produit = ModelProduits::getProduitById($id_produit);
     $image = $produit->get('urlImage_produit');
-    $categorie_produit = $produit->get('categorie_produit');
-    $description_produit = $produit->get('desc_produit');
-    $prix_produit = $produit->get('prix_produit');
     $nom_produit = $produit->get('nom_produit');
+    $categorie_produit = $produit->get('categorie_produit');
+    $prix_produit = $produit->get('prix_produit');
+    $description_produit = $produit->get('desc_produit');
   ?>
   <main class="mt-5 pt-4">
     <div class="container dark-grey-text mt-5">

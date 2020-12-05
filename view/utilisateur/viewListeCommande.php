@@ -67,7 +67,7 @@
                 <br> Adresse mail - ' .$mail .'
               </span>       
             </p>
-            <a href="index?action=listeCommande&controller=commande&id_utilisateur='.$id.'" class="lead font-weight-bold">Nb commandes : '. $nbrCommandes  . '</a>'
+            <a href="index?action=listeCommade&controller=commandes&id_utilisateur=' .$id.'"  class="lead font-weight-bold">Nb commandes : '. $nbrCommandes  . '</a>'
             ?>
             <div>  
             <br>

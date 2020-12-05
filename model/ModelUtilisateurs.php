@@ -168,7 +168,7 @@ class ModelUtilisateurs extends Model {
 
   public static function getNbrCommandeUtilisateur($id) {
       try {
-      $sql = "SELECT COUNT(id_commande) AS nbCommande FROM p_commandes c JOIN p_utilisateurs u ON c.id_client = u.id_utilisateur WHERE id_utilisateur = :id_utilisateur;";
+      $sql = "SELECT COUNT(id_commande) FROM p_commandes c JOIN p_utilisateurs u ON c.id_client = u.id_utilisateur WHERE id_utilisateur = :id_utilisateur;";
 
       $req_prep = Model::$pdo->prepare($sql); 
 

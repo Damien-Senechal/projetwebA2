@@ -203,7 +203,7 @@
                         <strong>
                           <a href="index?action=utilisateurDetail&controller=utilisateur&id_utilisateur='.$id.'" class="dark-grey-text"> ' .$prenom. '
                             <br>
-                            <span class="badge badge-pill danger-color">'.$mail.'</span>
+                            <span class="badge badge-pill orange">'.$mail.'</span>
                           </a>
                         </strong>
                       </h5>
