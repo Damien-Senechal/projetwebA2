@@ -69,14 +69,12 @@
             
           </li>
           <li class="nav-item">
-            <a href="https://github.com/Damien-Senechal/projetwebA2" class="nav-link border border-light rounded waves-effect"
-              target="_blank">
+            <a href="index?action=seRegister&controller=utilisateur" class="nav-link border border-light rounded waves-effect">
               <i class=""></i>S'enregistrer
             </a>
           </li>
           <li class="nav-item">
-            <a href="https://github.com/Damien-Senechal/projetwebA2" class="nav-link border border-light rounded waves-effect"
-              target="_blank">
+            <a href="index?action=seConnecter&controller=utilisateur" class="nav-link border border-light rounded waves-effect">
               <i class=""></i>Se connecter
             </a>
           </li>

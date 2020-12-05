@@ -17,6 +17,25 @@ class ControllerUtilisateur
         require File::build_path(array('view','view.php'));
     }
 
+    public static function seConnecter() {
+        $pagetitle = "Se connecter";
+        $view = "viewConnecter";
+        require File::build_path(array('view','view.php'));
+    }
+
+    public static function connected(){
+    if(ModelUtilisateur::getUtilisateurById($_GET['login'])->get('nonce')==NULL){
+        if (ModelUtilisateur::checkPassword($_GET["login"], $_GET["mdp"])){
+            $_SESSION['login'] = $_GET["login"];
+            $_SESSION['admin'] = ModelUtilisateur::getUtilisateurById($_GET['login'])->get('admin');
+        }
+        $pagetitle = "Detail utilisateur";
+        $view = 'detail';
+        $u = ModelUtilisateur::select($_GET['login']);
+        require File::build_path(array('view','view.php'));
+        }
+    }
+
     public static function create(){
         $pagetitle = "Créer Utilisateur";
         $view = 'update';

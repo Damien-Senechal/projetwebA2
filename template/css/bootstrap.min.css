@@ -69,11 +69,7 @@ body {
 [tabindex="-1"]:focus {
  outline:0!important
 }
-hr {
- box-sizing:content-box;
- height:0;
- overflow:visible
-}
+
 h1,
 h2,
 h3,
