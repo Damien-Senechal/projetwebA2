@@ -22,7 +22,7 @@
             padding-bottom: 10px;
         }
 
-        input[type=mail], input[type=password] {
+        input[type=text], input[type=password] {
             width: 100%;
             padding: 12px 20px;
             margin: 8px 0;
@@ -56,10 +56,10 @@
                 <h1>Connexion</h1>
                 
                 <label><b>Adresse e-mail : </b></label>
-                <input type="mail" placeholder="Adresse mail..." name="email" id="mail_utilisateur" required>
+                <input type="text" placeholder="Adresse mail..." name="mail_utilisateur" id="mail_utilisateur" required>
 
                 <label><b>Mot de passe :</b></label>
-                <input type="password" placeholder="Entrer le mot de passe..." name="password" id="mdp_utilisateur" required>
+                <input type="password" placeholder="Entrer le mot de passe..." name="mdp_utilisateur" id="mdp_utilisateur" required>
 
                 <input type='hidden' name="controller" value="utilisateur">
                 <input type='hidden' name="action" value="connected">

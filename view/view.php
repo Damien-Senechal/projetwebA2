@@ -68,16 +68,34 @@
           <li class="nav-item">
             
           </li>
+          <?php if(!isset($_SESSION['id_utilisateur'])) {
+          echo '
           <li class="nav-item">
-            <a href="index?action=seRegister&controller=utilisateur" class="nav-link border border-light rounded waves-effect">
-              <i class=""></i>S'enregistrer
+            <a href="index?action=enregistrer&controller=utilisateur" class="nav-link border border-light rounded waves-effect">
+              <i class=""></i>S\'enregistrer
             </a>
           </li>
           <li class="nav-item">
             <a href="index?action=seConnecter&controller=utilisateur" class="nav-link border border-light rounded waves-effect">
               <i class=""></i>Se connecter
             </a>
-          </li>
+          </li>'; }
+          else {
+            echo '
+            <li class="nav-item">
+            <a href="index?action=deconnecter&controller=utilisateur" class="nav-link border border-light rounded waves-effect">
+              <i class=""></i>Se deconnecter
+            </a>
+          </li>';
+          $prenom_utilisateur = $u->get('prenom_utilisateur');
+          $image_utilisateur = $u->get('pp_utilisateur');
+          echo '<li style = "margin-left : 10px;" class="nav-item">
+                Bonjour ' . $prenom_utilisateur .' ' . 
+          '<img style = "width : 40px; height : 40px;" src="'.$image_utilisateur.'" class="card-img-top"
+                        alt="imageUtilisateur">
+          </li>';
+          }
+          ?>
         </ul>
       </div>
     </div>

@@ -76,10 +76,6 @@ class ModelDetail extends Model {
       echo "Le detail $this->id_detail, de la commande $this->id_commande, du produit $this->id_produit, en quantite de $this->quantite_produit_detail et au prix de $this->prix_detail";
   }
 
-  public function save() {
-    Model::$pdo->query("INSERT INTO p_detail_commande VALUES ('$this->id_detail', '$this->id_commande', '$this->id_produit', '$this->quantite_produit_detail', '$this->prix_detail')");
-  }
-
 
   public static function getAllDetails() {
 

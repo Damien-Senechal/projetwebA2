@@ -1,5 +1,6 @@
 <?php
-
+require_once File::build_path(array('lib', 'Security.php'));
+require_once File::build_path(array('lib', 'Session.php'));
 require_once File::build_path(array('model', 'Model.php'));
 
 class ModelUtilisateurs extends Model {
@@ -14,7 +15,8 @@ class ModelUtilisateurs extends Model {
   private $admin_utilisateur;
   private $histoire_utilisateur;
   private $nonce_utilisateur;
-      
+  protected static $object = "utilisateur";
+  
   // un constructeur
   public function __construct($id = NULL, $nom = NULL, $pre = NULL, $mail = NULL, $mdp = NULL, $adr = NULL, $ddn = NULL, $admin = NULL, $histoire = NULL, $nonce = NULL) {
     if (!is_null($id) && !is_null($nom) && !is_null($pre) && !is_null($mail) && !is_null($mdp) && !is_null($adr) && !is_null($ddn) && !is_null($admin) && !is_null($histoire) && !is_null($nonce)) {
@@ -124,10 +126,6 @@ class ModelUtilisateurs extends Model {
     	echo "L'utilisateur $this->id_utilisateur, $this->nom_utilisateur, $this->prenom_utilisateur, adresse mail : $this->mail_utilisateur, mot de passe : $this->mdp_utilisateur, adresse $this->adresse_utilisateur, date de naissance : $this->ddn_utilisateur, admin : $this->admin_utilisateur";
   }
 
-  public function save() {
-    Model::$pdo->query("INSERT INTO p_utilisateurs VALUES ('$this->id_utilisateur', '$this->nom_utilisateur', '$this->prenom_utilisateur', '$this->mail_utilisateur', '$this->mdp_utilisateur', '$this->adresse_utilisateur', '$this->ddn_utilisateur'), '$this->histoire_utilisateur', '$this->admin_utilisateur')");
-  }
-
   public static function age($date) { 
          $age = date("Y") - date('Y', strtotime($date)); 
         if (date('md') < date('md', strtotime($date))) { 
@@ -176,6 +174,26 @@ class ModelUtilisateurs extends Model {
       return $tab_uti[0];
   }
 
+  public static function getUtilisateurByMail($id) {
+      $sql = "SELECT * from p_utilisateurs WHERE mail_utilisateur=:nom_tag";
+      // Préparation de la requête
+      $req_prep = Model::$pdo->prepare($sql);
+
+      $values = array(
+          "nom_tag" => $id,
+          //nomdutag => valeur, ...
+      );
+      // On donne les valeurs et on exécute la requête   
+      $req_prep->execute($values);
+
+      // On récupère les résultats comme précédemment
+      $req_prep->setFetchMode(PDO::FETCH_CLASS, 'ModelUtilisateurs');
+      $tab_uti = $req_prep->fetchAll();
+      // Attention, si il n'y a pas de résultats, on renvoie false
+      if (empty($tab_uti)) return false;
+      return $tab_uti[0];
+  }
+
   public static function getNbrCommandeUtilisateur($id) {
       try {
       $sql = "SELECT COUNT(id_commande) FROM p_commandes c JOIN p_utilisateurs u ON c.id_client = u.id_utilisateur WHERE id_utilisateur = :id_utilisateur;";
@@ -198,6 +216,36 @@ class ModelUtilisateurs extends Model {
             die();
           }
   }
+
+  public static function checkPassword($mail,$mot_de_passe_hache){
+        $mot_de_passe_hache = Security::hacher($mot_de_passe_hache);
+        try
+        {
+            $sql = "SELECT COUNT(*) FROM p_utilisateurs WHERE mdp_utilisateur = :mdp AND mail_utilisateur = :mail";
+            $req_prep = Model::$pdo->prepare($sql); 
+
+            $values = array(
+            "mail" => $mail, 
+            "mdp" => $mot_de_passe_hache,
+            );
+             $req_prep->execute($values);
+            $tab_uti = $req_prep->fetch();
+            if ($tab_uti[0] == 1) {
+                return true;
+            }
+            else {
+                return false;
+            }
+
+       }catch (PDOException $e) {
+            if (Conf::getDebug()) {
+              echo $e->getMessage(); // affiche un message d'erreur
+            }else {
+              echo 'Une erreur est survenue <a href="../index.php"> retour a la page daccueil </a>';
+            }
+            die();
+          }
+        }
 
   public function delete()
     {
