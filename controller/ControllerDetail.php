@@ -1,21 +1,17 @@
 <?php
 
-require_once File::build_path(array('model','ModelCommandes.php'));
-require_once File::build_path(array('model','ModelUtilisateurs.php'));
 require_once File::build_path(array('model','ModelDetail.php'));
-
-class ControllerCommande
+class ControllerDetail
 {
-    protected static $object = "commande";
-    public static function listeCommande() {
-        $listeCommandes = ModelCommandes::getListeCommandeUtilisateur($_GET['id_utilisateur']);
+    protected static $object = "detail";
+    public static function listeDetail() {
+        $listeDetail = ModelUtilisateurs::getListeCommandeUtilisateur($_GET['id_utilisateur']);
         $pagetitle = "Liste commande(s) de " . ModelUtilisateurs::getUtilisateurById($_GET['id_utilisateur'])->get('nom_utilisateur');
-        if ($listeCommandes != null){
+        if ($listeDetail != null){
             $view = 'viewListeCommande';
         } else {
             self::error("Aucune commande !");
         }
-        require File::build_path(array('view','view.php'));
     }
 
     public static function read(){

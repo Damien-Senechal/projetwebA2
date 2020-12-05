@@ -10,10 +10,10 @@
                 $controller_class::$action();
 
             }else{
-                ControllerProduits::error("action non définie");
+                $controller_class::error("action non définie");
             }
         }else{
-            ControllerProduits::error("class doesn't exist");
+            $controller_class::error("class doesn't exist");
         }
     }else{
         ControllerUtilisateur::accueil();
