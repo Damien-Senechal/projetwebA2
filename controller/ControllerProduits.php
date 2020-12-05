@@ -22,6 +22,12 @@ class ControllerProduits
         require File::build_path(array('view','view.php'));
     }
 
+    public static function afficherPanier(){
+        $pagetitle = "Panier";
+        $view = "viewPanier";
+        require File::build_path(array('view','view.php'));
+    }
+
     public static function update(){
         $pagetitle = "Modifier Produits";
         $view = 'update';
