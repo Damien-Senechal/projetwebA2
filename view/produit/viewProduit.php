@@ -57,7 +57,7 @@
 
             <?php echo '<p>'. $description_produit . '</p>' ?> 
 
-            <form class="d-flex justify-content-left">
+            <form class="d-flex justify-content-left" action="ajoutPanier">
               <!-- Default input -->
               <input type="number" value="1" aria-label="Search" class="form-control" style="width: 100px">
               <button class="btn btn-primary btn-md my-0 p" type="submit">Ajouter au panier 
