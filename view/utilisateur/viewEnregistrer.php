@@ -122,7 +122,7 @@
 	                <input type="text" pattern="[0-9]{4}-(01|02|03|04|05|06|07|08|09|10|11|12)-([0,1,2][1-9]|10|20|30|31)" name="ddn_utilisateur" id="ddn_utilisateur" placeholder="(aaaa-mm-jj)" value="'. $ddn_utilisateur.'" />
 	                <label>Histoire :</label>
 	                <input type="text" name="histoire_utilisateur" id="histoire_utilisateur" value="'. $histoire_utilisateur.'"/>
-	                <label>Ancien mot de passe :</label>
+	                <label style = "color : red";>Ancien mot de passe :</label>
 	                <input type="password" name="ancien_mdp_utilisateur" id="ancien_mdp_utilisateur" value="'. $mdp_utilisateur.'"" required/>
 	                <label>Confirmer le mot de passe :</label>
 	                <input type="password" name="mdp_utilisateur" id="mdp_utilisateur"/>
@@ -133,8 +133,8 @@
                         if($_SESSION['admin_utilisateur'])
                         {
                             echo '<label for="admin">setAdmin</label>
-                                  <input type="checkbox" name="admin" id="admin"'; 
-                                  if ($admin_utilisateur) {
+                                  <input type="checkbox" name="admin" ';
+                                  if ($admin_utilisateur == 1)
                                   	echo 'checked/>';
                         }
                     }
