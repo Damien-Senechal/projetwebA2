@@ -58,8 +58,11 @@
 
             <?php echo '<p>'. $description_produit . '</p>' ?> 
 
-            <form method="post" class="d-flex justify-content-left" action="index?action=afficherPanier&controller=produits&id_client=667">
-              <input type="number" value="1" aria-label="Search" class="form-control" style="width: 100px" min="0" max="<?php $stock_produit; ?>">
+
+            <form method="post" class="d-flex justify-content-left" action="index?action=afficherPanier&controller=produits&id_client=667&nbrProduit=<?php echo $_SESSION['nbrProduit']; ?>">
+
+              <input type="number" for="nombre" id="nombre" value="1" aria-label="Search" class="form-control" style="width: 100px" min="1" max="<?php echo $stock_produit; ?>">
+
               <button class="btn btn-primary btn-md my-0 p" type="submit">Ajouter au panier 
                 <i class="fas fa-shopping-cart ml-1"></i>
               </button>
@@ -160,6 +163,9 @@
     </div>
   </main>
   <!--Main layout-->
+  <script type="text/javascript">
+    var nbProduit = document.getElementById("nombre").value;
+  </script>
 </body>
 
 </html>

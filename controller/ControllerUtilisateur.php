@@ -28,17 +28,16 @@ class ControllerUtilisateur
         $view = 'viewAccueil';
         $_SESSION['formMail'] = $_GET["mail_utilisateur"];
         $_SESSION['formMdp'] = $_GET["mdp_utilisateur"];
-        if (ModelUtilisateurs::getUtilisateurByMail($_GET['mail_utilisateur'])) {
-            if((ModelUtilisateurs::getUtilisateurByMail($_GET['mail_utilisateur'])->get('nonce_utilisateur'))==NULL){
-                if (ModelUtilisateurs::checkPassword($_GET["mail_utilisateur"], $_GET["mdp_utilisateur"])){
-                    $id = ModelUtilisateurs::getUtilisateurByMail($_GET['mail_utilisateur'])->get('id_utilisateur');
-                    $u = ModelUtilisateurs::getUtilisateurByMail($_GET['mail_utilisateur']);
+        if (ModelUtilisateurs::checkPassword($_GET["mail_utilisateur"], $_GET["mdp_utilisateur"])) {
+                if((ModelUtilisateurs::getUtilisateurByMail($_GET['mail_utilisateur'])->get('nonce_utilisateur'))==NULL){
+                        $id = ModelUtilisateurs::getUtilisateurByMail($_GET['mail_utilisateur'])->get('id_utilisateur');
+                        $u = ModelUtilisateurs::getUtilisateurByMail($_GET['mail_utilisateur']);
 
-                    $_SESSION['id_utilisateur'] = ModelUtilisateurs::getUtilisateurById($id)->get('id_utilisateur');
-                    $_SESSION['admin_utilisateur'] = ModelUtilisateurs::getUtilisateurById($id)->get('admin_utilisateur');
+                        $_SESSION['id_utilisateur'] = ModelUtilisateurs::getUtilisateurById($id)->get('id_utilisateur');
+                        $_SESSION['admin_utilisateur'] = ModelUtilisateurs::getUtilisateurById($id)->get('admin_utilisateur');
+                    }
                 }
-            }
-        }
+        
         else {
             $pagetitle = "Identifiant ou mot de passe incorrect";
             $view = 'viewConnecter';

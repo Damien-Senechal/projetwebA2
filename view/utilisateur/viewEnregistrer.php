@@ -66,6 +66,7 @@
                 if ($_GET['action'] == "enregistrer") {
                     echo '<legend style="text-align : center;">Création de compte :</legend>';
                 } else {
+                    
                     echo '<legend style="text-align : center;">Modification de compte :</legend>';
                 }
                 
