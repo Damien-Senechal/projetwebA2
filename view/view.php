@@ -78,6 +78,7 @@
               <i class=""></i>Se connecter
             </a>
 <<<<<<< HEAD
+<<<<<<< HEAD
           </li>'; }
           else {
             echo '
@@ -97,6 +98,9 @@
           </li>';
           }
           ?>
+=======
+          </li>
+>>>>>>> parent of 146b3a3... ajout fonctions se connecter et s'enregistrer
 =======
           </li>
 >>>>>>> parent of 146b3a3... ajout fonctions se connecter et s'enregistrer
