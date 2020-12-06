@@ -154,6 +154,9 @@ class ControllerUtilisateur
         if(!filter_var($_GET['mail_utilisateur'], FILTER_VALIDATE_EMAIL)){
             self::error("Mail incorrect <br>");
         }
+        else if ($_GET['ancien_mdp_utilisateur'] != $utilisateur->get('mdp_utilisateur')) {
+            self::error("Mot de passe incorrect <br>");
+        }
         else{
             if($id==$_SESSION['id_utilisateur'] | Session::is_admin()){
                 if(isset($_GET['admin_utilisateur'])){
