@@ -4,4 +4,5 @@ class Session {
         return (!empty($_SESSION['login']) && ($_SESSION['login'] == $login));
     }
 }
+
  ?>

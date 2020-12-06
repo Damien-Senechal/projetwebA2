@@ -60,6 +60,10 @@ class ModelCommandes extends Model {
         echo "La commande $this->id_commande, de $this->id_client, en date de $this->date_commande et au prix de $this->prix_commande";
     }
 
+    public function save() {
+      Model::$pdo->query("INSERT INTO p_commandes VALUES ('$this->id_commande', '$this->id_client', '$this->date_commande', '$this->prix_commande')");
+    }
+
 
     public static function getAllCommandes() {
 
