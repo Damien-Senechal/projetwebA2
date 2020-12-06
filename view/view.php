@@ -82,11 +82,13 @@
               <i class=""></i>Se deconnecter
             </a>
           </li>';
+          $u = ModelUtilisateurs::getUtilisateurById($_SESSION['id_utilisateur']);
+          $id = $u->get('id_utilisateur');
           $prenom_utilisateur = $u->get('prenom_utilisateur');
           $image_utilisateur = $u->get('pp_utilisateur');
           echo '<li style = "margin-left : 10px;" class="nav-item">
                 Bonjour ' . $prenom_utilisateur .' ' . 
-          '<a href="index?action=utilisateurDetail&controller=utilisateur&id_utilisateur='.$id.'">
+          '<a href="index?action=utilisateurDetail&controller=utilisateur&id_utilisateur='. $id .'">
           <img style = "width : 40px; height : 40px;" src="'.$image_utilisateur.'" class="card-img-top"
                         alt="imageUtilisateur">
           </a>
