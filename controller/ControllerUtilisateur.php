@@ -17,6 +17,12 @@ class ControllerUtilisateur
         require File::build_path(array('view','view.php'));
     }
 
+    public static function listeUtilisateur(){
+        $pagetitle = "Liste utilisateur";
+        $view = "viewListeUtil";
+        require File::build_path(array('view','view.php'));
+    }
+
     public static function seConnecter() {
         $pagetitle = "Se connecter";
         $view = "viewConnecter";

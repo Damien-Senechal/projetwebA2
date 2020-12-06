@@ -51,6 +51,12 @@
             <a class="nav-link waves-effect" href="index?action=utilisateurDetail&controller=utilisateur&id_utilisateur='.$_SESSION['id_utilisateur'].'">Compte</a>
           </li>';
           }
+          if (Session::is_admin()) {
+            echo '
+            <li class="nav-item">
+              <a class="nav-link waves-effect" href="index?action=listeUtilisateur&controller=utilisateur">Utilisateur</a>
+            </li> ';
+          }
           ?>
         </ul>
         <!-- Right -->

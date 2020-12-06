@@ -18,23 +18,6 @@ class ModelUtilisateurs extends Model {
   protected static $object = "utilisateur";
   protected static $primary = "id_utilisateur";
   
-  // un constructeur
-  // public function __construct($id = NULL, $nom = NULL, $pre = NULL, $mail = NULL,  $adr = NULL, $ddn = NULL, $histoire = NULL, $mdp = NULL, $pp = NULL, $admin = NULL,  $nonce = NULL) {
-  //   if (!is_null($id) && !is_null($nom) && !is_null($pre) && !is_null($mail) && !is_null($mdp) && !is_null($adr) && !is_null($ddn) && !is_null($pp) && !is_null($admin) && !is_null($histoire) && !is_null($nonce)) {
-  //     $this->id_utilisateur = $id;
-  //     $this->nom_utilisateur = $nom;
-  //     $this->prenom_utilisateur = $pre;
-  //     $this->mail_utilisateur = $mail;
-  //     $this->mdp_utilisateur = $mdp;
-  //     $this->adresse_utilisateur = $adr;
-  //     $this->ddn_utilisateur = $ddn;
-  //     $this->pp_utilisateur = $pp;
-  //     $this->admin_utilisateur = $admin;
-  //     $this->histoire_utilisateur = $histoire;
-  //     $this->nonce_utilisateur = $nonce;
-  //   }
-  // }
-
   public function __construct($data = array())  {
         foreach ($data as $key => $value){
             if($key != 'action') {

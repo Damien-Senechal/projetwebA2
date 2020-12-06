@@ -21,15 +21,19 @@
     $_SESSION['prixPanier'] = 0;
   ?>
   <script>
+    <?php
    function displayPrice(){
        var nbProduit = document.getElementById("nombre").value;
-       var prix = <?php echo $prix_produit ?>;
+       var prix = $prix_produit;
        var total = 0;
        var total = nbProduit * prix;
        var tot = total.toFixed(2);
        document.getElementById("total_prix").innerHTML = " Total : " + tot + " € ";
-       return nbProduit;
-     }
+       document.getElementById("total_prix2").innerHTML = " Total : " + tot + " € ";
+
+        window.location.href = "add.php?var1=" + a + "&var2=" + b;
+       ?>
+       }
    </script>
   <main class="mt-5 pt-4">
     <div class="container dark-grey-text mt-5">
@@ -74,7 +78,6 @@
             <form method="post" class="d-flex justify-content-left" action="index?action=majPanier&controller=produits&id_produit=<?php echo $id_produit; ?>">
 
               <input type="number" for="nombre" id="nombre" value="1" aria-label="Search" class="form-control" onchange="displayPrice()" style="width: 100px" min="1" max="<?php echo $stock_produit; ?>">
-
 
               <button class="btn btn-primary btn-md my-0 p" type="submit">
                 <i style = "font-size: 20px" id="total_prix" class="fas fa-shopping-cart ml-1"> <?php echo  'Total : '.$prix_produit.' €'  ?></i>
