@@ -207,11 +207,9 @@
                           </a>
                         </strong>
                       </h5>
-
                       <h4 class="font-weight-bold blue-text">
                         <strong> '.$age. ' ans </strong>
                       </h4>
-
                     </div>
                   </div>
                 </div>';

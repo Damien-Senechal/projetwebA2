@@ -24,35 +24,59 @@ class ControllerUtilisateur
     }
 
     public static function connected(){
-    if(ModelUtilisateur::getUtilisateurById($_GET['login'])->get('nonce')==NULL){
-        if (ModelUtilisateur::checkPassword($_GET["login"], $_GET["mdp"])){
-            $_SESSION['login'] = $_GET["login"];
-            $_SESSION['admin'] = ModelUtilisateur::getUtilisateurById($_GET['login'])->get('admin');
+        $pagetitle = "Cookie paradise";
+        $view = 'viewAccueil';
+        $id = ModelUtilisateurs::getUtilisateurByMail($_GET['mail_utilisateur'])->get('id_utilisateur');
+    if((ModelUtilisateurs::getUtilisateurByMail($_GET['mail_utilisateur'])->get('nonce_utilisateur'))==NULL){
+        if (ModelUtilisateurs::checkPassword($_GET["mail_utilisateur"], $_GET["mdp_utilisateur"])){
+            $_SESSION['id_utilisateur'] = ModelUtilisateurs::getUtilisateurById($id)->get('id_utilisateur');
+            $_SESSION['admin_utilisateur'] = ModelUtilisateurs::getUtilisateurById($id)->get('admin_utilisateur');
         }
-        $pagetitle = "Detail utilisateur";
-        $view = 'detail';
-        $u = ModelUtilisateur::select($_GET['login']);
+        $u = ModelUtilisateurs::getUtilisateurByMail($_GET['mail_utilisateur']);
         require File::build_path(array('view','view.php'));
         }
     }
 
-    public static function create(){
-        $pagetitle = "Créer Utilisateur";
-        $view = 'update';
+    public static function deconnecter(){
+        session_unset();     // unset $_SESSION variable for the run-time 
+        session_destroy();   // destroy session data in storage
+        // Il faut réappeler session_start() pour accéder de nouveau aux variables de session
+        setcookie(session_name(),'',time()-1);
+        $pagetitle = "Cookie paradise";
+        $view = "viewAccueil";
         require File::build_path(array('view','view.php'));
     }
 
-    public static function created(){
+    public static function enregistrer(){
+        $pagetitle = "Créer compte";
+        $view = 'viewEnregistrer';
+        require File::build_path(array('view','view.php'));
+    }
+
+    public static function senregistrer(){
         $utilisateur = new ModelUtilisateurs($_GET);
-        if($_GET["mdp_utilisateur"]!=$_GET["mdp_utilisateur2"]){
-            self::error("les mdp sont different");
+        $mdp_utilisateurhache = Security::hacher($utilisateur->get("mdp_utilisateur"));
+        $nonce = Security::generateRandomHex();
+        if(isset($_GET['admin_utilisateur'])){
+                if($_GET['admin_utilisateur']=="on"){
+                    $isadmin_utilisateur = 1;
+                }
+            }
+        else{
+            $isadmin_utilisateur = 0;
         }
-        else if ($utilisateur->save(array("id_utilisateur" => $utilisateur->get("id_utilisateur"),"nom_utilisateur" => $utilisateur->get("nom_utilisateur"),"prenom_utilisateur" => $utilisateur->get("prenom_utilisateur"),"mail_utilisateur" => $utilisateur->get("mail_utilisateur"), "mdp_utilisateur" => $utilisateur->get("mdp_utilisateur"), "adresse_utilisateur" => $utilisateur->get("adresse_utilisateur"), "ddn_utilisateur" => $utilisateur->get("ddn_utilisateur"), "admin_utilisateur" => $utilisateur->get("admin_utilisateur"))) == false){
+        if(!filter_var($_GET['mail_utilisateur'], FILTER_VALIDATE_EMAIL)){
+            self::error("email pas bon <br>");
+        }
+        else if($_GET["mdp_utilisateur"]!=$_GET["mdp_utilisateur2"]){
+            self::error("les mdp_utilisateur sont different");
+        }
+        else if ($utilisateur->save(array("nom_utilisateur" => $utilisateur->get("nom_utilisateur"),"prenom" => $utilisateur->get("prenom_utilisateur"), "mail_utilisateur" => $utilisateur->get("mail_utilisateur"), "mdp_utilisateur" => $utilisateur->get("mdp_utilisateur"), "mdp_utilisateur" => $mdp_utilisateurhache, "adresse_utilisateur" => $utilisateur->get("adresse_utilisateur"), "ddn_utilisateur" => $utilisateur->get("ddn_utilisateur"), "pp_utilisateur" => $utilisateur->get("pp_utilisateur"),"admin_utilisateur" => $isadmin_utilisateur, "histoire_utilisateur" => $utilisateur->get("histoire_utilisateur"), "nonce" => $nonce)) == false) {
             self::error("utilisateur déjà créé");
         }
         else {
-            $pagetitle = "Modifier Utilisateur";
-            $view = 'created';
+            $pagetitle = "Creer compte";
+            $view = 'viewAccueil';
             require File::build_path(array('view','view.php'));
         }
     }
@@ -64,15 +88,15 @@ class ControllerUtilisateur
     }
 
     public static function updated(){
-        if($_GET["mdp_utilisateur"]==$_GET["mdp_utilisateur2"])
+        if($_GET["mdp_utilisateur_utilisateur"]==$_GET["mdp_utilisateur_utilisateur2"])
         {
-        $utilisateur->update(array('id_utilisateur' => $_GET['id_utilisateur'], 'nom_utilisateur' => $htmlSpecialNom, 'prenom_utilisateur' => $_GET['nom_utilisateur'], 'mail_utilisateur' => $_GET['mail_utilisateur'], 'adresse_utilisateur' => $_GET['adresse_utilisateur'], 'ddn_utilisateur' => $_GET['ddn_utilisateur'], 'admin_utilisateur' => $_GET['admin_utilisateur'], 'mdp_utilisateur' => $_GET['mdp_utilisateur']));
+        $utilisateur->update(array('id_utilisateur' => $_GET['id_utilisateur'], 'nom_utilisateur' => $htmlSpecialNom, 'prenom_utilisateur' => $_GET['nom_utilisateur'], 'mail_utilisateur' => $_GET['mail_utilisateur'], 'adresse_utilisateur' => $_GET['adresse_utilisateur'], 'ddn_utilisateur' => $_GET['ddn_utilisateur'], 'admin_utilisateur' => $_GET['admin_utilisateur'], 'mdp_utilisateur_utilisateur' => $_GET['mdp_utilisateur_utilisateur']));
         $pagetitle = "Modifier Utilisateur";
         $view = 'updated';
         require File::build_path(array('view','view.php'));
         }
         else{
-           self::error("les mdp sont different"); 
+           self::error("les mdp_utilisateur sont different"); 
         }
     }
 

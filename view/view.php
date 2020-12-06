@@ -23,21 +23,17 @@
         <!-- Navbar -->
         <nav class="navbar fixed-top navbar-expand-lg navbar-light white scrolling-navbar">
           <div class="container">
-
       <!-- Brand -->
       <a class="navbar-brand waves-effect" href="index.php">
         <strong class="blue-text">Cookie Paradise</strong>
       </a>
-
       <!-- Collapse -->
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
         aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
-
       <!-- Links -->
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
-
         <!-- Left -->
         <ul class="navbar-nav mr-auto">
           <li class="nav-item">
@@ -52,7 +48,6 @@
             <a class="nav-link waves-effect" href="#">Compte</a>
           </li>
         </ul>
-
         <!-- Right -->
         <ul class="navbar-nav nav-flex-icons">
           <li class="nav-item">
@@ -68,16 +63,36 @@
           <li class="nav-item">
             
           </li>
+          <?php if(!isset($_SESSION['id_utilisateur'])) {
+          echo '
           <li class="nav-item">
-            <a href="index?action=seRegister&controller=utilisateur" class="nav-link border border-light rounded waves-effect">
-              <i class=""></i>S'enregistrer
+            <a href="index?action=enregistrer&controller=utilisateur" class="nav-link border border-light rounded waves-effect">
+              <i class=""></i>S\'enregistrer
             </a>
           </li>
           <li class="nav-item">
             <a href="index?action=seConnecter&controller=utilisateur" class="nav-link border border-light rounded waves-effect">
               <i class=""></i>Se connecter
             </a>
-          </li>
+          </li>'; }
+          else {
+            echo '
+            <li class="nav-item">
+            <a href="index?action=deconnecter&controller=utilisateur" class="nav-link border border-light rounded waves-effect">
+              <i class=""></i>Se deconnecter
+            </a>
+          </li>';
+          $prenom_utilisateur = $u->get('prenom_utilisateur');
+          $image_utilisateur = $u->get('pp_utilisateur');
+          echo '<li style = "margin-left : 10px;" class="nav-item">
+                Bonjour ' . $prenom_utilisateur .' ' . 
+          '<a href="index?action=utilisateurDetail&controller=utilisateur&id_utilisateur='.$id.'">
+          <img style = "width : 40px; height : 40px;" src="'.$image_utilisateur.'" class="card-img-top"
+                        alt="imageUtilisateur">
+          </a>
+          </li>';
+          }
+          ?>
         </ul>
       </div>
     </div>
@@ -92,47 +107,38 @@
     </main>
     <!--Footer-->
   <footer class="page-footer text-center font-small mt-4 wow fadeIn">
-
     <!--Call to action-->
     <div class="pt-4">
       
       <p><strong> Regalez vous :D </strong></p>
     </div>
     <!--/.Call to action-->
-
     <hr class="my-4">
-
     <!-- Social icons -->
     <div class="pb-4">
       <a href="https://fb.watch/256tEI8fKq/" target="_blank">
         <i class="fab fa-facebook-f mr-3"></i>
       </a>
-
       <a href="https://twitter.com/Granola" target="_blank">
         <i class="fab fa-twitter mr-3"></i>
       </a>
-
       <a href="https://www.youtube.com/watch?v=awmQrt_AERY" target="_blank">
         <i class="fab fa-youtube mr-3"></i>
       </a>
-
       <a href="https://www.pinterest.fr/pin/549509592032222133/" target="_blank">
         <i class="fab fa-pinterest mr-3"></i>
       </a>
-
       <a href="https://github.com/Damien-Senechal/projetwebA2" target="_blank">
         <i class="fab fa-github mr-3"></i>
       </a>
     </div>
     <!-- Social icons -->
-
     
     <div class="footer-copyright py-3">
       vive les cookies
       <a href="https://m.media-amazon.com/images/I/81tSnVvcnSL._SS500_.jpg" target="_blank"> tiakapté </a>
     </div>
     
-
   </footer>
   <!--/.Footer-->
   <!-- SCRIPTS -->

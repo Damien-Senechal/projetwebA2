@@ -93,11 +93,6 @@ class ModelProduits extends Model {
       echo "Le cookie n° $this->id_produit, de nom : $this->nom_produit, avec la description $this->desc_produit, qui coûte $this->prix_produit, en quantite de $this->stock_produit, avec l'url : $this->urlimage_produit et de catégorie $this->categorie_produit";
   }
 
-  public function save() {
-    Model::$pdo->query("INSERT INTO p_produits (id_produit, nom_produit, desc_produit, prix_produit, stock_produit, urlimage_produit) VALUES ('$this->id_produit', '$this->nom_produit', '$this->desc_produit', '$this->prix_produit', '$this->stock_produit', '$this->urlimage_produit')");
-  }
-
-
   public static function getAllProduits() {
 
     try {

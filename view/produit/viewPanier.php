@@ -15,7 +15,6 @@
             <?php 
             $id = $_GET['id_client'];  
             $details = ModelCommandes::getDetailsFromCommande($id);      
-              echo var_dump($details);
             ?>
           </div>
         </section>

@@ -56,12 +56,12 @@
             </p>
 
              <?php if($histoire != NULL) {
-             	echo '<i> <div class="lead font-weight-bold">Histoire : </i><br> </div> <i>'. $histoire.' </i>';
+              echo '<i> <div class="lead font-weight-bold">Histoire : </i><br> </div> <i>'. $histoire.' </i>';
              }
             ?> 
         
-			<?php 
-			echo '<p class="lead">
+      <?php 
+      echo '<p class="lead">
               <span class="mr-1">
                 <br> Adresse mail - ' .$mail .'
               </span>       
