@@ -17,6 +17,7 @@
     $description_produit = $produit->get('desc_produit');
     $stock_produit = $produit->get('stock_produit');
   ?>
+  <main class="mt-5 pt-4">
   <script>
    function displayPrice(){
        var nbProduit = document.getElementById("nombre").value;
@@ -26,12 +27,20 @@
        var total = nbProduit * prix;
        var tot = total.toFixed(2);
        document.getElementById("total_prix").innerHTML = " Total : " + tot + " € ";
-       document.getElementsById('tampon').innerHTML = 'action="index?action=afficherPanier&controller=produits&nom_produit='+nom+'&prix_produit='+prix+ '&qaProduit=' + nbProduit;
+       document.getElementById('tamponNom').innerHTML = nom;
+       document.getElementById('tamponPrix').innerHTML = prix;
+       document.getElementById('tamponProduit').innerHTML = nbProduit;
+       <?php 
+            $nom = "<div id='tamponNom'></div>";
+            strip_tags($nom);
+            $prix = "<div id='tamponPrix'></div>";
+            strip_tags($prix);
+            $qqt = "<div id='tamponProduit'></div>";
+            strip_tags($qqt);
+        ?>
      }
    </script>
-  <main class="mt-5 pt-4">
     <div class="container dark-grey-text mt-5">
-
       <!--Grid row-->
       <div class="row wow fadeIn">
 
@@ -67,22 +76,28 @@
 
             <p class="lead font-weight-bold">Description</p>
 
-            <?php 
-            $html = '<div class="test" id ="tampon"></div>';
-            echo $html;
-            preg_match('/<div class="test">(.*?)</div>/s', $html, $match);
-            var_dump($contenue);
-            ?>
-            <form method="post" class="d-flex justify-content-left" action="#">
-              <input type="number" for="nombre" id="nombre" value="1" aria-label="Search" class="form-control" onchange="displayPrice()" style="width: 100px" min="1" max="<?php echo $stock_produit; ?>">
+              <?php
+              echo '
+              <input type="number" for="nombre" id="nombre" value="1" aria-label="Search" class="form-control" onchange="displayPrice()" style="width: 100px" min="1" max="'. $stock_produit.'">';
+              ?>
 
-
+            <form method="get" class="d-flex justify-content-left" action="index.php">
               <button class="btn btn-primary btn-md my-0 p" type="submit">
-                <i style = "font-size: 20px" id="total_prix" class="fas fa-shopping-cart ml-1"> <?php echo  'Total : '.$prix_produit.' €'  ?></i>
+                <i style = "font-size: 20px" id="total_prix" class="fas fa-shopping-cart ml-1"> <?php echo  'Total : '.$prix_produit.' €'; ?></i>
+
                 <br>
                  Ajouter au panier 
                 
               </button>
+            <!-- action=afficherPanier&controller=produits&nom_produit=CookieOGalak&prix_produit=4.5&qaProduit=2 -->
+            <?php  
+              echo '<input type="hidden" name="action" value="afficherPanier">';
+              echo '<input type="hidden" name="controller" value="produits">';
+              echo '<input type="hidden" name="nom_produit" value="'.$nom.'">';
+              echo '<input type="hidden" name="prix_produit" value="'.$prix.'">';
+              echo '<input type="hidden" name="qaProduit" value="'.$qqt.'">';
+
+              ?>
             </form>
 
           </div>
@@ -181,9 +196,6 @@
     </div>
   </main>
   <!--Main layout-->
-  <script type="text/javascript">
-    var nbProduit = document.getElementById("nombre").value;
-  </script>
 </body>
 
 </html>
