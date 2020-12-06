@@ -16,7 +16,21 @@
     $prix_produit = $produit->get('prix_produit');
     $description_produit = $produit->get('desc_produit');
     $stock_produit = $produit->get('stock_produit');
+    $_SESSION['produitPanier'] = $id_produit;
+    $_SESSION['quantiteProduit'] = 0;
+    $_SESSION['prixPanier'] = 0;
   ?>
+  <script>
+   function displayPrice(){
+       var nbProduit = document.getElementById("nombre").value;
+       var prix = <?php echo $prix_produit ?>;
+       var total = 0;
+       var total = nbProduit * prix;
+       var tot = total.toFixed(2);
+       document.getElementById("total_prix").innerHTML = " Total : " + tot + " € ";
+       return nbProduit;
+     }
+   </script>
   <main class="mt-5 pt-4">
     <div class="container dark-grey-text mt-5">
 
@@ -56,17 +70,18 @@
 
             <p class="lead font-weight-bold">Description</p>
 
-            <?php echo '<p>'. $description_produit . '</p>' ?> 
+
+            <form method="post" class="d-flex justify-content-left" action="index?action=majPanier&controller=produits&id_produit=<?php echo $id_produit; ?>">
+
+              <input type="number" for="nombre" id="nombre" value="1" aria-label="Search" class="form-control" onchange="displayPrice()" style="width: 100px" min="1" max="<?php echo $stock_produit; ?>">
 
 
-            <form method="post" class="d-flex justify-content-left" action="index?action=afficherPanier&controller=produits&id_client=667&nbrProduit=<?php echo $_SESSION['nbrProduit']; ?>">
-
-              <input type="number" for="nombre" id="nombre" value="1" aria-label="Search" class="form-control" style="width: 100px" min="1" max="<?php echo $stock_produit; ?>">
-
-              <button class="btn btn-primary btn-md my-0 p" type="submit">Ajouter au panier 
-                <i class="fas fa-shopping-cart ml-1"></i>
+              <button class="btn btn-primary btn-md my-0 p" type="submit">
+                <i style = "font-size: 20px" id="total_prix" class="fas fa-shopping-cart ml-1"> <?php echo  'Total : '.$prix_produit.' €'  ?></i>
+                <br>
+                 Ajouter au panier 
+                
               </button>
-
             </form>
 
           </div>

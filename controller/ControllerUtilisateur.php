@@ -149,12 +149,19 @@ class ControllerUtilisateur
         $htmlSpecialHistoire = htmlspecialchars($_GET['histoire_utilisateur']);
         $htmlSpecialDDN = htmlspecialchars($_GET['ddn_utilisateur']);
 
+        if (empty($_GET["mdp_utilisateur"]) && empty($_GET["mdp_utilisateur2"])) {
+            $htmlSpecialMdp = $utilisateur->get('mdp_utilisateur');
+        }
+        else {
+            $htmlSpecialMdp = Security::hacher(htmlspecialchars($_GET['mdp_utilisateur']));
+        }
+
 
         if(!filter_var($_GET['mail_utilisateur'], FILTER_VALIDATE_EMAIL)){
-            self::error("Mail incorrect <br>");
+            echo 'Mail incorrect <br>!  <a href="index.php">RETOUR A L\'ACCEUIL</a>';
         }
-        else if ($_GET['ancien_mdp_utilisateur'] != $utilisateur->get('mdp_utilisateur')) {
-            self::error("Mot de passe incorrect <br>");
+        else if (Security::hacher($_GET['ancien_mdp_utilisateur']) != $utilisateur->get('mdp_utilisateur')) {
+            echo 'Mot de passe incorrect <br>  <a href="index.php">RETOUR A L\'ACCEUIL</a>';
         }
         else{
             if($id==$_SESSION['id_utilisateur'] | Session::is_admin()){
@@ -166,12 +173,12 @@ class ControllerUtilisateur
                 else{
                     $isadmin = 0;
                 }
-                if($_GET["mdp_utilisateur"]==$_GET["mdp_utilisateur2"]) {
-                    $utilisateur->updateGen(array("id_utilisateur" => $_SESSION['id_utilisateur'],
+                if($_GET["mdp_utilisateur"]==$_GET["mdp_utilisateur2"] | empty($_GET["mdp_utilisateur"]) && empty($_GET["mdp_utilisateur2"])) {
+                    $utilisateur->updateGen(array("id_utilisateur" => $id,
                                              "nom_utilisateur" => $htmlSpecialNom,
                                              "prenom_utilisateur" => $htmlSpecialPrenom,
                                              "mail_utilisateur" => $htmlSpecialMail,
-                                             "mdp_utilisateur" => Security::hacher($_GET['mdp_utilisateur']),
+                                             "mdp_utilisateur" => $htmlSpecialMdp,
                                              "adresse_utilisateur" => $htmlSpecialAdresse,
                                              "admin_utilisateur" => $isadmin,
                                              "histoire_utilisateur" => $htmlSpecialHistoire,
@@ -187,7 +194,7 @@ class ControllerUtilisateur
             }
             else
             {
-                echo "Arrete de hacker notre site stp";
+                echo 'Arrete de hacker notre site stp  <a href="index.php">RETOUR A L\'ACCEUIL</a>';
             }
         }
     }

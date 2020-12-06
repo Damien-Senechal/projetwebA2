@@ -72,21 +72,33 @@
             else {
               echo '<a class="lead font-weight-bold"> Aucune commande </a>';
             }
-            ?>
+      ?>
             <div>  
             <br>
             </div>
 
-
-            <form class="d-flex justify-content-left">
-              <a href="index?action=update&controller=utilisateur&id_utilisateur=<?php echo $_SESSION['id_utilisateur'] ?>">
+            <?php if ($_GET['id_utilisateur'] == $_SESSION['id_utilisateur']) {
+              echo '<form class="d-flex justify-content-left">
+              <a href="index?action=update&controller=utilisateur&id_utilisateur='.$_SESSION['id_utilisateur'].'">
               <!-- Default input -->
               <input class="btn btn-primary btn-md my-0 p" value="Modifier compte" disabled="disabled"> 
                 <i class=""></i>
               </input>
               </a>
 
-            </form>
+            </form>';
+            } else if (Session::is_admin()) {
+              echo '<form class="d-flex justify-content-left">
+              <a href="index?action=update&controller=utilisateur&id_utilisateur='.$id.'">
+              <!-- Default input -->
+              <input class="btn btn-primary btn-md my-0 p" value="Modifier compte" disabled="disabled"> 
+                <i class=""></i>
+              </input>
+              </a>
+
+              </form>';
+            }
+            ?>
 
           </div>
           <!--Content-->
