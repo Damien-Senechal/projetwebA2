@@ -21,11 +21,12 @@
    function displayPrice(){
        var nbProduit = document.getElementById("nombre").value;
        var prix = <?php echo $prix_produit ?>;
+       var nom = "<?php echo $nom_produit ?>";
        var total = 0;
        var total = nbProduit * prix;
        var tot = total.toFixed(2);
        document.getElementById("total_prix").innerHTML = " Total : " + tot + " € ";
-       return nbProduit;
+       document.getElementsById('tampon').innerHTML = 'action="index?action=afficherPanier&controller=produits&nom_produit='+nom+'&prix_produit='+prix+ '&qaProduit=' + nbProduit;
      }
    </script>
   <main class="mt-5 pt-4">
@@ -57,7 +58,6 @@
                 <span class="badge orange mr-1"> -25% </span>
               </a>
             </div>
-
             <p class="lead">
               <span class="mr-1">
                 <del><?php echo $prix_produit * 1.5 . '€' ?></del>
@@ -67,9 +67,13 @@
 
             <p class="lead font-weight-bold">Description</p>
 
-
-            <form method="post" class="d-flex justify-content-left" action="index?action=afficherPanier&controller=produits&nom_produit=<?php echo $nom_produit; ?>&&id_produit=<?php echo $id_produit; ?>">
-
+            <?php 
+            $html = '<div class="test" id ="tampon"></div>';
+            echo $html;
+            preg_match('/<div class="test">(.*?)</div>/s', $html, $match);
+            var_dump($contenue);
+            ?>
+            <form method="post" class="d-flex justify-content-left" action="#">
               <input type="number" for="nombre" id="nombre" value="1" aria-label="Search" class="form-control" onchange="displayPrice()" style="width: 100px" min="1" max="<?php echo $stock_produit; ?>">
 
 

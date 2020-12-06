@@ -1,27 +1,39 @@
 <!DOCTYPE html>
-<html>
-<head>
-  
-</head>
+
+<html lang="fr">
   <body>
-    <!--Main layout-->
+    <form method="post" action="panier.php">
+        <?php
+          if (creationPanier())
+          { 
+              $nbArticles=count($_SESSION['panier']['nomProduit']);
+              if ($nbArticles <= 0)
+              echo "<tr><td>Votre panier est vide </ td></tr>";
+              else
+              {
+                  for ($i=0 ;$i < $nbArticles ; $i++)
+                  {
+                      echo "<tr>";
+                      echo "<td>".htmlspecialchars($_SESSION['panier']['nomProduit'][$i])."</ td>";
+                      echo "<td><input type=\"text\" size=\"4\" name=\"q[]\" value=\"".htmlspecialchars($_SESSION['panier']['qaProduit'][$i])."\"/></td>";
+                      echo "<td>".htmlspecialchars($_SESSION['panier']['prixProduit'][$i])."</td>";
+                      echo "<td><a href=\"".htmlspecialchars("panier.php?action=suppression&l=".rawurlencode($_SESSION['panier']['nomProduit'][$i]))."\">XX</a></td>";
+                      echo "</tr>";
+                  }
 
-    <main>
+                  echo "<tr><td colspan=\"2\"> </td>";
+                  echo "<td colspan=\"2\">";
+                  echo "Total : ".MontantGlobal();
+                  echo "</td></tr>";
 
-      <div class="container" style="margin-top: 5%">
-        <!--Section: Products v.3-->
-        <section class="text-center mb-4">
-          <div class="row wow fadeIn">
-            <?php 
-            $id = $_GET['id_client'];  
-            $details = ModelCommandes::getDetailsFromCommande($id);      
-            ?>
-          </div>
-        </section>
-        <!--Section: Products v.3-->
-      </div>
+                  echo "<tr><td colspan=\"4\">";
+                  echo "<input type=\"submit\" value=\"Rafraichir\"/>";
+                  echo "<input type=\"hidden\" name=\"action\" value=\"refresh\"/>";
 
-    </main>
-    <!--Main layout--> 
+                  echo "</td></tr>";
+              }
+          }
+        ?>
+    </form>
   </body>
-</html> 
+</html>
