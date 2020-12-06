@@ -68,17 +68,16 @@
           <li class="nav-item">
             
           </li>
-          <?php if(!isset($_SESSION['id_utilisateur'])) {
-          echo '
           <li class="nav-item">
-            <a href="index?action=enregistrer&controller=utilisateur" class="nav-link border border-light rounded waves-effect">
-              <i class=""></i>S\'enregistrer
+            <a href="index?action=seRegister&controller=utilisateur" class="nav-link border border-light rounded waves-effect">
+              <i class=""></i>S'enregistrer
             </a>
           </li>
           <li class="nav-item">
             <a href="index?action=seConnecter&controller=utilisateur" class="nav-link border border-light rounded waves-effect">
               <i class=""></i>Se connecter
             </a>
+<<<<<<< HEAD
           </li>'; }
           else {
             echo '
@@ -98,6 +97,9 @@
           </li>';
           }
           ?>
+=======
+          </li>
+>>>>>>> parent of 146b3a3... ajout fonctions se connecter et s'enregistrer
         </ul>
       </div>
     </div>
