@@ -68,17 +68,17 @@
           <li class="nav-item">
             
           </li>
+          <?php if(!isset($_SESSION['id_utilisateur'])) {
+          echo '
           <li class="nav-item">
-            <a href="index?action=seRegister&controller=utilisateur" class="nav-link border border-light rounded waves-effect">
-              <i class=""></i>S'enregistrer
+            <a href="index?action=enregistrer&controller=utilisateur" class="nav-link border border-light rounded waves-effect">
+              <i class=""></i>S\'enregistrer
             </a>
           </li>
           <li class="nav-item">
             <a href="index?action=seConnecter&controller=utilisateur" class="nav-link border border-light rounded waves-effect">
               <i class=""></i>Se connecter
             </a>
-<<<<<<< HEAD
-<<<<<<< HEAD
           </li>'; }
           else {
             echo '
@@ -91,19 +91,11 @@
           $image_utilisateur = $u->get('pp_utilisateur');
           echo '<li style = "margin-left : 10px;" class="nav-item">
                 Bonjour ' . $prenom_utilisateur .' ' . 
-          '<a href="index?action=utilisateurDetail&controller=utilisateur&id_utilisateur='.$id.'">
-          <img style = "width : 40px; height : 40px;" src="'.$image_utilisateur.'" class="card-img-top"
+          '<img style = "width : 40px; height : 40px;" src="'.$image_utilisateur.'" class="card-img-top"
                         alt="imageUtilisateur">
-          </a>
           </li>';
           }
           ?>
-=======
-          </li>
->>>>>>> parent of 146b3a3... ajout fonctions se connecter et s'enregistrer
-=======
-          </li>
->>>>>>> parent of 146b3a3... ajout fonctions se connecter et s'enregistrer
         </ul>
       </div>
     </div>
