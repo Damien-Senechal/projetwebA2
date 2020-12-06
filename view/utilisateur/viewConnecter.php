@@ -15,7 +15,7 @@
             background: #fff;
             box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
         }
-        #container h1{
+        #container h1, p{
             margin: 0 auto;
             text-align: center;
             padding-bottom: 10px;
@@ -51,14 +51,25 @@
             
             <form  method="get" action="index.php">
                 <h1>Connexion</h1>
-                
+                <?php if (isset($_SESSION['msgErreur'])){
+                    echo '<p style="text-align : center; color : red;">' . $_SESSION['msgErreur'] . '</p>';
+                    } ?>
                 <label><b>Adresse e-mail : </b></label>
-                <input type="text" placeholder="Adresse mail..." name="mail_utilisateur" id="mail_utilisateur" required>
+                <input type="text" placeholder="Adresse mail..." name="mail_utilisateur" id="mail_utilisateur" 
+                required 
+                <?php if (isset($_SESSION['formMail'])){
+                    echo 'value="' . $_SESSION['formMail'] . '"';
+                    }?>>
                 <label><b>Mot de passe :</b></label>
-                <input type="password" placeholder="Entrer le mot de passe..." name="mdp_utilisateur" id="mdp_utilisateur" required>
+                <input type="password" placeholder="Entrer le mot de passe..." name="mdp_utilisateur" id="mdp_utilisateur" 
+                required 
+                <?php if (isset($_SESSION['formMdp'])){
+                    echo 'value="' . $_SESSION['formMdp'] . '"';
+                    }?>>
                 <input type='hidden' name="controller" value="utilisateur">
                 <input type='hidden' name="action" value="connected">
                 <input type="submit" id='submit' value='Se connecter' >
+                <p><a href="<?php $_SESSION['msgErreur'] = NULL;$_SESSION['formMail'] = NULL;$_SESSION['formMdp'] = NULL;echo "index.php";  ?>"> fermer </a></p>
             </form>
         </div>
 </body>

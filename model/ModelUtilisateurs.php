@@ -9,29 +9,40 @@ class ModelUtilisateurs extends Model {
   private $nom_utilisateur;
   private $prenom_utilisateur;
   private $mail_utilisateur;
-  private $mdp_utilisateur;
   private $adresse_utilisateur;
   private $ddn_utilisateur;
-  private $admin_utilisateur;
   private $histoire_utilisateur;
+  private $mdp_utilisateur;
+  private $admin_utilisateur;
   private $nonce_utilisateur;
   protected static $object = "utilisateur";
+  protected static $primary = "id_utilisateur";
   
   // un constructeur
-  public function __construct($id = NULL, $nom = NULL, $pre = NULL, $mail = NULL, $mdp = NULL, $adr = NULL, $ddn = NULL, $admin = NULL, $histoire = NULL, $nonce = NULL) {
-    if (!is_null($id) && !is_null($nom) && !is_null($pre) && !is_null($mail) && !is_null($mdp) && !is_null($adr) && !is_null($ddn) && !is_null($admin) && !is_null($histoire) && !is_null($nonce)) {
-      $this->id_utilisateur = $id;
-      $this->nom_utilisateur = $nom;
-      $this->prenom_utilisateur = $pre;
-      $this->mail_utilisateur = $mail;
-      $this->mdp_utilisateur = $mdp;
-      $this->adresse_utilisateur = $adr;
-      $this->ddn_utilisateur = $ddn;
-      $this->admin_utilisateur = $admin;
-      $this->histoire_utilisateur = $histoire;
-      $this->nonce_utilisateur = $nonce;
+  // public function __construct($id = NULL, $nom = NULL, $pre = NULL, $mail = NULL,  $adr = NULL, $ddn = NULL, $histoire = NULL, $mdp = NULL, $pp = NULL, $admin = NULL,  $nonce = NULL) {
+  //   if (!is_null($id) && !is_null($nom) && !is_null($pre) && !is_null($mail) && !is_null($mdp) && !is_null($adr) && !is_null($ddn) && !is_null($pp) && !is_null($admin) && !is_null($histoire) && !is_null($nonce)) {
+  //     $this->id_utilisateur = $id;
+  //     $this->nom_utilisateur = $nom;
+  //     $this->prenom_utilisateur = $pre;
+  //     $this->mail_utilisateur = $mail;
+  //     $this->mdp_utilisateur = $mdp;
+  //     $this->adresse_utilisateur = $adr;
+  //     $this->ddn_utilisateur = $ddn;
+  //     $this->pp_utilisateur = $pp;
+  //     $this->admin_utilisateur = $admin;
+  //     $this->histoire_utilisateur = $histoire;
+  //     $this->nonce_utilisateur = $nonce;
+  //   }
+  // }
+
+  public function __construct($data = array())  {
+        foreach ($data as $key => $value){
+            if($key != 'action') {
+                $this->$key = $value;
+            }
+        }
+
     }
-  }
    
   public function get($nom_attribut) {
       if (property_exists($this, $nom_attribut))
@@ -96,6 +107,16 @@ class ModelUtilisateurs extends Model {
           die();
       }
   }
+
+  public function setPp($pp2)  {
+      try {
+        $this->pp_utilisateur = $pp2;
+      } catch(PDOException $e) {
+        echo $e->getMessage();
+        die();
+      }
+  }
+
   public function setAdmin($admin2)  {
       if (strlen($admin2) > 1) {
         echo "Admin non valide (taille > 1)\n";

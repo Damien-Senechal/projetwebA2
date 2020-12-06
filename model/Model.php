@@ -37,7 +37,7 @@
 	        try {
 	            $table_name = static::$object;
 
-	            $sql = "INSERT INTO $table_name ";
+	            $sql = "INSERT INTO p_$table_name"."s ";
 	            $sql_values = "VALUES(";
 	            $pdo = Model::$pdo;
 	            foreach ($data as $key => $valeur) {
@@ -133,12 +133,12 @@
 		    $table_name = static::$object;
 		    $class_name = 'Model' . ucfirst($table_name);
 		    $primary_key = static::$primary;
-		    $primary_key_value = $_GET["$primary_key"];
+		    $primary_key_value = $_SESSION["$primary_key"];
 		    $string = '';
 		    try {
 		        foreach ($data as $key => $value) {$string =  $string . $key . '="' . $value . '",';}
 		        $string = rtrim($string,",");
-		        $sql = "UPDATE $table_name SET $string WHERE $primary_key= :primary_key;";
+		        $sql = "UPDATE p_$table_name"."s SET $string WHERE $primary_key= :primary_key;";
 		        $req_prep = Model::$pdo->prepare($sql);
 		        $values = array(
 		          	"primary_key"=>$data[$primary_key],

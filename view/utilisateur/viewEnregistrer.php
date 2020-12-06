@@ -50,27 +50,27 @@
 </head>
 <body>
     <?php
-    if ($_GET['action'] == "enregistrer"){
-        $vue = "created";
-        $etat = "require";
-        $valeur = "";
-    }else{
-        $vue = "updated";
-        $etat = "readonly";
-        $valeur = $_GET["id_utilisateur"];
-    }
-?>
+        if ($_GET['action'] == "enregistrer"){
+            $vue = "enregistrer";
+        }else{
+            $vue = "updated";
+            $mailSession = ModelUtilisateurs::getUtilisateurById($_GET['id_utilisateur'])->get('mail_utilisateur');
+            $_SESSION['ancienMail'] = $mailSession;
+        }
+    ?>
 <div id="container">
     <form method="get" action="index.php">
 
         <fieldset>
-            <legend style="text-align : center;">Création de compte :</legend>
+            <?php
+                if ($_GET['action'] == "enregistrer") {
+                    echo '<legend style="text-align : center;">Création de compte :</legend>';
+                } else {
+                    echo '<legend style="text-align : center;">Modification de compte :</legend>';
+                }
+                
+            ?>
             <p>
-                <?php if ($_GET['action'] != "enregistrer") {
-                    echo '<label for="id_utilisateur_id">id_utilisateur</label>
-                    "<input type="text" placeholder="id_utilisateur" name="id_utilisateur" $etat id="id_utilisateur_id" value="$valeur"/>';
-                    }
-                ?>
                 <label>Nom :</label>
                 <input type="text" name="nom_utilisateur" id="nom_utilisateur" required/>
                 <label>Prenom :</label>
@@ -80,12 +80,9 @@
                 <label>Adresse :</label>
                 <input type="text" name="adresse_utilisateur" id="adresse_utilisateur" required/>
                 <label>Date de naissance :</label>
-                <input type="date" name="ddn_utilisateur" id="ddn_utilisateur"/>
+                <input type="text" pattern="[0-9]{4}-(01|02|03|04|05|06|07|08|09|10|11|12)-([0,1,2][1-9]|10|20|30|31)" name="ddn_utilisateur" id="ddn_utilisateur" placeholder="(aaaa-mm-jj)" />
                 <label>Histoire :</label>
                 <input type="text" name="histoire_utilisateur" id="histoire_utilisateur"/>
-                <label>Photo de profil :</label>
-                <input type="file" name="pp_utilisateur" id="pp_utilisateur"/>
-
                 <label>Mot de passe :</label>
                 <input type="password" name="mdp_utilisateur" id="mdp_utilisateur" required/>
                 <label>Confirmer le mot de passe :</label>
@@ -99,7 +96,7 @@
                                   <input type="checkbox" name="admin" id="admin"/>';
                         }
                     }
-                    echo "<input type='hidden' name='action' value='senregistrer'>";
+                    echo "<input type='hidden' name='action' value='$vue'>";
                 ?>
 
                 <input type='hidden' name="controller" value="utilisateur">

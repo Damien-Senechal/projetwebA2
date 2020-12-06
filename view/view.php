@@ -19,7 +19,7 @@
     
 </head>
 <body>
-    <header>
+    <header> <!---->
         <!-- Navbar -->
         <nav class="navbar fixed-top navbar-expand-lg navbar-light white scrolling-navbar">
           <div class="container">
@@ -44,9 +44,14 @@
           <li class="nav-item">
             <a class="nav-link waves-effect" href="index?action=magasinProduit&controller=produits">Magasin</a>
           </li>
+          <?php 
+          if (isset($_SESSION['id_utilisateur'])) {
+          echo '
           <li class="nav-item">
-            <a class="nav-link waves-effect" href="#">Compte</a>
-          </li>
+            <a class="nav-link waves-effect" href="index?action=utilisateurDetail&controller=utilisateur&id_utilisateur='.$_SESSION['id_utilisateur'].'">Compte</a>
+          </li>';
+          }
+          ?>
         </ul>
         <!-- Right -->
         <ul class="navbar-nav nav-flex-icons">
@@ -85,14 +90,15 @@
           $u = ModelUtilisateurs::getUtilisateurById($_SESSION['id_utilisateur']);
           $id = $u->get('id_utilisateur');
           $prenom_utilisateur = $u->get('prenom_utilisateur');
-          $image_utilisateur = $u->get('pp_utilisateur');
-          echo '<li style = "margin-left : 10px;" class="nav-item">
+          echo '<li style = "margin-left : 10px; align-items : stretch;" class="nav-item">
                 Bonjour ' . $prenom_utilisateur .' ' . 
           '<a href="index?action=utilisateurDetail&controller=utilisateur&id_utilisateur='. $id .'">
-          <img style = "width : 40px; height : 40px;" src="'.$image_utilisateur.'" class="card-img-top"
-                        alt="imageUtilisateur">
+            <img style = "width : 40px; height : 40px;" src="template/img/imagesUtilisateur/'.$prenom_utilisateur.'.png" class="card-img-top" alt="imageUtilisateur">
           </a>
           </li>';
+          if (Session::is_admin()) {
+            echo '<p style="color : red; margin-left : 10px;"><strong> IS ADMIN </strong></p>';
+          }
           }
           ?>
         </ul>

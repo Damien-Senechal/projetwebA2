@@ -1,3 +1,3 @@
 <?php
-    echo $message;
+    echo '<br><br><br>'.$message;
 ?>

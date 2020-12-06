@@ -168,7 +168,7 @@
   <!--/.Faites  attention a ca-->
     <div class="container" style="margin-top: 5%">
       <!--Section: Products v.3-->
-      <h1 class="dark-grey-text"><strong><center> EKIP : </center></strong></h1>
+      <h1 class="dark-grey-text"><strong><center> L'équipe : </center></strong></h1>
       <section class="text-center mb-4">
         <div class="row wow fadeIn">
           <?php
@@ -182,13 +182,12 @@
                 $prenom = $utilisateur->get('prenom_utilisateur');
                 $mail = $utilisateur->get('mail_utilisateur');
                 $ddn = $utilisateur->get('ddn_utilisateur');
-                $image = $utilisateur->get('pp_utilisateur');
                 $age = ModelUtilisateurs::age($ddn); 
 
                 echo '<div class="col-lg-3 col-md-6 mb-4">
                   <div class="card">
                     <div class="view overlay">
-                      <img src="'.$image.'" class="card-img-top"
+                      <img src="template/img/imagesUtilisateur/'.$prenom.'.png" class="card-img-top"
                         alt="">
                       <a href="index?action=utilisateurDetail&controller=utilisateur&id_utilisateur='.$id.'">
                         <div class="mask rgba-white-slight">Présentation</div>

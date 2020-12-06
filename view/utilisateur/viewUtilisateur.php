@@ -15,7 +15,6 @@
     $prenom = $utilisateur->get('prenom_utilisateur');
     $mail = $utilisateur->get('mail_utilisateur');
     $ddn = $utilisateur->get('ddn_utilisateur');
-    $image = $utilisateur->get('pp_utilisateur');
     $histoire = $utilisateur->get('histoire_utilisateur');
     $nbrCommandes = $utilisateur->getNbrCommandeUtilisateur($id);
   ?>
@@ -28,7 +27,7 @@
         <!--Grid column-->
         <div class="col-md-6 mb-4">
 
-          <?php  echo '<img src="'.$image.'" class="img-fluid" alt="">'?>
+          <?php  echo '<img src="template/img/imagesUtilisateur/'.$prenom.'.png" class="img-fluid" alt="">'?>
 
         </div>
         <!--Grid column-->
@@ -80,11 +79,12 @@
 
 
             <form class="d-flex justify-content-left">
+              <a href="index?action=update&controller=utilisateur&id_utilisateur=<?php echo $_SESSION['id_utilisateur'] ?>">
               <!-- Default input -->
-              
-              <button class="btn btn-primary btn-md my-0 p" type="submit"> Modifier compte
+              <input class="btn btn-primary btn-md my-0 p" value="Modifier compte" disabled="disabled"> 
                 <i class=""></i>
-              </button>
+              </input>
+              </a>
 
             </form>
 
