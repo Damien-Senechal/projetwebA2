@@ -16,24 +16,17 @@
     $prix_produit = $produit->get('prix_produit');
     $description_produit = $produit->get('desc_produit');
     $stock_produit = $produit->get('stock_produit');
-    $_SESSION['produitPanier'] = $id_produit;
-    $_SESSION['quantiteProduit'] = 0;
-    $_SESSION['prixPanier'] = 0;
   ?>
   <script>
-    <?php
    function displayPrice(){
        var nbProduit = document.getElementById("nombre").value;
-       var prix = $prix_produit;
+       var prix = <?php echo $prix_produit ?>;
        var total = 0;
        var total = nbProduit * prix;
        var tot = total.toFixed(2);
        document.getElementById("total_prix").innerHTML = " Total : " + tot + " € ";
-       document.getElementById("total_prix2").innerHTML = " Total : " + tot + " € ";
-
-        window.location.href = "add.php?var1=" + a + "&var2=" + b;
-       ?>
-       }
+       return nbProduit;
+     }
    </script>
   <main class="mt-5 pt-4">
     <div class="container dark-grey-text mt-5">
@@ -75,9 +68,10 @@
             <p class="lead font-weight-bold">Description</p>
 
 
-            <form method="post" class="d-flex justify-content-left" action="index?action=majPanier&controller=produits&id_produit=<?php echo $id_produit; ?>">
+            <form method="post" class="d-flex justify-content-left" action="index?action=afficherPanier&controller=produits&nom_produit=<?php echo $nom_produit; ?>&&id_produit=<?php echo $id_produit; ?>">
 
               <input type="number" for="nombre" id="nombre" value="1" aria-label="Search" class="form-control" onchange="displayPrice()" style="width: 100px" min="1" max="<?php echo $stock_produit; ?>">
+
 
               <button class="btn btn-primary btn-md my-0 p" type="submit">
                 <i style = "font-size: 20px" id="total_prix" class="fas fa-shopping-cart ml-1"> <?php echo  'Total : '.$prix_produit.' €'  ?></i>
@@ -96,12 +90,14 @@
       </div>
       <!--Grid row-->
 
-      <hr> <!--c kwa?-->
+      <hr> 
+      <!--c kwa?-->
+      <!-- Aucunes idées mais on le laisse pour le lore -->
 
       <!--Grid row-->
       <div class="row d-flex justify-content-center wow fadeIn">
 
-      	<?php 
+        <?php 
           $tab_produits = ModelProduits::getAllProduits();
           $tailleTab = sizeof($tab_produits);
 
@@ -111,12 +107,12 @@
           }
           $deuxiemeCookie = rand(0, $tailleTab-1);
           while ($premierCookie == $deuxiemeCookie | $tab_produits[$deuxiemeCookie ]->get('id_produit') == $id_produit) {
-          	$deuxiemeCookie = rand(0, $tailleTab-1);
+            $deuxiemeCookie = rand(0, $tailleTab-1);
           }
 
           $troisiemeCookie = rand(0, $tailleTab-1);
           while ($premierCookie == $troisiemeCookie | $deuxiemeCookie == $troisiemeCookie | $tab_produits[$troisiemeCookie ]->get('id_produit') == $id_produit) {
-          	$troisiemeCookie = rand(0, $tailleTab-1);
+            $troisiemeCookie = rand(0, $tailleTab-1);
           }
 
           $image1 = $tab_produits[$premierCookie]->get('urlImage_produit');
