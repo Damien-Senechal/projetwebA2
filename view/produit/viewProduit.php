@@ -27,17 +27,12 @@
        var total = nbProduit * prix;
        var tot = total.toFixed(2);
        document.getElementById("total_prix").innerHTML = " Total : " + tot + " € ";
-       document.getElementById('tamponNom').innerHTML = nom;
-       document.getElementById('tamponPrix').innerHTML = prix;
-       document.getElementById('tamponProduit').innerHTML = nbProduit;
-       <?php 
-            $nom = "<div id='tamponNom'></div>";
-            strip_tags($nom);
-            $prix = "<div id='tamponPrix'></div>";
-            strip_tags($prix);
-            $qqt = "<div id='tamponProduit'></div>";
-            strip_tags($qqt);
-        ?>
+       document.getElementById("form").innerHTML = '<input type="hidden" name="action" value="afficherPanier">';
+       document.getElementById("form2").innerHTML = '<input type="hidden" name="controller" value="produits">';
+       document.getElementById("form3").innerHTML = '<input type="hidden" name="nom_produit" value="' + nom + '">';
+       document.getElementById("form4").innerHTML = '<input type="hidden" name="prix_produit" value="' + prix + '">';
+       document.getElementById("form5").innerHTML = '<input type="hidden" name="qaProduit" value="' + nbProduit + '">';
+
      }
    </script>
     <div class="container dark-grey-text mt-5">
@@ -76,30 +71,29 @@
 
             <p class="lead font-weight-bold">Description</p>
 
-              <?php
-              echo '
-              <input type="number" for="nombre" id="nombre" value="1" aria-label="Search" class="form-control" onchange="displayPrice()" style="width: 100px" min="1" max="'. $stock_produit.'">';
-              ?>
+              <form method="get" class="d-flex justify-content-left" action="index.php">
+                 
+                <?php
+                echo '
+                <input type="number" for="nombre" id="nombre" value="1" aria-label="Search" class="form-control" onchange="displayPrice()" style="width: 100px" min="1" max="'. $stock_produit.'">';
+                ?>
+                <button class="btn btn-primary btn-md my-0 p" type="submit">
+                  <i style = "font-size: 20px" id="total_prix" class="fas fa-shopping-cart ml-1"> <?php echo  'Total : '.$prix_produit.' €'; ?></i>
 
-            <form method="get" class="d-flex justify-content-left" action="index.php">
-              <button class="btn btn-primary btn-md my-0 p" type="submit">
-                <i style = "font-size: 20px" id="total_prix" class="fas fa-shopping-cart ml-1"> <?php echo  'Total : '.$prix_produit.' €'; ?></i>
-
-                <br>
-                 Ajouter au panier 
-                
-              </button>
-            <!-- action=afficherPanier&controller=produits&nom_produit=CookieOGalak&prix_produit=4.5&qaProduit=2 -->
-            <?php  
-              echo '<input type="hidden" name="action" value="afficherPanier">';
-              echo '<input type="hidden" name="controller" value="produits">';
-              echo '<input type="hidden" name="nom_produit" value="'.$nom.'">';
-              echo '<input type="hidden" name="prix_produit" value="'.$prix.'">';
-              echo '<input type="hidden" name="qaProduit" value="'.$qqt.'">';
-
-              ?>
-            </form>
-
+                  <br>
+                   Ajouter au panier 
+                  
+                </button>
+              <!-- action=afficherPanier&controller=produits&nom_produit=CookieOGalak&prix_produit=4.5&qaProduit=2 -->
+                <?php 
+                  echo '
+                  <div id = "form"><input type="hidden" name="action" value="afficherPanier"></div>
+                  <div id = "form2"><input type="hidden" name="controller" value="produits"></div>
+                  <div id = "form3"><input type="hidden" name="nom_produit" value="' . $nom_produit . '"></div>
+                  <div id = "form4"><input type="hidden" name="prix_produit" value="' . $prix_produit . '"></div>
+                  <div id = "form5"><input type="hidden" name="qa_produit" value="1"></div>';
+                ?>
+              </form>
           </div>
           <!--Content-->
 
@@ -188,7 +182,7 @@
           <h4 class="my-4 h4"><center>'.$tab_produits[$troisiemeCookie]->get('prix_produit').' €</center></h4>
 
         </div>
-        <!--Grid column-->'
+        <!--Grid column-->';
         ?>
       </div>
       <!--Grid row-->
