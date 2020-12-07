@@ -34,6 +34,7 @@
        document.getElementById("form5").innerHTML = '<input type="hidden" name="qaProduit" value="' + nbProduit + '">';
 
      }
+     
    </script>
     <div class="container dark-grey-text mt-5">
       <!--Grid row-->

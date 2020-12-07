@@ -96,15 +96,17 @@
           $u = ModelUtilisateurs::getUtilisateurById($_SESSION['id_utilisateur']);
           $id = $u->get('id_utilisateur');
           $prenom_utilisateur = $u->get('prenom_utilisateur');
-          echo '<li style = "margin-left : 10px; align-items : stretch;" class="nav-item">
-                Bonjour ' . $prenom_utilisateur .' ' . 
-          '<a href="index?action=utilisateurDetail&controller=utilisateur&id_utilisateur='. $id .'">
-            <img style = "width : 40px; height : 40px;" src="template/img/imagesUtilisateur/'.$prenom_utilisateur.'.png" class="card-img-top" alt="imageUtilisateur">
-          </a>
-          </li>';
+          echo '<li style = "margin-left : 10px; display: flex;" class="nav-item">
+                <a style = "display: flex; align-items: center;">
+                Bonjour ' . $prenom_utilisateur. ' 
+                <a>
+            <a href="index?action=utilisateurDetail&controller=utilisateur&id_utilisateur='. $id .'">
+            <img style = "margin-left : 10px; width : 40px; height : 40px; align-items : center;" src="template/img/imagesUtilisateur/'.$prenom_utilisateur.'.png" class="card-img-top">
+          </a>';
           if (Session::is_admin()) {
-            echo '<p style="color : red; margin-left : 10px;"><strong> IS ADMIN </strong></p>';
+            echo '<i style="margin-top : 4%; color : red; margin-left : 10px;"><strong> IS ADMIN </strong></i>';
           }
+          '</li>';      
           }
           ?>
         </ul>
