@@ -22,19 +22,18 @@
    function displayPrice(){
        var nbProduit = document.getElementById("nombre").value;
        var prix = <?php echo $prix_produit ?>;
-       var nom = "<?php echo $nom_produit ?>";
+       var id = "<?php echo $id_produit ?>";
        var total = 0;
        var total = nbProduit * prix;
        var tot = total.toFixed(2);
        document.getElementById("total_prix").innerHTML = " Total : " + tot + " € ";
-       document.getElementById("form").innerHTML = '<input type="hidden" name="action" value="afficherPanier">';
+       document.getElementById("form").innerHTML = '<input type="hidden" name="action" value="ajouterObjetPanier">';
        document.getElementById("form2").innerHTML = '<input type="hidden" name="controller" value="produits">';
-       document.getElementById("form3").innerHTML = '<input type="hidden" name="nom_produit" value="' + nom + '">';
-       document.getElementById("form4").innerHTML = '<input type="hidden" name="prix_produit" value="' + prix + '">';
-       document.getElementById("form5").innerHTML = '<input type="hidden" name="qaProduit" value="' + nbProduit + '">';
+       document.getElementById("form3").innerHTML = '<input type="hidden" name="id_produit" value="' + id + '">';
+       document.getElementById("form5").innerHTML = '<input type="hidden" name="qa_produit" value="' + nbProduit + '">';
 
      }
-     
+
    </script>
     <div class="container dark-grey-text mt-5">
       <!--Grid row-->
@@ -85,13 +84,12 @@
                    Ajouter au panier 
                   
                 </button>
-              <!-- action=afficherPanier&controller=produits&nom_produit=CookieOGalak&prix_produit=4.5&qaProduit=2 -->
+              
                 <?php 
                   echo '
-                  <div id = "form"><input type="hidden" name="action" value="afficherPanier"></div>
+                  <div id = "form"><input type="hidden" name="action" value="ajouterObjetPanier"></div>
                   <div id = "form2"><input type="hidden" name="controller" value="produits"></div>
-                  <div id = "form3"><input type="hidden" name="nom_produit" value="' . $nom_produit . '"></div>
-                  <div id = "form4"><input type="hidden" name="prix_produit" value="' . $prix_produit . '"></div>
+                  <div id = "form3"><input type="hidden" name="id_produit" value="' . $id_produit . '"></div>
                   <div id = "form5"><input type="hidden" name="qa_produit" value="1"></div>';
                 ?>
               </form>

@@ -65,6 +65,7 @@
                 <br> Adresse mail - ' .$mail .'
               </span>       
             </p> ';
+            if ((!empty($_SESSION['id_utilisateur'])) && ($_GET['id_utilisateur'] == $_SESSION['id_utilisateur']) && (Session::is_admin())) {
             if ($nbrCommandes > 0) {
               echo '
             <a href="index?action=listeCommande&controller=commande&id_utilisateur='.$id.'" class="lead font-weight-bold">Nb commandes : '. $nbrCommandes  . '</a>';
@@ -72,12 +73,11 @@
             else {
               echo '<a class="lead font-weight-bold"> Aucune commande </a>';
             }
-      ?>
+            echo '
             <div>  
             <br>
-            </div>
+            </div>';
 
-            <?php if ($_GET['id_utilisateur'] == $_SESSION['id_utilisateur']) {
               echo '<form class="d-flex justify-content-left">
               <a href="index?action=update&controller=utilisateur&id_utilisateur='.$_SESSION['id_utilisateur'].'">
               <!-- Default input -->
@@ -87,16 +87,6 @@
               </a>
 
             </form>';
-            } else if (Session::is_admin()) {
-              echo '<form class="d-flex justify-content-left">
-              <a href="index?action=update&controller=utilisateur&id_utilisateur='.$id.'">
-              <!-- Default input -->
-              <input class="btn btn-primary btn-md my-0 p" value="Modifier compte" disabled="disabled"> 
-                <i class=""></i>
-              </input>
-              </a>
-
-              </form>';
             }
             ?>
 

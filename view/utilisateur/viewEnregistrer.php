@@ -78,6 +78,8 @@
                     <input type="text" pattern="[0-9]{4}-(01|02|03|04|05|06|07|08|09|10|11|12)-([0,1,2][1-9]|10|20|30|31)" name="ddn_utilisateur" id="ddn_utilisateur" placeholder="(aaaa-mm-jj)" />
                     <label>Histoire :</label>
                     <input type="text" name="histoire_utilisateur" id="histoire_utilisateur"/>
+                    <label>Photo de profil</label>
+                    <input type="file" name="pp_utilisateur" id="pp_utilisateur"/>
                     <label>Mot de passe :</label>
                     <input type="password" name="mdp_utilisateur" id="mdp_utilisateur" required/>
                     <label>Confirmer le mot de passe :</label>

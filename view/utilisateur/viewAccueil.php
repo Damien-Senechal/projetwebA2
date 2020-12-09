@@ -168,7 +168,7 @@
   <!--/.Faites  attention a ca-->
     <div class="container" style="margin-top: 5%">
       <!--Section: Products v.3-->
-      <h1 class="dark-grey-text"><strong><center> Ekip : </center></strong></h1>
+      <h1 class="dark-grey-text"><strong><center> Les créateurs : </center></strong></h1>
       <section class="text-center mb-4">
         <div class="row wow fadeIn">
           <?php

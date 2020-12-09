@@ -214,3 +214,232 @@
 </body>
 
 </html>
+
+
+
+
+
+
+
+
+
+
+echo '<div class="col-lg-3 col-md-6 mb-4">
+                                <!--Card-->
+                                <div class="card">
+                                  <!--Card image-->
+                                  <div class="card-body text-center">
+                              Produit n°'.$i.' : <br><br>
+                              '.$nom_produit.' <br>
+                              <a href="index?action=produitDetail&controller=produits&id_produit='.$id_produit.'">
+                              <img src="'.$image_produit.'" class="img-fluid" alt=""><br></a>';
+                              if ($quantite_produit_detail == 1) 
+                                echo $quantite_produit_detail.' produit acheté <br><br>';
+                              else 
+                                echo $quantite_produit_detail.' produits achetés <br>'
+                                . 'Prix produit - '.$prix_produit.'€ <br> ';
+                              echo '
+                              Prix total - '.$prix_detail.'€ 
+                              </div></div></div>';
+                              $i = $i + 1;
+
+
+
+
+
+
+
+echo '
+                                <div class="col-lg-3 col-md-6 mb-4">
+                                  <div class="card">
+                                    <div class="card-body text-center">
+                                    Produit n°'.($i + 1).' : <br><br>
+                                    '.$nom_produit.' <br>
+                                    <a href="index?action=produitDetail&controller=produits&id_produit='.$id_produit.'">
+                                    <img src="'.$image_produit.'" class="img-fluid" alt=""><br></a>'; 
+                                    if (htmlspecialchars($_SESSION['panier'][$i]['qaProduit']) == 1) 
+                                      echo htmlspecialchars($_SESSION['panier'][$i]['qaProduit']).' produit <br><br>';
+                                    else 
+                                      echo '<strong> ' .htmlspecialchars($_SESSION['panier'][$i]['qaProduit']).' produits </strong><br>'. 
+                                    'Prix produit - '.$prix_produit.'€ <br> ';
+                                    echo ' <div style = "color : red;"> Prix total - '.htmlspecialchars($_SESSION['panier'][$i]['qaProduit']) * $prix_produit.'€ 
+                                    </div>
+                                  </div>
+                                </div>
+                                ';
+
+
+
+
+
+
+
+<!DOCTYPE html>
+
+<html lang="fr">
+  <body>
+    <main class="mt-5 pt-4">
+      <form method="post" action="panier.php">
+        <div class="container" style="margin-top: 5%">
+        <!--Card content-->
+          <div class="card" style="margin-top: 5%">
+            <section class="text-center mb-4">
+              
+              <!--Category & Title-->
+              <a class="grey-text">
+                <h5>Votre panier</h5>
+              </a>
+              <h5>
+                <strong>
+                  <a class="dark-grey-text">
+                    <?php
+                    if (ControllerProduits::creerPanier())
+                    { 
+                      $nbArticles=count($_SESSION['panier']);
+                      if ($nbArticles <= 0)
+                        echo "Votre panier est vide ";
+                      else
+                      {
+                      echo '
+                      <span class="badge badge-pill danger-color" style="font-size : 130%"> Montant du panier : '.ControllerProduits::totalPrix().'€</span>
+                      ';
+                        for ($i=0 ;$i < $nbArticles ; $i++)
+                        {
+                          $id_produit = htmlspecialchars($_SESSION['panier'][$i]['idProduit']);
+                          $produit = ModelProduits::getProduitById($id_produit);
+                            $nom_produit = $produit->get('nom_produit');
+                            $image_produit = $produit->get('urlImage_produit');
+                            $prix_produit = $produit->get('prix_produit');
+
+                            echo '<div class="col-lg-3 col-md-6 mb-4">
+                                  <!--Card-->
+                                  <div class="card">
+                                    <!--Card image-->
+                                    <div class="card-body text-center">
+                                Produit n°'.$i.' : <br><br>
+                                '.$nom_produit.' <br>
+                                <a href="index?action=produitDetail&controller=produits&id_produit='.$id_produit.'">
+                                <img src="'.$image_produit.'" class="img-fluid" alt=""><br></a>';
+                                if ($quantite_produit_detail == 1) 
+                                  echo $quantite_produit_detail.' produit acheté <br><br>';
+                                else 
+                                  echo $quantite_produit_detail.' produits achetés <br>'
+                                  . 'Prix produit - '.$prix_produit.'€ <br> ';
+                                echo '
+                                Prix total - '.$prix_detail.'€ 
+                                </div></div></div>';
+                                $i = $i + 1;
+                        } 
+                        echo "  </section>
+                              </div>";
+                        //echo "<td>".htmlspecialchars($_SESSION['panier'][$i]['prixProduit'])."</td>";
+                        // echo "<td><a href=\"".htmlspecialchars("panier.php?action=suppression&l=".rawurlencode($_SESSION['panier']['id_produit'][$i]))."\">XX</a></td>";
+                        // echo "</tr>";
+                    }
+                  }
+                ?>
+          </div>
+        </div>
+      </form>
+    </main>
+  </body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+viewListeCommande :
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  
+</head>
+
+<body>
+  <!--Main layout-->
+  <main class="mt-5 pt-4">
+    <div class="container" style="margin-top: 5%">
+    <?php
+    foreach ((array) $listeCommandes as $key => $value) {
+      $commande = ModelCommandes::getCommandeById($value[0]);
+      $id = $commande->get('id_commande');
+      $id_client = $commande->get('id_client');
+      $date = $commande->get('date_commande');
+      $prix = $commande->get('prix_commande');
+        $utilisateur = ModelUtilisateurs::getUtilisateurById($id_client);
+          $nom = $utilisateur->get('nom_utilisateur');
+          $prenom = $utilisateur->get('prenom_utilisateur');
+          $image = $utilisateur->get('image_utilisateur');
+      $liste_detail = ModelDetail::getListeDetailCommande($id);
+      echo '<!--Card content-->
+                  <div class="card" style="margin-top: 5%">
+                  <section class="text-center mb-4">
+                    <!--Category & Title-->
+                    <a class="grey-text">
+                      <h5>Commande n°'.$id.'</h5>
+                    </a>
+                    <h5>
+                      <strong>
+                        <a class="dark-grey-text"> Commandé par ' .$nom. ' <br><br>
+                          <span class="badge badge-pill danger-color" style="font-size : 130%"> (Yves) Montant de la commande - '.$prix.'€</span>
+                          <div class="container" style="margin-top: 5%">
+                          <section class="text-center mb-4">
+                            <div class="row wow fadeIn">'; 
+                          $i = 1;
+                          foreach ((array) $liste_detail as $key => $value) {
+                            $detail = ModelDetail::getDetailById($value[0]);
+                              $id_detail = $detail->get("id_detail");
+                              $id_produit = $detail->get("id_produit");
+                              $produit = ModelProduits::getProduitById($id_produit);
+                                $nom_produit = $produit->get("nom_produit");
+                                $image_produit = $produit->get("urlImage_produit");
+                                $prix_produit = $produit->get("prix_produit");
+                              $quantite_produit_detail = $detail->get("quantite_produit_detail");
+                              $prix_detail = $detail->get("prix_detail");
+                              echo '<div class="col-lg-3 col-md-6 mb-4">
+                                <!--Card-->
+                                <div class="card">
+                                  <!--Card image-->
+                                  <div class="card-body text-center">
+                              Produit n°'.$i.' : <br><br>
+                              '.$nom_produit.' <br>
+                              <a href="index?action=produitDetail&controller=produits&id_produit='.$id_produit.'">
+                              <img src="'.$image_produit.'" class="img-fluid" alt=""><br></a>';
+                              if ($quantite_produit_detail == 1) 
+                                echo $quantite_produit_detail.' produit acheté <br><br>';
+                              else 
+                                echo $quantite_produit_detail.' produits achetés <br>'
+                                . 'Prix produit - '.$prix_produit.'€ <br> ';
+                              echo '
+                              Prix total - '.$prix_detail.'€ 
+                              </div></div></div>';
+                              $i = $i + 1;
+                              } 
+                              
+                        echo'</div>
+                          </section>
+                        </div> 
+                        </a>
+                      </strong>
+                    </h5>
+
+                    <h4 class="font-weight-bold blue-text">
+                      <strong>Commandé le '.$date.' </strong>
+                    </h4>
+                    </div></section>';
+      }
+    ?>
+  </div>
+  </main>
+  <!--Main layout-->
+</body>
+
+</html>

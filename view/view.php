@@ -62,9 +62,16 @@
         <!-- Right -->
         <ul class="navbar-nav nav-flex-icons">
           <li class="nav-item">
-            <a class="nav-link waves-effect">
-              <span class="badge red z-depth-1 mr-1"> ? </span>
-              <i class="fas fa-shopping-cart"></i>
+            <a class="nav-link waves-effect" href="index?action=afficherPanier&controller=produits">
+              <span class="badge red z-depth-1 mr-1"> <?php 
+              if(!empty($_SESSION['panier'])) {
+              echo count($_SESSION['panier']); 
+              }
+              else
+                echo '0';
+              ?> 
+              </span>
+                <i class="fas fa-shopping-cart"></i>
               <span class="clearfix d-none d-sm-inline-block"> Panier </span>
             </a>
           </li>

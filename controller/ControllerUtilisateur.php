@@ -38,7 +38,6 @@ class ControllerUtilisateur
                 if((ModelUtilisateurs::getUtilisateurByMail($_GET['mail_utilisateur'])->get('nonce_utilisateur'))==NULL){
                         $id = ModelUtilisateurs::getUtilisateurByMail($_GET['mail_utilisateur'])->get('id_utilisateur');
                         $u = ModelUtilisateurs::getUtilisateurByMail($_GET['mail_utilisateur']);
-
                         $_SESSION['id_utilisateur'] = ModelUtilisateurs::getUtilisateurById($id)->get('id_utilisateur');
                         $_SESSION['admin_utilisateur'] = ModelUtilisateurs::getUtilisateurById($id)->get('admin_utilisateur');
                     }

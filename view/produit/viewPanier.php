@@ -2,38 +2,71 @@
 
 <html lang="fr">
   <body>
-    <form method="post" action="panier.php">
-        <?php
-          if (creationPanier())
-          { 
-              $nbArticles=count($_SESSION['panier']['nomProduit']);
-              if ($nbArticles <= 0)
-              echo "<tr><td>Votre panier est vide </ td></tr>";
-              else
-              {
-                  for ($i=0 ;$i < $nbArticles ; $i++)
-                  {
-                      echo "<tr>";
-                      echo "<td>".htmlspecialchars($_SESSION['panier']['nomProduit'][$i])."</ td>";
-                      echo "<td><input type=\"text\" size=\"4\" name=\"q[]\" value=\"".htmlspecialchars($_SESSION['panier']['qaProduit'][$i])."\"/></td>";
-                      echo "<td>".htmlspecialchars($_SESSION['panier']['prixProduit'][$i])."</td>";
-                      echo "<td><a href=\"".htmlspecialchars("panier.php?action=suppression&l=".rawurlencode($_SESSION['panier']['nomProduit'][$i]))."\">XX</a></td>";
-                      echo "</tr>";
+    <main class="mt-5 pt-4">
+      <div class="container" style="margin-top: 5%">
+              <a class="grey-text">
+                <h5>Votre panier</h5>
+              </a>
+              <h5>
+                <strong>
+                    <?php
+                    if (ControllerProduits::creerPanier())
+                    { 
+                      $nbArticles=count($_SESSION['panier']);
+                      if ($nbArticles <= 0)
+                        echo "Votre panier est vide ";
+                      else
+                      {
+                      echo '
+                        <div class="card" style="margin-top: 5%; align-items : row;">
+                          <span class="badge badge-pill danger-color" style="font-size : 130%"> Montant du panier : '.ControllerProduits::totalPrix().'€</span>
+                            <div class="card" style="margin-top: 5%">
+                      ';
+                        for ($i=0 ;$i < $nbArticles ; $i++)
+                        {
+                            $id_produit = htmlspecialchars($_SESSION['panier'][$i]['idProduit']);
+                            $produit = ModelProduits::getProduitById($id_produit);
+                            $nom_produit = $produit->get('nom_produit');
+                            $image_produit = $produit->get('urlImage_produit');
+                            $prix_produit = $produit->get('prix_produit');
+                            $prix_total = $_SESSION['panier'][$i]['qaProduit'] * $prix_produit;
+
+                            echo '
+                            <div class="col-lg-3 col-md-6 mb-4">
+                                <!--Card-->
+                                <div class="card">
+                                  <!--Card image-->
+                                  <div class="card-body text-center">
+                                Produit n°'.$i.' : <br><br>
+                                '.$nom_produit.' <br>
+                                <a href="index?action=produitDetail&controller=produits&id_produit='.$id_produit.'">
+                                <img src="'.$image_produit.'" class="img-fluid" alt=""><br></a>';
+                                if ($_SESSION['panier'][$i]['qaProduit'] == 1) 
+                                  echo '<strong>1 produit acheté <br><br></strong>';
+                                else 
+                                  echo '<strong>'.$_SESSION['panier'][$i]['qaProduit'].' produits achetés <br></strong>'
+                                  . ' Prix produit - '.$prix_produit.'€ ';
+                                echo '
+                                <div style="color : red;"> Prix total - '.$prix_total.'€ 
+                                </div>
+                                ';
+                                $i = $i + 1;
+                                echo ' 
+                                </div> 
+                                </div> 
+                                </div>
+                                </div>
+                                </div>';
+                        } 
+                        echo "  
+                        </a>
+                      </strong>
+                    </h5>";
+                    }
                   }
-
-                  echo "<tr><td colspan=\"2\"> </td>";
-                  echo "<td colspan=\"2\">";
-                  echo "Total : ".MontantGlobal();
-                  echo "</td></tr>";
-
-                  echo "<tr><td colspan=\"4\">";
-                  echo "<input type=\"submit\" value=\"Rafraichir\"/>";
-                  echo "<input type=\"hidden\" name=\"action\" value=\"refresh\"/>";
-
-                  echo "</td></tr>";
-              }
-          }
-        ?>
-    </form>
+                ?>
+          </div>
+        </div>
+    </main>
   </body>
 </html>
