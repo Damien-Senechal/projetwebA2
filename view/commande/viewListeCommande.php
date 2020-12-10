@@ -10,7 +10,7 @@
   <main class="mt-5 pt-4">
     <div class="container" style="margin-top: 5%">
     <?php
-    $value = $listeCommandes[0];
+    foreach ((array) $listeCommandes as $key => $value) {
       $commande = ModelCommandes::getCommandeById($value[0]);
       $id = $commande->get('id_commande');
       $id_client = $commande->get('id_client');
@@ -73,11 +73,11 @@
                       </strong>
                     </h5>
 
-                  <h4 class="font-weight-bold blue-text">
-                    <strong>Commandé le '.$date.' </strong>
-              </h4>
-            </div></section>';
-    
+                    <h4 class="font-weight-bold blue-text">
+                      <strong>Commandé le '.$date.' </strong>
+                    </h4>
+                    </div></section>';
+      }
     ?>
   </div>
   </main>

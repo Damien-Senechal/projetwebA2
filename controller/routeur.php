@@ -8,7 +8,6 @@
             if (in_array($_GET['action'],get_class_methods($controller_class))) {
                 $action = $_GET['action'];
                 $controller_class::$action();
-
             }else{
                 $controller_class::error("action non définie");
             }

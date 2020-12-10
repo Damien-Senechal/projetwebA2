@@ -2,7 +2,17 @@
 <html lang="en">
 
 <head>
-  
+  <script>
+   function displayPrice(){
+       var nbProduit = document.getElementById("nombre").value;
+       var prix = <?php echo $prix_produit ?>;
+       var total = 0;
+       var total = nbProduit * prix;
+       var tot = total.toFixed(2);
+       document.getElementById("total_prix").innerHTML = " Total : " + tot + " € ";
+     }
+
+   </script>
 </head>
 
 <body>
@@ -18,23 +28,6 @@
     $stock_produit = $produit->get('stock_produit');
   ?>
   <main class="mt-5 pt-4">
-  <script>
-   function displayPrice(){
-       var nbProduit = document.getElementById("nombre").value;
-       var prix = <?php echo $prix_produit ?>;
-       var id = "<?php echo $id_produit ?>";
-       var total = 0;
-       var total = nbProduit * prix;
-       var tot = total.toFixed(2);
-       document.getElementById("total_prix").innerHTML = " Total : " + tot + " € ";
-       document.getElementById("form").innerHTML = '<input type="hidden" name="action" value="ajouterObjetPanier">';
-       document.getElementById("form2").innerHTML = '<input type="hidden" name="controller" value="produits">';
-       document.getElementById("form3").innerHTML = '<input type="hidden" name="id_produit" value="' + id + '">';
-       document.getElementById("form5").innerHTML = '<input type="hidden" name="qa_produit" value="' + nbProduit + '">';
-
-     }
-
-   </script>
     <div class="container dark-grey-text mt-5">
       <!--Grid row-->
       <div class="row wow fadeIn">
@@ -72,10 +65,12 @@
             <p class="lead font-weight-bold">Description</p>
 
               <form method="get" class="d-flex justify-content-left" action="index.php">
-                 
+                 <input type="hidden" name="action" value="ajouterObjetPanier">
+                 <input type="hidden" name="controller" value="produits">
                 <?php
                 echo '
-                <input type="number" for="nombre" id="nombre" value="1" aria-label="Search" class="form-control" onchange="displayPrice()" style="width: 100px" min="1" max="'. $stock_produit.'">';
+                 <input type="hidden" name="id_produit" value="' .$id_produit.'">
+                <input name="qa_produit" type="number" for="nombre" id="nombre" value="1" aria-label="Search" class="form-control" onchange="displayPrice()" style="width: 100px" min="1" max="'. $stock_produit.'">';
                 ?>
                 <button class="btn btn-primary btn-md my-0 p" type="submit">
                   <i style = "font-size: 20px" id="total_prix" class="fas fa-shopping-cart ml-1"> <?php echo  'Total : '.$prix_produit.' €'; ?></i>
@@ -84,14 +79,7 @@
                    Ajouter au panier 
                   
                 </button>
-              
-                <?php 
-                  echo '
-                  <div id = "form"><input type="hidden" name="action" value="ajouterObjetPanier"></div>
-                  <div id = "form2"><input type="hidden" name="controller" value="produits"></div>
-                  <div id = "form3"><input type="hidden" name="id_produit" value="' . $id_produit . '"></div>
-                  <div id = "form5"><input type="hidden" name="qa_produit" value="1"></div>';
-                ?>
+          
               </form>
           </div>
           <!--Content-->

@@ -65,7 +65,7 @@
                 <br> Adresse mail - ' .$mail .'
               </span>       
             </p> ';
-            if ((!empty($_SESSION['id_utilisateur'])) && ($_GET['id_utilisateur'] == $_SESSION['id_utilisateur']) && (Session::is_admin())) {
+            if ((!empty($_SESSION['id_utilisateur'])) && ($_GET['id_utilisateur'] == $_SESSION['id_utilisateur']) || (Session::is_admin())) {
             if ($nbrCommandes > 0) {
               echo '
             <a href="index?action=listeCommande&controller=commande&id_utilisateur='.$id.'" class="lead font-weight-bold">Nb commandes : '. $nbrCommandes  . '</a>';

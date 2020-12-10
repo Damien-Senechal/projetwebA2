@@ -43,7 +43,6 @@ class ControllerProduits
             $idProduit = $_GET['id_produit'];
             $qaProduit = $_GET['qa_produit'];
             $exists = array_search($idProduit, array_column($_SESSION['panier'], "idProduit"));
-            var_dump($exists);
             if ($exists !== false)
                 {
                     $_SESSION['panier'][$exists]['qaProduit'] += $qaProduit;
@@ -59,46 +58,45 @@ class ControllerProduits
         }  
     }
 
-    public static function supprimerProduit($idProduit){
+    public static function supprimerProduit(){
         if (self::creerPanier())
         {
-          $panierTampon=array();
-          $panierTampon['idProduit'] = array();
-          $panierTampon['qaProduit'] = array();
-          $panierTampon['prixProduit'] = array();
+            $idProduit = $_GET['id_produit'];
+            $panierTampon = array();
 
-          for($i = 0; $i < count($_SESSION['panier']['idProduit']); $i++)
-          {
-             if ($_SESSION['panier']['idProduit'][$i] !== $idProduit)
-             {
-                array_push( $panierTampon['idProduit'],$_SESSION['panier']['idProduit'][$i]);
-                array_push( $panierTampon['qaProduit'],$_SESSION['panier']['qaProduit'][$i]);
-                array_push( $panierTampon['prixProduit'],$_SESSION['panier']['prixProduit'][$i]);
-             }
-          }
-          $_SESSION['panier'] =  $panierTampon;
-          unset($panierTampon);
+            foreach ($_SESSION['panier'] as $key => $value) {
+                if ($_SESSION['panier'][$key]['idProduit'] != $idProduit)
+                    {
+                        array_push($panierTampon, array("idProduit" => $_SESSION['panier'][$key]['idProduit'], "qaProduit" => $_SESSION['panier'][$key]['qaProduit']));
+                    }
+            }
+            $_SESSION['panier'] = $panierTampon;
+            unset($panierTampon);
+            self::afficherPanier();
         }
         else {
-            self::error("Oh fréro... y a un blème la");
+            self::error("Panier inexistant");
         }
     }
 
-    public static function majQaProduit($idProduit, $qaProduit){
-        if (creerPanier() && !isVerrouille())
+    public static function majQaProduit(){
+        if (self::creerPanier())
         {
+            $idProduit = $_GET['id_produit'];
+            $qaProduit = $_GET['qa_produit'];
             if ($qaProduit > 0)
             {
-                $exists = array_search($idProduit,  $_SESSION['panier']['idProduit']);
+                $exists = array_search($idProduit, array_column($_SESSION['panier'], "idProduit"));
 
                 if ($exists !== false)
                 {
-                    $_SESSION['panier']['qaProduit'][$exists] = $qaProduit ;
+                    $_SESSION['panier'][$exists]['qaProduit'] = $qaProduit;
                 }
             }
             else{
                 supprimerProduit($idProduit);
             }
+            self::afficherPanier();
         } else{
             self::error("Ca commence a faire beaucoup, calme toi un peu et respire lentement.");
         }
@@ -106,18 +104,17 @@ class ControllerProduits
 
     public static function totalPrix(){
         $totalPrix=0;
-        for($i = 0; $i < count($_SESSION['panier']); $i++)
-        {
-            $totalPrix += $_SESSION['panier'][$i]['qaProduit'] * ModelProduits::getProduitById($_SESSION['panier'][$i]['idProduit'])->get("prix_produit");
+        foreach ($_SESSION['panier'] as $key => $value) {
+            $totalPrix += $_SESSION['panier'][$key]['qaProduit'] * ModelProduits::getProduitById($_SESSION['panier'][$key]['idProduit'])->get("prix_produit");
         }
         return $totalPrix;
     }
 
     public static function nbrProduit(){
-        if (isset($_SESSION['panier']))
-        return count($_SESSION['panier']['idProduit']);
+        if (!empty($_SESSION['panier']))
+            return count($_SESSION['panier']);
         else{
-            return 0;
+            echo "0";
         }
     }
 
