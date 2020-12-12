@@ -26,7 +26,7 @@
                     echo $e->getMessage(); // affiche un message d'erreur
                 } 
                 else {
-                    echo 'Une erreur est survenue <a href=""> retour a la page d\'accueil </a>';
+                    echo 'Une erreur est survenue <a href="index.php"> retour a la page d\'accueil </a>';
                 }
                 die();
             }
@@ -36,7 +36,6 @@
 	    {
 	        try {
 	            $table_name = static::$object;
-
 	            $sql = "INSERT INTO p_$table_name"."s ";
 	            $sql_values = "VALUES(";
 	            $pdo = Model::$pdo;
@@ -68,7 +67,7 @@
 		        if (Conf::getDebug()) {
 		          	echo $e->getMessage(); // affiche un message d'erreur
 		        } else {
-		          	echo 'Une erreur est survenue <a href=""> retour a la page d\'accueil </a>';
+		          	echo 'Une erreur est survenue <a href="index.php"> retour a la page d\'accueil </a>';
 		        }
 		        die();
 		    }
@@ -121,7 +120,7 @@
 		        if (Conf::getDebug()) {
 		          	echo $e->getMessage(); // affiche un message d'erreur
 		        } else {
-		          	echo 'Une erreur est survenue <a href=""> retour a la page d\'accueil </a>';
+		          	echo 'Une erreur est survenue <a href="index.php"> retour a la page d\'accueil </a>';
 		        }
 	        	die();
       		}
@@ -147,7 +146,7 @@
 		        if (Conf::getDebug()) {
 		          	echo $e->getMessage(); // affiche un message d'erreur
 		        } else {
-		          	echo 'Une erreur est survenue <a href=""> retour a la page d\'accueil </a>';
+		          	echo 'Une erreur est survenue <a href="index.php"> retour a la page d\'accueil </a>';
 		        }
 		        die();
 		    }

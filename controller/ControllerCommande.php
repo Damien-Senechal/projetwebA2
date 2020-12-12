@@ -18,10 +18,59 @@ class ControllerCommande
         require File::build_path(array('view','view.php'));
     }
 
+    public static function listeToutesCommandes() {
+        $listeToutesCommandes = ModelCommandes::getAllCommandes();
+        $pagetitle = "Liste toutes les commandes";
+        if ($listeToutesCommandes != null){
+            $view = 'viewListeToutesCommandes';
+        } else {
+            self::error("Aucune commande !");
+        }
+        require File::build_path(array('view','view.php'));
+    }
+
     public static function validerPanier(){
-    $pagetitle = "Magasin";
-    $view = "viewMagasin";
-    require File::build_path(array('view', 'view.php'));
+        if(!empty($_SESSION['panier'])) {
+            $commande = new ModelCommandes(); 
+            if(!empty($_SESSION['id_utilisateur']))
+                $id_client = $_SESSION['id_utilisateur'];
+            else 
+                $id_client = NULL;
+            $prix_commande = ControllerProduits::totalPrix();
+            $date_commande = date("Y-m-d");
+            if ($commande->save(array("id_commande" => NULL,
+                                          "id_client" => $id_client,
+                                          "prix_commande" => $prix_commande,
+                                          "date_commande" => $date_commande)) == false) {
+            self::error("Erreur lors de la création de la commande !");
+            }
+            else {
+                foreach ($_SESSION['panier'] as $key => $value) {
+                    $detail = new ModelDetail(); 
+                    $id_commande = $commande->get("id_commande");
+                    $id_produit = $_SESSION['panier'][$key]['idProduit'];
+                    $quantite_produit_detail = $_SESSION['panier'][$key]['qaProduit'];
+                    $id_produit = $_SESSION['panier'][$key]['idProduit'];
+                        $prix_produit = ModelProduits::getProduitById($id_produit)->get("prix_produit");
+                    $prix_detail = $_SESSION['panier'][$key]['qaProduit'] * $prix_produit;
+
+                    if ($detail->save(array("id_detail" => NULL,
+                                              "id_commande" => ModelCommandes::getIdNouvelleCommande(),
+                                              "id_produit" => $id_produit,
+                                              "quantite_produit_detail" => $quantite_produit_detail,
+                                              "prix_detail" => $prix_detail)) == false) {
+                        self::error("Erreur lors de la création du détail n°" . $key ." !");
+                    }
+                    else {
+                        ModelProduits::updateQuantiteProduit($quantite_produit_detail, $id_produit);
+                    }            
+                }
+            }
+            unset($_SESSION['panier']);
+            $pagetitle = "Paiement accepté !";
+            $view = 'viewPaiementAccepter';
+            require File::build_path(array('view','view.php'));
+        }
     }
 
     public static function read(){

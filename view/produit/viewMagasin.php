@@ -38,11 +38,28 @@
 
                 <!--Card content-->
                 <div class="card-body text-center">
-                  <!--Category & Title-->
+                  <!--Category & Title-->';
+                  if(Session::is_admin()) {
+                    echo '
                   <a href="index?action=produitDetail&controller=produits&id_produit='.$id.'" class="grey-text">
                     <h5>Stock : '.$stock.' unités</h5>
-                  </a>
-                  <h5>
+                  </a>';
+                  } else if ($stock == 0) {
+                    echo '
+                  <a href="index?action=produitDetail&controller=produits&id_produit='.$id.'" class="grey-text">
+                    <h5 style="color : #d91002;"><i>Épuisé</i></h5>
+                  </a>';
+                  } else if ($stock <= 5) {
+                    echo '
+                  <a href="index?action=produitDetail&controller=produits&id_produit='.$id.'" class="grey-text">
+                    <h5 style="color : #ed8200;"><i>'.$stock.' unités restantes !</i></h5>
+                  </a>';
+                  } else {
+                    echo '<a href="index?action=produitDetail&controller=produits&id_produit='.$id.'" class="grey-text">
+                    <h5 style="color : grey;"><i>Disponible</i></h5>
+                  </a>';
+                  }
+                  echo '<h5>
                     <strong>
                     <a href="index?action=produitDetail&controller=produits&id_produit='.$id.'" class="dark-grey-text"> ' .$nom . ' ';
                         if($categorie != NULL) {

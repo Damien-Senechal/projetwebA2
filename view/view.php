@@ -45,7 +45,13 @@
             <a class="nav-link waves-effect" href="index?action=magasinProduit&controller=produits">Magasin</a>
           </li>
           <?php 
-          if (isset($_SESSION['id_utilisateur'])) {
+          if (Session::is_admin()) {
+            echo '
+            <li class="nav-item">
+              <a class="nav-link waves-effect" href="index?action=listeToutesCommandes&controller=commande">Commandes</a>
+            </li>';
+          }
+          else if (isset($_SESSION['id_utilisateur'])) {
           echo '
           <li class="nav-item">
             <a class="nav-link waves-effect" href="index?action=utilisateurDetail&controller=utilisateur&id_utilisateur='.$_SESSION['id_utilisateur'].'">Compte</a>
@@ -54,10 +60,10 @@
           if (Session::is_admin()) {
             echo '
             <li class="nav-item">
-              <a class="nav-link waves-effect" href="index?action=listeUtilisateur&controller=utilisateur">Utilisateur</a>
+              <a class="nav-link waves-effect" href="index?action=listeUtilisateur&controller=utilisateur">Utilisateurs</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link waves-effect" href="https://webinfo.iutmontp.univ-montp2.fr/my/">Base de données</a>
+              <a class="nav-link waves-effect" href="https://webinfo.iutmontp.univ-montp2.fr/my/">BDD</a>
             </li>';
           }
           ?>

@@ -48,7 +48,7 @@ class ModelProduits extends Model {
                     echo $e->getMessage(); // affiche un message d'erreur
                 } 
                 else {
-                    echo 'Une erreur est survenue <a href="File::build_path(array())"> retour a la page d\'accueil </a>';
+                    echo 'Une erreur est survenue <a href="index.php"> retour a la page d\'accueil </a>';
                 }
                 die();
             }
@@ -74,6 +74,30 @@ class ModelProduits extends Model {
       return $tab_prod[0];
   }
 
+  public static function updateQuantiteProduit($qqt_produit, $id_produit)
+      {
+          try {
+              $sql = "UPDATE p_produits SET stock_produit = stock_produit-:qqt WHERE id_produit =:id";
+              $req_prep = Model::$pdo->prepare($sql);
+              $values = array(
+                "qqt"=>$qqt_produit,
+                "id"=>$id_produit,
+              );
+              $req_prep->execute($values);
+            } catch (PDOException $e) {
+              if (Conf::getDebug()) {
+                echo $e->getMessage(); // affiche un message d'erreur
+              }else {
+                echo 'Une erreur est survenue <a href="index.php"> retour a la page d\'accueil </a>';
+              }
+              die();
+            }
+    }
+
+
+
+  
+
     public function delete()
       {
           try {
@@ -87,7 +111,7 @@ class ModelProduits extends Model {
               if (Conf::getDebug()) {
                 echo $e->getMessage(); // affiche un message d'erreur
               }else {
-                echo 'Une erreur est survenue <a href="../index.php"> retour a la page d\'accueil </a>';
+                echo 'Une erreur est survenue <a href="index.php"> retour a la page d\'accueil </a>';
               }
               die();
             }

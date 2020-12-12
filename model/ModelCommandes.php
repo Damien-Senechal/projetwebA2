@@ -8,7 +8,7 @@ class ModelCommandes extends Model {
     private $id_client;
     private $prix_commande;
     private $date_commande;
-    protected static $object = "commandes";
+    protected static $object = "commande";
     protected static $primary = "id_commande";
         
     // un constructeur
@@ -39,6 +39,27 @@ class ModelCommandes extends Model {
         $tab_cmd = $rep->fetchAll();
 
         return $tab_cmd;
+
+      } catch (PDOException $e) {
+                  if (Conf::getDebug()) {
+                      echo $e->getMessage(); // affiche un message d'erreur
+                  } 
+                  else {
+                      echo 'Une erreur est survenue <a href="../index.php"> retour a la page d\'accueil </a>';
+                  }
+                  die();
+              }
+    }
+
+    public static function getIdNouvelleCommande() {
+      try {
+        $sql = 'SELECT MAX(id_commande) FROM p_commandes';
+
+        $req_prep = Model::$pdo->prepare($sql); 
+
+        $req_prep->execute();
+        $tab_uti = $req_prep->fetch();
+        return $tab_uti[0];
 
       } catch (PDOException $e) {
                   if (Conf::getDebug()) {

@@ -79,7 +79,7 @@
         <fieldset>
             <?php
                 if ($_GET['action'] == "creerCookie") {
-                    echo '<legend style="text-align : center;">Création de compte :</legend>
+                    echo '<legend style="text-align : center;">Création d\'un produit :</legend>
                     <p>
                     <label>Id produit :</label>
                     <input type="text" name="id_produit" placeholder="00cooAA" required/>
@@ -88,7 +88,7 @@
                     <label>Description produit :</label>
                     <input type="text" name="desc_produit" required/>
                     <label>Prix produit :</label>
-                    <input type="number" name="prix_produit" required/>
+                    <input type="number" step=0.01 name="prix_produit" required/>
                     <label>Stock produit :</label>
                     <input type="number" name="stock_produit" required/>
                     <label>Photo produit :</label>
@@ -109,7 +109,7 @@
                         $urlImage_produit = $produit->get("urlImage_produit");
                         $categorie_produit = $produit->get("categorie_produit");
 
-                    echo '<legend style="text-align : center;">Modification du cookie '. $nom_produit .':</legend>
+                    echo '<legend style="text-align : center;">Modification du produit '. $nom_produit .':</legend>
                     <p>
                     <label>Id produit :</label>
                     <input style="background-color : lightgray" type="text" name="id_produit" value="'. $id_produit.'" readonly/>
@@ -118,7 +118,7 @@
                     <label>Description produit :</label>
                     <input type="text" name="desc_produit" value="'. $desc_produit.'"/>
                     <label>Prix produit :</label>
-                    <input type="number" name="prix_produit" value="'. $prix_produit.'"/>
+                    <input type="number" step=0.01 name="prix_produit" value="'. $prix_produit.'"/>
                     <label>Stock produit :</label>
                     <input type="number" name="stock_produit" value="'. $stock_produit.'"/>
                     <label>Photo produit :</label><img style ="height: 20%; width: 20%;" src="'. $urlImage_produit.'">

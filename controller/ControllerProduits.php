@@ -247,7 +247,7 @@ class ControllerProduits
     }
 
     public static function error($message){
-        $pagetitle = "Delete Produits";
+        $pagetitle = "Erreur Produits";
         $view = 'error';
         require File::build_path(array('view','view.php'));
     }

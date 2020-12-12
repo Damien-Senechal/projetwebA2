@@ -70,18 +70,23 @@
                  <input type="hidden" name="controller" value="produits">
                 <?php
                 echo '
-                 <input type="hidden" name="id_produit" value="' .$id_produit.'">
-                <input name="qa_produit" type="number" for="nombre" id="nombre" value="1" aria-label="Search" class="form-control" onchange="displayPrice()" style="width: 100px" min="1" max="'. $stock_produit.'">';
-                ?>
-                <button class="btn btn-primary btn-md my-0 p" type="submit">
-                  <i style = "font-size: 20px" id="total_prix" class="fas fa-shopping-cart ml-1"> <?php echo  'Total : '.$prix_produit.' €'; ?></i>
+                 <input type="hidden" name="id_produit" value="' .$id_produit.'">';
+                 if ($stock_produit == 0) {
+                  echo '<p> Aucun produit disponible </p>';
+                 } else {
+                    echo '<input name="qa_produit" type="number" for="nombre" id="nombre" value="1" aria-label="Search" class="form-control" onchange="displayPrice()" style="width: 100px" min="1" max="'. $stock_produit.'">
+                      <button class="btn btn-primary btn-md my-0 p" type="submit">
+                        <i style = "font-size: 20px" id="total_prix" class="fas fa-shopping-cart ml-1"> Total : '.$prix_produit.' € </i>
 
-                  <br>
-                   Ajouter au panier 
-                  
-                </button>
+                        <br>
+                         Ajouter au panier 
+                        
+                      </button>';
+                }
+                ?>
           
               </form>
+
           </div>
           <!--Content-->
 
@@ -90,6 +95,9 @@
 
       </div>
       <!--Grid row-->
+              <center>
+                <a style="margin-top : 2%; color : #2196f3" class="nav-link border border-light rounded waves-effect" href="index?action=magasinProduit&controller=produits"> ⬅ Revenir au magasin ⬅</a>
+              </center>
 
       <hr> 
       <!--c kwa?-->

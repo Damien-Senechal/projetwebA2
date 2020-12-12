@@ -73,7 +73,9 @@
                     echo '<legend style="text-align : center;">Création de compte :</legend>
                     <p>
                     <label>Nom :</label>
-                    <input type="text" name="nom_utilisateur" required/>
+                    <input type="text" name="nom_utilisateur"'. 
+                    if (isset($_SESSION['formMail'])){
+                    echo 'value="' . $_SESSION['formMail'] . '"';.'required/>
                     <label>Prenom :</label>
                     <input type="text" name="prenom_utilisateur" required/>
                     <label>Email :</label>
@@ -87,9 +89,9 @@
                     <label>Photo de profil</label>
                     <input type="file" name="photo_utilisateur" accept=".png, .jpeg, .jpg"/>
                     <label>Mot de passe :</label>
-                    <input type="password" name="mdp_utilisateur" '; if(!Session::is_admin()) { echo 'required';} echo '/>
+                    <input type="password" name="mdp_utilisateur" minlength="8" required/>
                     <label>Confirmer le mot de passe :</label>
-                    <input type="password" name="mdp_utilisateur2" required/>';
+                    <input type="password" name="mdp_utilisateur2" minlength="8" required/>';
                     if(!empty($_SESSION['admin_utilisateur']) && $_SESSION['admin_utilisateur'])
                     {
                         echo '<label>setAdmin</label>

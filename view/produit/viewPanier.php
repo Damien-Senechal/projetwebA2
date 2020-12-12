@@ -2,6 +2,11 @@
 <head>
   <script type="text/javascript">
   </script>
+  <style type="text/css">
+    span:hover{
+      box-shadow: 2px 2px 3px black;
+    }
+  </style>
 </head>
 <html lang="fr">
   <body>
@@ -102,10 +107,10 @@
                               echo '  
                               </div>
                               <a href="index?action=magasinProduit&controller=produits">
-                                <span class="badge badge-pill blue" style="font-size : 130%; margin-right : 5%"> ⬅ Poursuivre les achats</span>
+                                <span class="badge badge-pill blue" style="font-size : 130%; margin-right : 5%; border-radius : 0px"> ⬅ Poursuivre les achats</span>
                               </a>
                               <a href="index?action=validerPanier&controller=commande">
-                                <span class="badge badge-pill danger-color" style="font-size : 130%"> Proceder au paiement ➡</span>
+                                <span class="badge badge-pill danger-color" style="font-size : 130%; border-radius : 0px;"> Proceder au paiement ➡</span>
                               </a>
                               </section>
                             </div>

@@ -58,9 +58,13 @@ class ControllerUtilisateur
                         $id = ModelUtilisateurs::getUtilisateurByMail($mail_utilisateur)->get('id_utilisateur');
                         $_SESSION['id_utilisateur'] = ModelUtilisateurs::getUtilisateurById($id)->get('id_utilisateur');
                         $_SESSION['admin_utilisateur'] = ModelUtilisateurs::getUtilisateurById($id)->get('admin_utilisateur');
-                    }
                 }
-        
+                else {
+                    $pagetitle = "Probleme avec le mail";
+                    $view = 'viewConnecter';
+                    $_SESSION['msgErreur'] = "Vous n'avez pas vérifié votre compte !";
+                }
+        }
         else {
             $pagetitle = "Identifiants de connexion incorrects";
             $view = 'viewConnecter';
@@ -97,8 +101,18 @@ class ControllerUtilisateur
         $htmlSpecialmdp1 = htmlspecialchars($_POST['mdp_utilisateur']);
         $htmlSpecialmdp2 = htmlspecialchars($_POST['mdp_utilisateur2']);
         $mdp_utilisateurhache = Security::hacher(htmlspecialchars($_POST["mdp_utilisateur"]));
-        $nonce = Security::generateRandomHex();
 
+        $_SESSION['formNom'] = $htmlSpecialNom;
+        $_SESSION['formPrenom'] = $htmlSpecialPrenom;
+        $_SESSION['formMail'] = $htmlSpecialMail;
+        $_SESSION['formAdresse'] = $htmlSpecialAdresse;
+        $_SESSION['formHistoire'] = $htmlSpecialHistoire;
+        $_SESSION['formDDN'] = $htmlSpecialDDN;
+        $_SESSION['formMdp1'] = $htmlSpecialmdp1;
+        $_SESSION['formMdp2'] = $htmlSpecialmdp2;
+
+        $nonce = NULL;
+        //Security::generateRandomHex()
         $randomText = Security::generateRandomHex();
 
         if(!empty($_FILES["photo_utilisateur"])) {
@@ -120,10 +134,10 @@ class ControllerUtilisateur
                 $isadmin_utilisateur = 0;
             }
             if(!filter_var($htmlSpecialMail, FILTER_VALIDATE_EMAIL)){
-                self::error("email pas bon <br>");
+                self::error("Email non valide", "enregistrer", self::$object);
             }
             else if($htmlSpecialmdp1!=$htmlSpecialmdp2){
-                self::error('Les mots de passe ne correspondent pas !  <a href="index.php">RETOUR A L\'ACCEUIL</a>');
+                self::error("Les deux mots de passes sont différents", "enregistrer", self::$object);
             }
             else if ($utilisateur->save(array("id_utilisateur" => NULL,
                                               "nom_utilisateur" => $htmlSpecialNom,
@@ -139,6 +153,15 @@ class ControllerUtilisateur
                 self::error("utilisateur déjà créé");
             }
             else {
+                unset($_SESSION['formNom']);
+                unset($_SESSION['formPrenom']);
+                unset($_SESSION['formMail']);
+                unset($_SESSION['formAdresse']);
+                unset($_SESSION['formHistoire']);
+                unset($_SESSION['formDDN']);
+                unset($_SESSION['formMdp1']);
+                unset($_SESSION['formMdp2']);
+
                 $pagetitle = "Cookie paradise";
                 $view = 'viewAccueil';
                 require File::build_path(array('view','view.php'));
@@ -162,7 +185,7 @@ class ControllerUtilisateur
         }
         else
         {
-            echo "erreur";
+            self::error("Problème dans la création de compte", "accueil", "utilisateur"); 
         }
     }
 
@@ -178,6 +201,16 @@ class ControllerUtilisateur
         $htmlSpecialDDN = htmlspecialchars($_POST['ddn_utilisateur']);
         $htmlSpecialmdp1 = htmlspecialchars($_POST['mdp_utilisateur']);
         $htmlSpecialmdp2 = htmlspecialchars($_POST['mdp_utilisateur2']);
+
+        $_SESSION['formNom'] = $htmlSpecialNom;
+        $_SESSION['formPrenom'] = $htmlSpecialPrenom;
+        $_SESSION['formMail'] = $htmlSpecialMail;
+        $_SESSION['formAdresse'] = $htmlSpecialAdresse;
+        $_SESSION['formHistoire'] = $htmlSpecialHistoire;
+        $_SESSION['formDDN'] = $htmlSpecialDDN;
+        $_SESSION['formMdp1'] = $htmlSpecialmdp1;
+        $_SESSION['formMdp2'] = $htmlSpecialmdp2;
+
 
         $randomText = Security::generateRandomHex();
 
@@ -228,12 +261,20 @@ class ControllerUtilisateur
                                              "nonce_utilisateur" => NULL,
                                              "ddn_utilisateur" => $htmlSpecialDDN,
                                              "urlImage_utilisateur" => $urlImage));
+                    unset($_SESSION['formNom']);
+                    unset($_SESSION['formPrenom']);
+                    unset($_SESSION['formMail']);
+                    unset($_SESSION['formAdresse']);
+                    unset($_SESSION['formHistoire']);
+                    unset($_SESSION['formDDN']);
+                    unset($_SESSION['formMdp1']);
+                    unset($_SESSION['formMdp2']);
                     $pagetitle = "Cookie Paradise";
                     $view = 'viewAccueil';
                     require File::build_path(array('view','view.php'));
                 }
                 else{
-                   self::error("Les mots de passe sont different"); 
+                   self::error("Les mots de passe sont different", "senregistrer", "utilisateur"); 
                 }
             }
             else
@@ -246,7 +287,7 @@ class ControllerUtilisateur
 
 
     public static function error($message, $action, $controller){
-        $pagetitle = "Delete Utilisateur";
+        $pagetitle = "Erreur Utilisateur";
         $view = 'error';
         require File::build_path(array('view','view.php'));
     }

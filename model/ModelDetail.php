@@ -9,7 +9,7 @@ class ModelDetail extends Model {
   private $id_produit;
   private $quantite_produit_detail;
   private $prix_detail;
-  protected static $object = "detail";
+  protected static $object = "detail_commande";
   protected static $primary = "id_detail";
       
   // un constructeur
@@ -35,7 +35,7 @@ class ModelDetail extends Model {
   public static function getAllDetails() {
 
     try {
-      $rep = Model::$pdo->query('SELECT * FROM p_detail_commande');
+      $rep = Model::$pdo->query('SELECT * FROM p_detail_commandes');
 
       $rep->setFetchMode(PDO::FETCH_CLASS, 'ModelDetail');
       $tab_cmd = $rep->fetchAll();
@@ -54,7 +54,7 @@ class ModelDetail extends Model {
   }
 
     public static function getDetailById($id) {
-      $sql = "SELECT * from p_detail_commande WHERE id_detail=:nom_tag";
+      $sql = "SELECT * from p_detail_commandes WHERE id_detail=:nom_tag";
       // Préparation de la requête
       $req_prep = Model::$pdo->prepare($sql);
 
@@ -75,7 +75,7 @@ class ModelDetail extends Model {
 
   public static function getListeDetailCommande($id) {
       try {
-      $sql = "SELECT id_detail FROM p_detail_commande WHERE id_commande = :id_commande;";
+      $sql = "SELECT id_detail FROM p_detail_commandes WHERE id_commande = :id_commande;";
 
       $req_prep = Model::$pdo->prepare($sql); 
 
@@ -100,7 +100,7 @@ class ModelDetail extends Model {
   public function delete()
     {
         try {
-            $sql = "DELETE FROM p_detail_commande WHERE id_detail = :id_detail;";
+            $sql = "DELETE FROM p_detail_commandes WHERE id_detail = :id_detail;";
             $req_prep = Model::$pdo->prepare($sql);
             $values = array(
               "id_detail"=>$this->id_detail,
