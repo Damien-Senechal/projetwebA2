@@ -52,7 +52,7 @@
                   } else if ($stock <= 5) {
                     echo '
                   <a href="index?action=produitDetail&controller=produits&id_produit='.$id.'" class="grey-text">
-                    <h5 style="color : #ed8200;"><i>'.$stock.' unités restantes !</i></h5>
+                    <h5 style="color : #ed8200;"><i>'.$stock.' restantes !</i></h5>
                   </a>';
                   } else {
                     echo '<a href="index?action=produitDetail&controller=produits&id_produit='.$id.'" class="grey-text">

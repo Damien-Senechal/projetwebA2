@@ -73,30 +73,54 @@
                     echo '<legend style="text-align : center;">Création de compte :</legend>
                     <p>
                     <label>Nom :</label>
-                    <input type="text" name="nom_utilisateur"'. 
-                    if (isset($_SESSION['formMail'])){
-                    echo 'value="' . $_SESSION['formMail'] . '"';.'required/>
+                    <input type="text" required name="nom_utilisateur"'; 
+                    if (isset($_SESSION["formNom"])){
+                    echo ' value="' . $_SESSION['formNom'];} echo '"/>
+
                     <label>Prenom :</label>
-                    <input type="text" name="prenom_utilisateur" required/>
+                    <input type="text" required name="prenom_utilisateur"'; 
+                    if (isset($_SESSION['formPrenom'])){
+                    echo 'value="' . $_SESSION['formPrenom'];} echo '"/>
+
                     <label>Email :</label>
-                    <input type="email" name="mail_utilisateur" required/>
+                    <input type="email" required name="mail_utilisateur"'; 
+                    if (isset($_SESSION['formMail'])){
+                    echo 'value="' . $_SESSION['formMail'];} echo '"/>
+
                     <label>Adresse :</label>
-                    <input type="text" name="adresse_utilisateur"  required/>
+                    <input type="text" required name="adresse_utilisateur"'; 
+                    if (isset($_SESSION['formAdresse'])){
+                    echo 'value="' . $_SESSION['formAdresse'];} echo '"/>
+
                     <label>Date de naissance :</label>
-                    <input type="date" name="ddn_utilisateur"/>
+                    <input type="date" required name="ddn_utilisateur"'; 
+                    if (isset($_SESSION['formDDN'])){
+                    echo 'value="' . $_SESSION['formDDN'];} echo '"/>
+
                     <label>Histoire :</label>
-                    <input type="text" name="histoire_utilisateur"/>
+                    <input type="text" name="histoire_utilisateur"'; 
+                    if (isset($_SESSION['formHistoire'])){
+                    echo 'value="' . $_SESSION['formHistoire'];} echo '"/>
+
                     <label>Photo de profil</label>
                     <input type="file" name="photo_utilisateur" accept=".png, .jpeg, .jpg"/>
+
                     <label>Mot de passe :</label>
-                    <input type="password" name="mdp_utilisateur" minlength="8" required/>
+                    <input type="password" name="mdp_utilisateur" minlength="8" required '; 
+                    if (isset($_SESSION['formMdp1'])){
+                    echo 'value="' . $_SESSION['formMdp1'];} echo '"/>
+
                     <label>Confirmer le mot de passe :</label>
-                    <input type="password" name="mdp_utilisateur2" minlength="8" required/>';
+                    <input type="password" name="mdp_utilisateur2" minlength="8" required'; 
+                    if (isset($_SESSION['formMdp2'])){
+                    echo 'value="' . $_SESSION['formMdp2'];} echo '"/>';
+
                     if(!empty($_SESSION['admin_utilisateur']) && $_SESSION['admin_utilisateur'])
                     {
                         echo '<label>setAdmin</label>
                                   <input type="checkbox" name="admin_utilisateur" id="admin_utilisateur"/>';
                     }
+
                     echo '</p>
                     <p>
                         <input type="submit" value="Envoyer"/>

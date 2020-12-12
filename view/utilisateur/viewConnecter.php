@@ -20,7 +20,7 @@
             text-align: center;
             padding-bottom: 10px;
         }
-        input[type=text], input[type=password] {
+        input[type=text], input[type=password]{
             width: 100%;
             padding: 12px 20px;
             margin: 8px 0;
@@ -49,27 +49,39 @@
         <div id="container">
             <!-- zone de connexion -->
             
-            <form  method="get" action="index.php">
+            <form  method="post" action="index?action=connected&controller=utilisateur">
                 <h1>Connexion</h1>
                 <?php if (isset($_SESSION['msgErreur'])){
                     echo '<p style="text-align : center; color : red;">' . $_SESSION['msgErreur'] . '</p>';
                     } ?>
                 <label><b>Adresse e-mail : </b></label>
-                <input type="text" placeholder="Adresse mail..." name="mail_utilisateur" id="mail_utilisateur" 
+                <input type="text" placeholder="Adresse mail..." name="mail_utilisateur" 
                 required 
                 <?php if (isset($_SESSION['formMail'])){
                     echo 'value="' . $_SESSION['formMail'] . '"';
-                    }?>>
+                    } else if (isset($_COOKIE['mail_utilisateur'])) {
+                        echo 'value="' . $_COOKIE['mail_utilisateur'] . '"';
+                    }
+                ?>>
                 <label><b>Mot de passe :</b></label>
-                <input type="password" placeholder="Entrer le mot de passe..." name="mdp_utilisateur" id="mdp_utilisateur" 
+                <input type="password" placeholder="Entrer le mot de passe..." name="mdp_utilisateur" 
                 required 
                 <?php if (isset($_SESSION['formMdp'])){
                     echo 'value="' . $_SESSION['formMdp'] . '"';
-                    }?>>
-                <input type='hidden' name="controller" value="utilisateur">
-                <input type='hidden' name="action" value="connected">
-                <input type="submit" id='submit' value='Se connecter' >
-                <p><a href="<?php $_SESSION['msgErreur'] = NULL;$_SESSION['formMail'] = NULL;$_SESSION['formMdp'] = NULL;echo "index.php";  ?>"> fermer </a></p>
+                    } else if (isset($_COOKIE['mdp_utilisateur'])) {
+                        echo 'value="' . $_COOKIE['mdp_utilisateur'] . '"';
+                    }
+                ?>>
+                <input type="checkbox" name="souvenir_utilisateur"
+                <?php if (isset($_COOKIE['souvenir_utilisateur'])){
+                    echo ' checked';
+                    }
+                ?>>
+                <label style="margin-top: 2%"><b>Se souvenir de moi ?</b></label>
+
+
+                <input type="submit" value='Se connecter' >
+                <p><a href="<?php isset($_SESSION['msgErreur']); isset($_SESSION['formMail']); isset($_SESSION['formMdp']); echo "index.php";  ?>"> fermer </a></p>
             </form>
         </div>
 </body>

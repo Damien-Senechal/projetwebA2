@@ -443,3 +443,47 @@ viewListeCommande :
 </body>
 
 </html>
+
+
+
+//view enregistrer
+
+
+
+                    <label>Prenom :</label>
+                    <input type="text" required name="prenom_utilisateur"'; 
+                    if (isset($_SESSION['formPrenom'])){
+                    echo 'value="' . $_SESSION['formPrenom'] . '"/>
+
+                    <label>Email :</label>
+                    <input type="email" required name="mail_utilisateur"'; 
+                    if (isset($_SESSION['formMail'])){
+                    echo 'value="' . $_SESSION['formMail'] . '"/>
+
+                    <label>Adresse :</label>
+                    <input type="text" required name="adresse_utilisateur"'; 
+                    if (isset($_SESSION['formAdresse'])){
+                    echo 'value="' . $_SESSION['formAdresse'] . '"/>
+
+                    <label>Date de naissance :</label>
+                    <input type="date" required name="ddn_utilisateur"'; 
+                    if (isset($_SESSION['formDDN'])){
+                    echo 'value="' . $_SESSION['formDDN'] . '"/>
+
+                    <label>Histoire :</label>
+                    <input type="text" name="histoire_utilisateur"'; 
+                    if (isset($_SESSION['formHistoire'])){
+                    echo 'value="' . $_SESSION['formHistoire'] . '"/>
+
+                    <label>Photo de profil</label>
+                    <input type="file" name="photo_utilisateur" accept=".png, .jpeg, .jpg"/>
+
+                    <label>Mot de passe :</label>
+                    <input type="password" name="mdp_utilisateur" minlength="8" required '; 
+                    if (isset($_SESSION['formMdp1'])){
+                    echo 'value="' . $_SESSION['formMdp1'] . '"/>
+
+                    <label>Confirmer le mot de passe :</label>
+                    <input type="password" name="mdp_utilisateur2" minlength="8" required'; 
+                    if (isset($_SESSION['formMdp2'])){
+                    echo 'value="' . $_SESSION['formMdp2'] . '"/>

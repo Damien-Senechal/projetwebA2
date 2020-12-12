@@ -47,17 +47,22 @@ class ControllerUtilisateur
     public static function connected(){
         $pagetitle = "Cookie paradise";
         $view = 'viewAccueil';
-        $_SESSION['formMail'] = htmlspecialchars($_GET["mail_utilisateur"]);
-        $_SESSION['formMdp'] = htmlspecialchars($_GET["mdp_utilisateur"]);
+        $_SESSION['formMail'] = htmlspecialchars($_POST["mail_utilisateur"]);
+        $_SESSION['formMdp'] = htmlspecialchars($_POST["mdp_utilisateur"]);
 
-        $mdp_utilisateur = htmlspecialchars($_GET["mdp_utilisateur"]);
-        $mail_utilisateur = htmlspecialchars($_GET["mail_utilisateur"]);
+        $mdp_utilisateur = htmlspecialchars($_POST["mdp_utilisateur"]);
+        $mail_utilisateur = htmlspecialchars($_POST["mail_utilisateur"]);
 
         if (ModelUtilisateurs::checkPassword($mail_utilisateur, $mdp_utilisateur)) {
                 if((ModelUtilisateurs::getUtilisateurByMail($mail_utilisateur)->get('nonce_utilisateur'))==NULL){
                         $id = ModelUtilisateurs::getUtilisateurByMail($mail_utilisateur)->get('id_utilisateur');
                         $_SESSION['id_utilisateur'] = ModelUtilisateurs::getUtilisateurById($id)->get('id_utilisateur');
                         $_SESSION['admin_utilisateur'] = ModelUtilisateurs::getUtilisateurById($id)->get('admin_utilisateur');
+                        if(isset($_POST['souvenir_utilisateur'])) {
+                            setcookie('mail_utilisateur',htmlspecialchars($_POST["mail_utilisateur"]),time()+365*24*3600,null,null,false,true);
+                            setcookie('mdp_utilisateur',htmlspecialchars($_POST["mdp_utilisateur"]),time()+365*24*3600,null,null,false,true);
+                            setcookie('souvenir_utilisateur',htmlspecialchars($_POST["souvenir_utilisateur"]),time()+365*24*3600,null,null,false,true);
+                         }
                 }
                 else {
                     $pagetitle = "Probleme avec le mail";
