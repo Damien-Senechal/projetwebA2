@@ -1,7 +1,11 @@
 <!DOCTYPE html>
 <html>
 <head>
-  
+  <style type="text/css">
+    #modifsupri:hover{
+      font-size : 107%;
+    }
+  </style>
 </head>
 <body>
   <!--Main layout-->
@@ -14,9 +18,9 @@
         <div class="row wow fadeIn">
 
           <?php
-            $tab_produits = ModelProduits::getAllProduits();
+            $tab_produits = ModelProduit::getAllProduits();
             foreach ($tab_produits as $key => $value) {
-            $produit = ModelProduits::getProduitById($value->get('id_produit'));
+            $produit = ModelProduit::getProduitById($value->get('id_produit'));
             $image = $produit->get('urlImage_produit');
             $id = $produit->get('id_produit');
             $stock = $produit->get('stock_produit');
@@ -30,7 +34,7 @@
                 <div class="view overlay">
                   <img src="'.$image.'" class="card-img-top"
                     alt="">
-                  <a href="index?action=produitDetail&controller=produits&id_produit='.$id.'">
+                  <a href="index?action=produitDetail&controller=produit&id_produit='.$id.'">
                     <div class="mask rgba-white-slight">Acheter</div>
                   </a>
                 </div>
@@ -41,27 +45,27 @@
                   <!--Category & Title-->';
                   if(Session::is_admin()) {
                     echo '
-                  <a href="index?action=produitDetail&controller=produits&id_produit='.$id.'" class="grey-text">
+                  <a href="index?action=produitDetail&controller=produit&id_produit='.$id.'" class="grey-text">
                     <h5>Stock : '.$stock.' unités</h5>
                   </a>';
                   } else if ($stock == 0) {
                     echo '
-                  <a href="index?action=produitDetail&controller=produits&id_produit='.$id.'" class="grey-text">
+                  <a href="index?action=produitDetail&controller=produit&id_produit='.$id.'" class="grey-text">
                     <h5 style="color : #d91002;"><i>Épuisé</i></h5>
                   </a>';
                   } else if ($stock <= 5) {
                     echo '
-                  <a href="index?action=produitDetail&controller=produits&id_produit='.$id.'" class="grey-text">
+                  <a href="index?action=produitDetail&controller=produit&id_produit='.$id.'" class="grey-text">
                     <h5 style="color : #ed8200;"><i>'.$stock.' restantes !</i></h5>
                   </a>';
                   } else {
-                    echo '<a href="index?action=produitDetail&controller=produits&id_produit='.$id.'" class="grey-text">
+                    echo '<a href="index?action=produitDetail&controller=produit&id_produit='.$id.'" class="grey-text">
                     <h5 style="color : grey;"><i>Disponible</i></h5>
                   </a>';
                   }
                   echo '<h5>
                     <strong>
-                    <a href="index?action=produitDetail&controller=produits&id_produit='.$id.'" class="dark-grey-text"> ' .$nom . ' ';
+                    <a href="index?action=produitDetail&controller=produit&id_produit='.$id.'" class="dark-grey-text"> ' .$nom . ' ';
                         if($categorie != NULL) {
                           echo '<span class="badge badge-pill danger-color"> '.$categorie.'</span>';
                         } else
@@ -79,11 +83,11 @@
                   if(Session::is_admin()) {
                     echo '
                     <div style = "font-size : 90%; margin-top : 5%">
-                      <a href="index?action=modifCookie&controller=produits&id_produit='.$id.'" class="nav-link border border-light rounded waves-effect" style="color : #2196f3; box-shadow: 1px 1px 1px gray; width : 49%">
-                      <i class=""></i>Modifier
+                      <a id="modifsupri" href="index?action=modifCookie&controller=produit&id_produit='.$id.'" class="nav-link border border-light rounded waves-effect" style="color : #2196f3; box-shadow: 1px 1px 1px gray; width : 49%">
+                      <i class="">Modifier</i>
                       </a>
-                      <a href="index?action=supprimerCookie&controller=produits&id_produit='.$id.'" class="nav-link border border-light rounded waves-effect" style="color : red; box-shadow: 1px 1px 1px gray; width : 49%">
-                      <i class=""></i>Supprimer
+                      <a id="modifsupri" href="index?action=supprimerCookie&controller=produit&id_produit='.$id.'" class="nav-link border border-light rounded waves-effect" style="color : red; box-shadow: 1px 1px 1px gray; width : 49%">
+                      <i class="">Supprimer</i>
                       </a>
                     </div>';
                   }
@@ -105,7 +109,7 @@
                 <h4 style="padding-top: 50%" class="font-weight-bold blue-text">
                     <strong>Creer cookie</strong>
                   </h4>
-                  <a href="index?action=creerCookie&controller=produits">
+                  <a href="index?action=creerCookie&controller=produit">
                     <img style="padding-top: 10%; padding-bottom: 60%; padding-right: 30%; padding-left: 30%;"
                     src="template/img/plus-rouge.png" class="card-img-top"
                     alt="">

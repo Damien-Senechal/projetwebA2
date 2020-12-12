@@ -42,7 +42,7 @@
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link waves-effect" href="index?action=magasinProduit&controller=produits">Magasin</a>
+            <a class="nav-link waves-effect" href="index?action=magasinProduit&controller=produit">Magasin</a>
           </li>
           <?php 
           if (Session::is_admin()) {
@@ -71,8 +71,8 @@
         <!-- Right -->
         <ul class="navbar-nav nav-flex-icons">
           <li class="nav-item">
-            <a class="nav-link waves-effect" href="index?action=afficherPanier&controller=produits">
-              <span class="badge red z-depth-1 mr-1"> <?php echo ControllerProduits::nbrProduit() ?> 
+            <a class="nav-link waves-effect" href="index?action=afficherPanier&controller=produit">
+              <span class="badge red z-depth-1 mr-1"> <?php echo ControllerProduit::nbrProduit() ?> 
               </span>
                 <i class="fas fa-shopping-cart"></i>
               <span class="clearfix d-none d-sm-inline-block"> Panier </span>
@@ -103,7 +103,7 @@
               <i class=""></i>Se deconnecter
             </a>
           </li>';
-          $u = ModelUtilisateurs::getUtilisateurById($_SESSION['id_utilisateur']);
+          $u = ModelUtilisateur::getUtilisateurById($_SESSION['id_utilisateur']);
           $id = $u->get('id_utilisateur');
           $prenom_utilisateur = $u->get('prenom_utilisateur');
           $url = $u->get('urlImage_utilisateur');

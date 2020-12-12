@@ -67,7 +67,7 @@
                 <strong>N'hésitez pas à vous faire plaisir avec notre selections de cookies originaux !</strong>
               </p>
 
-              <a href="index?action=magasinProduit&controller=produits" class="btn btn-outline-white btn-lg"> --> Magasin <--
+              <a href="index?action=magasinProduit&controller=produit" class="btn btn-outline-white btn-lg"> --> Magasin <--
                 <i class=""></i>
               </a>
             </div>
@@ -101,7 +101,7 @@
                 <strong>N'hésitez pas à vous faire plaisir avec notre selections de cookies originaux !</strong>
               </p>
 
-              <a href="index?action=magasinProduit&controller=produits" class="btn btn-outline-white btn-lg">--> Magasin <--
+              <a href="index?action=magasinProduit&controller=produit" class="btn btn-outline-white btn-lg">--> Magasin <--
                 <i class=""></i>
               </a>
             </div>
@@ -135,7 +135,7 @@
                 <strong>N'hésitez pas à vous faire plaisir avec notre selections de cookies originaux !</strong>
               </p>
 
-              <a href="index?action=magasinProduit&controller=produits" class="btn btn-outline-white btn-lg">--> Magasin <--
+              <a href="index?action=magasinProduit&controller=produit" class="btn btn-outline-white btn-lg">--> Magasin <--
                 <i class=""></i>
               </a>
             </div>
@@ -172,9 +172,9 @@
       <section class="text-center mb-4">
         <div class="row wow fadeIn">
           <?php
-            $tab_utilisateurs = ModelUtilisateurs::getAllUtilisateurs();
+            $tab_utilisateurs = ModelUtilisateur::getAllUtilisateurs();
             foreach ($tab_utilisateurs as $key => $value) {
-              $utilisateur = ModelUtilisateurs::getUtilisateurById($value->get('id_utilisateur'));
+              $utilisateur = ModelUtilisateur::getUtilisateurById($value->get('id_utilisateur'));
               $admin = $utilisateur->get('admin_utilisateur');
               if ($admin == TRUE) {
                 $id = $utilisateur->get('id_utilisateur');
@@ -183,7 +183,7 @@
                 $mail = $utilisateur->get('mail_utilisateur');
                 $ddn = $utilisateur->get('ddn_utilisateur');
                 $url = $utilisateur->get('urlImage_utilisateur');
-                $age = ModelUtilisateurs::age($ddn); 
+                $age = ModelUtilisateur::age($ddn); 
 
                 echo '<div class="col-lg-3 col-md-6 mb-4">
                   <div class="card">

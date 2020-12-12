@@ -1,5 +1,5 @@
 <?php
-    require_once File::build_path(array('controller','ControllerProduits.php'));
+    require_once File::build_path(array('controller','ControllerProduit.php'));
     require_once File::build_path(array('controller','ControllerUtilisateur.php'));
     require_once File::build_path(array('controller','ControllerCommande.php'));
     if (isset($_GET['action'])) {

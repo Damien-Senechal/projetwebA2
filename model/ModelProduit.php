@@ -1,7 +1,7 @@
 <?php
 require_once File::build_path(array('model', 'Model.php'));
 
-class ModelProduits extends Model {
+class ModelProduit extends Model {
    
   private $id_produit;
   private $nom_produit;
@@ -38,7 +38,7 @@ class ModelProduits extends Model {
     try {
       $rep = Model::$pdo->query('SELECT * FROM p_produits');
 
-      $rep->setFetchMode(PDO::FETCH_CLASS, 'ModelProduits');
+      $rep->setFetchMode(PDO::FETCH_CLASS, 'ModelProduit');
       $tab_prod = $rep->fetchAll();
 
       return $tab_prod;
@@ -67,7 +67,7 @@ class ModelProduits extends Model {
       $req_prep->execute($values);
 
       // On récupère les résultats comme précédemment
-      $req_prep->setFetchMode(PDO::FETCH_CLASS, 'ModelProduits');
+      $req_prep->setFetchMode(PDO::FETCH_CLASS, 'ModelProduit');
       $tab_prod = $req_prep->fetchAll();
       // Attention, si il n'y a pas de résultats, on renvoie false
       if (empty($tab_prod)) return false;

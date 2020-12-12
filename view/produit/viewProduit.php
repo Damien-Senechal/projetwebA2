@@ -19,7 +19,7 @@
   <!--Main layout-->
   <?php
     $id_produit = $_GET['id_produit'];
-    $produit = ModelProduits::getProduitById($id_produit);
+    $produit = ModelProduit::getProduitById($id_produit);
     $image = $produit->get('urlImage_produit');
     $nom_produit = $produit->get('nom_produit');
     $categorie_produit = $produit->get('categorie_produit');
@@ -96,7 +96,7 @@
       </div>
       <!--Grid row-->
               <center>
-                <a style="margin-top : 2%; color : #2196f3" class="nav-link border border-light rounded waves-effect" href="index?action=magasinProduit&controller=produits"> ⬅ Revenir au magasin ⬅</a>
+                <a style="margin-top : 2%; color : #2196f3" class="nav-link border border-light rounded waves-effect" href="index?action=magasinProduit&controller=produit"> ⬅ Revenir au magasin ⬅</a>
               </center>
 
       <hr> 
@@ -107,7 +107,7 @@
       <div class="row d-flex justify-content-center wow fadeIn">
 
         <?php 
-          $tab_produits = ModelProduits::getAllProduits();
+          $tab_produits = ModelProduit::getAllProduits();
           $tailleTab = sizeof($tab_produits);
 
           $premierCookie = rand(0, $tailleTab-1);
@@ -156,7 +156,7 @@
         <!--Grid column-->
         <div class="col-lg-4 col-md-12 mb-4">
           <h4 class="my-4 h4"><center>'.$tab_produits[$premierCookie]->get('nom_produit').'</center></h4>
-          <a href="index?action=produitDetail&controller=produits&id_produit='.$id1.'"> <img src= '.$image1.' class="img-fluid"> </a>
+          <a href="index?action=produitDetail&controller=produit&id_produit='.$id1.'"> <img src= '.$image1.' class="img-fluid"> </a>
           <h4 class="my-4 h4"><center>'.$tab_produits[$premierCookie]->get('prix_produit').' €</center></h4>
 
         </div>
@@ -165,7 +165,7 @@
         <!--Grid column-->
         <div class="col-lg-4 col-md-6 mb-4">
           <h4 class="my-4 h4"><center>'.$tab_produits[$deuxiemeCookie]->get('nom_produit').'</center></h4>
-          <a href="index?action=produitDetail&controller=produits&id_produit='.$id2.'"> <img src= '.$image2.' class="img-fluid"> </a>
+          <a href="index?action=produitDetail&controller=produit&id_produit='.$id2.'"> <img src= '.$image2.' class="img-fluid"> </a>
           <h4 class="my-4 h4"><center>'.$tab_produits[$deuxiemeCookie]->get('prix_produit').' €</center></h4>
 
         </div>
@@ -174,7 +174,7 @@
         <!--Grid column-->
         <div class="col-lg-4 col-md-6 mb-4">
           <h4 class="my-4 h4"><center>'.$tab_produits[$troisiemeCookie]->get('nom_produit').'</center></h4>
-          <a href="index?action=produitDetail&controller=produits&id_produit='.$id3.'"> <img src= '.$image3.' class="img-fluid"> </a>
+          <a href="index?action=produitDetail&controller=produit&id_produit='.$id3.'"> <img src= '.$image3.' class="img-fluid"> </a>
           <h4 class="my-4 h4"><center>'.$tab_produits[$troisiemeCookie]->get('prix_produit').' €</center></h4>
 
         </div>

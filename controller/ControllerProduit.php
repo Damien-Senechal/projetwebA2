@@ -1,7 +1,7 @@
 <?php
 
-require_once File::build_path(array('model','ModelProduits.php'));
-class ControllerProduits
+require_once File::build_path(array('model','ModelProduit.php'));
+class ControllerProduit
 {
     protected static $object = "produit";
     public static function magasinProduit(){
@@ -11,14 +11,14 @@ class ControllerProduits
     }
 
     public static function produitDetail(){
-        setcookie("dureeDeViePanier", "OK", time()+10);
-        $pagetitle = "Achat d'un ".ModelProduits::getProduitById($_GET['id_produit'])->get('nom_produit')." ";
+        setcookie("dureeDeViePanier", "OK", time() + 600);
+        $pagetitle = "Achat d'un ".ModelProduit::getProduitById($_GET['id_produit'])->get('nom_produit')." ";
         $view = "viewProduit";
         require File::build_path(array('view', 'view.php'));
     }
 
     public static function supprimerCookie(){
-        $produit = ModelProduits::getProduitById(htmlspecialchars($_GET['id_produit']));
+        $produit = ModelProduit::getProduitById(htmlspecialchars($_GET['id_produit']));
         $urlImage_produit = $produit->get("urlImage_produit");
         unlink ($urlImage_produit);
         $produit->deleteGen();
@@ -34,7 +34,7 @@ class ControllerProduits
     }
 
     public static function creationCookie(){
-        $produit = new ModelProduits();
+        $produit = new ModelProduit();
 
         $htmlSpecialId = htmlspecialchars($_POST['id_produit']);
         $htmlSpecialNom = htmlspecialchars($_POST['nom_produit']);
@@ -85,7 +85,7 @@ class ControllerProduits
     }
 
     public static function modificationCoockie(){
-        $produit = ModelProduits::getProduitById(htmlspecialchars($_POST['id_produit']));
+        $produit = ModelProduit::getProduitById(htmlspecialchars($_POST['id_produit']));
 
         $htmlSpecialNom = htmlspecialchars($_POST['nom_produit']);
         $htmlSpecialDesc = htmlspecialchars($_POST['desc_produit']);
@@ -128,14 +128,14 @@ class ControllerProduits
     }
 
     public static function afficherPanier() {
-        setcookie("dureeDeViePanier", "OK", time()+10);
+        setcookie("dureeDeViePanier", "OK", time()+600);
         $pagetitle = "Panier";
         $view = "viewPanier";
         require File::build_path(array('view','view.php'));
     }
 
     public static function ajouterObjetPanier(){
-        setcookie("dureeDeViePanier", "OK", time()+10);
+        setcookie("dureeDeViePanier", "OK", time()+600);
         if (self::creerPanier())
         {  
             $idProduit = $_GET['id_produit'];
@@ -203,7 +203,7 @@ class ControllerProduits
     public static function totalPrix(){
         $totalPrix=0;
         foreach ($_SESSION['panier'] as $key => $value) {
-            $totalPrix += $_SESSION['panier'][$key]['qaProduit'] * ModelProduits::getProduitById($_SESSION['panier'][$key]['idProduit'])->get("prix_produit");
+            $totalPrix += $_SESSION['panier'][$key]['qaProduit'] * ModelProduit::getProduitById($_SESSION['panier'][$key]['idProduit'])->get("prix_produit");
         }
         return $totalPrix;
     }
@@ -230,7 +230,7 @@ class ControllerProduits
 
     public static function updated(){
 
-        $Produits = ModelProduits::getProduitById($htmlSpecialid_produit);
+        $Produits = ModelProduit::getProduitById($htmlSpecialid_produit);
         
         $Produits->update(array('id_produit' => $_GET['id_produit'], 'nom_produit' => $_GET['nom_produit'], 'prix_produit' => $_GET['prix_produit'], 'desc_produit' => $_GET['desc_produit'], 'stock_produit' => $_GET['stock_produit']));
         $pagetitle = "Modifier Produits";
@@ -240,7 +240,7 @@ class ControllerProduits
 
     public static function delete(){
         if (isset($_GET["id_produit"])) {
-            ModelProduits::delete($_GET["id_produit"]);
+            ModelProduit::delete($_GET["id_produit"]);
             $pagetitle = "Delete Produits";
             $view = 'deleted';
             require File::build_path(array('view','view.php'));

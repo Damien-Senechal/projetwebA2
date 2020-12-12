@@ -57,7 +57,7 @@
     }else{
         $vue = "modificationCoockie";
         $id_produit = $_GET['id_produit'];
-        $produit = ModelProduits::getProduitById($id_produit);
+        $produit = ModelProduit::getProduitById($id_produit);
         $image = $produit->get('urlImage_produit');
         $nom_produit = $produit->get('nom_produit');
         $categorie_produit = $produit->get('categorie_produit');
@@ -69,10 +69,10 @@
   <main class="mt-5 pt-4">
     <div id="container">
     <form method="post" <?php  if($_GET['action'] == "creerCookie") {
-        echo 'action="index?action=creationCookie&controller=produits"';
+        echo 'action="index?action=creationCookie&controller=produit"';
     }
     else {
-        echo 'action="index?action=modificationCoockie&controller=produits"';
+        echo 'action="index?action=modificationCoockie&controller=produit"';
     }
     ?> enctype="multipart/form-data">
 
@@ -100,7 +100,7 @@
                         <input type="submit" value="Envoyer"/>
                     </p>';
                 } else {
-                    $produit = ModelProduits::getProduitById($_GET['id_produit']);
+                    $produit = ModelProduit::getProduitById($_GET['id_produit']);
                         $id_produit = $produit->get("id_produit");
                         $nom_produit = $produit->get("nom_produit");
                         $desc_produit = $produit->get("desc_produit");
@@ -131,7 +131,7 @@
                     </p>';
                 }
             ?>
-            <p><center><a href="index?action=magasinProduit&controller=produits"> fermer </a></center></p>
+            <p><center><a href="index?action=magasinProduit&controller=produit"> fermer </a></center></p>
         </fieldset>
     </form> 
 </div>

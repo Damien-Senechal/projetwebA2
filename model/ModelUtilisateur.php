@@ -3,7 +3,7 @@ require_once File::build_path(array('lib', 'Security.php'));
 require_once File::build_path(array('lib', 'Session.php'));
 require_once File::build_path(array('model', 'Model.php'));
 
-class ModelUtilisateurs extends Model {
+class ModelUtilisateur extends Model {
    
   private $id_utilisateur;
   private $nom_utilisateur;
@@ -49,7 +49,7 @@ class ModelUtilisateurs extends Model {
     try {
         $rep = Model::$pdo->query('SELECT * FROM p_utilisateurs');
 
-        $rep->setFetchMode(PDO::FETCH_CLASS, 'ModelUtilisateurs');
+        $rep->setFetchMode(PDO::FETCH_CLASS, 'ModelUtilisateur');
         $tab_uti = $rep->fetchAll();
 
         return $tab_uti;
@@ -78,7 +78,7 @@ class ModelUtilisateurs extends Model {
       $req_prep->execute($values);
 
       // On récupère les résultats comme précédemment
-      $req_prep->setFetchMode(PDO::FETCH_CLASS, 'ModelUtilisateurs');
+      $req_prep->setFetchMode(PDO::FETCH_CLASS, 'ModelUtilisateur');
       $tab_uti = $req_prep->fetchAll();
       // Attention, si il n'y a pas de résultats, on renvoie false
       if (empty($tab_uti)) return false;
@@ -98,7 +98,7 @@ class ModelUtilisateurs extends Model {
       $req_prep->execute($values);
 
       // On récupère les résultats comme précédemment
-      $req_prep->setFetchMode(PDO::FETCH_CLASS, 'ModelUtilisateurs');
+      $req_prep->setFetchMode(PDO::FETCH_CLASS, 'ModelUtilisateur');
       $tab_uti = $req_prep->fetchAll();
       // Attention, si il n'y a pas de résultats, on renvoie false
       if (empty($tab_uti)) return false;

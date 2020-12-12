@@ -54,7 +54,7 @@
             $vue = "senregistrer";
         }else{
             $vue = "updated";
-            $mailSession = ModelUtilisateurs::getUtilisateurById($_GET['id_utilisateur'])->get('mail_utilisateur');
+            $mailSession = ModelUtilisateur::getUtilisateurById($_GET['id_utilisateur'])->get('mail_utilisateur');
             $_SESSION['ancienMail'] = $mailSession;
         }
     ?>
@@ -127,7 +127,7 @@
                     </p>';
                 } else {
                     if (!empty($_SESSION['id_utilisateur'])) {
-                        $utilisateur = ModelUtilisateurs::getUtilisateurById($_GET['id_utilisateur']);
+                        $utilisateur = ModelUtilisateur::getUtilisateurById($_GET['id_utilisateur']);
                             $nom_utilisateur = $utilisateur->get("nom_utilisateur");
                             $prenom_utilisateur = $utilisateur->get("prenom_utilisateur");
                             $mail_utilisateur = $utilisateur->get("mail_utilisateur");

@@ -11,9 +11,9 @@
       <section class="text-center mb-4">
         <div class="row wow fadeIn">
         <?php 
-          $tab_produits = ModelProduits::getAllProduits();
+          $tab_produits = ModelProduit::getAllProduits();
           foreach ($tab_produits as $key => $value) {
-            $produit = ModelProduits::getProduitById($value->get('id_produit'));
+            $produit = ModelProduit::getProduitById($value->get('id_produit'));
             $image = $produit->get('urlImage_produit');
             $id = $produit->get('id_produit');
             $stock = $produit->get('stock_produit');

@@ -4,7 +4,6 @@
 <head>
   
 </head>
-
 <body>
   <!--Main layout-->
   <main class="mt-5 pt-4">
@@ -15,10 +14,14 @@
       $id_client = $value->get('id_client');
       $date = $value->get('date_commande');
       $prix = $value->get('prix_commande');
-        $utilisateur = ModelUtilisateurs::getUtilisateurById($id_client);
-          $nom = $utilisateur->get('nom_utilisateur');
-          $prenom = $utilisateur->get('prenom_utilisateur');
-          $image = $utilisateur->get('image_utilisateur');
+      if($id_client == NULL) {
+        $nom = 'connecté';
+        $prenom = 'non ';
+      } else {
+        $utilisateur = ModelUtilisateur::getUtilisateurById($id_client);
+        $nom = $utilisateur->get('nom_utilisateur');
+        $prenom = $utilisateur->get('prenom_utilisateur');
+      }
       $liste_detail = ModelDetail::getListeDetailCommande($id);
       echo '<!--Card content-->
                   <div class="card" style="margin-top: 5%">
@@ -39,7 +42,7 @@
                             $detail = ModelDetail::getDetailById($value[0]);
                               $id_detail = $detail->get("id_detail");
                               $id_produit = $detail->get("id_produit");
-                              $produit = ModelProduits::getProduitById($id_produit);
+                              $produit = ModelProduit::getProduitById($id_produit);
                                 $nom_produit = $produit->get("nom_produit");
                                 $image_produit = $produit->get("urlImage_produit");
                                 $prix_produit = $produit->get("prix_produit");
@@ -52,7 +55,7 @@
                                   <div class="card-body text-center">
                               Produit n°'.$i.' : <br><br>
                               '.$nom_produit.' <br>
-                              <a href="index?action=produitDetail&controller=produits&id_produit='.$id_produit.'">
+                              <a href="index?action=produitDetail&controller=produit&id_produit='.$id_produit.'">
                               <img src="'.$image_produit.'" class="img-fluid" alt=""><br></a>';
                               if ($quantite_produit_detail == 1) 
                                 echo $quantite_produit_detail.' produit acheté <br><br>';

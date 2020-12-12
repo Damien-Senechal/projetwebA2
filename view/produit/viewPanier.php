@@ -16,7 +16,7 @@
             <strong>
           
                 <?php
-                if (ControllerProduits::creerPanier())
+                if (ControllerProduit::creerPanier())
                 { 
                   $nbArticles=count($_SESSION['panier']);
                   if ($nbArticles <= 0)
@@ -36,7 +36,7 @@
                       <a class="grey-text">
                         <h2>Votre panier</h2>
                       </a>
-                      <span class="badge badge-pill danger-color" style="font-size : 130%"> Montant du panier : '. ControllerProduits::totalPrix().' €</span>
+                      <span class="badge badge-pill danger-color" style="font-size : 130%"> Montant du panier : '. ControllerProduit::totalPrix().' €</span>
                         <div class="container">
                         <section class="text-center mb-4">
                         <div class="row wow fadeIn">';
@@ -45,7 +45,7 @@
                         foreach ($_SESSION['panier'] as $key => $value)
                         {
                             $id_produit = htmlspecialchars($_SESSION['panier'][$key]['idProduit']);
-                            $produit = ModelProduits::getProduitById($id_produit);
+                            $produit = ModelProduit::getProduitById($id_produit);
                             $nom_produit = $produit->get('nom_produit');
                             $image_produit = $produit->get('urlImage_produit');
                             $prix_produit = $produit->get('prix_produit');
@@ -61,7 +61,7 @@
                                 Produit n°'. $i .' :
                                 <br>
                                 <i> '.$nom_produit.' </i>
-                                <a href="index?action=produitDetail&controller=produits&id_produit='.$id_produit.'">
+                                <a href="index?action=produitDetail&controller=produit&id_produit='.$id_produit.'">
                                 <img src="'.$image_produit.'" class="img-fluid" alt="">
                                 </a>
 
@@ -89,7 +89,7 @@
                                   </button>';?>
                                   <?php 
                                   echo '
-                                  <a href="index?action=supprimerProduit&controller=produits&id_produit='.$_SESSION['panier'][$key]['idProduit'].'" class="nav-link border border-light rounded waves-effect" style="color : red; box-shadow: 1px 1px 1px gray;;"> '?>
+                                  <a href="index?action=supprimerProduit&controller=produit&id_produit='.$_SESSION['panier'][$key]['idProduit'].'" class="nav-link border border-light rounded waves-effect" style="color : red; box-shadow: 1px 1px 1px gray;;"> '?>
                                     <i class=""></i>Supprimer
                                   </a>
                                   </form>
@@ -106,7 +106,7 @@
                                   } 
                               echo '  
                               </div>
-                              <a href="index?action=magasinProduit&controller=produits">
+                              <a href="index?action=magasinProduit&controller=produit">
                                 <span class="badge badge-pill blue" style="font-size : 130%; margin-right : 5%; border-radius : 0px"> ⬅ Poursuivre les achats</span>
                               </a>
                               <a href="index?action=validerPanier&controller=commande">

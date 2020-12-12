@@ -1,6 +1,6 @@
 <?php
 
-require_once File::build_path(array('model','ModelUtilisateurs.php'));
+require_once File::build_path(array('model','ModelUtilisateur.php'));
 
 class ControllerUtilisateur
 {
@@ -12,7 +12,7 @@ class ControllerUtilisateur
     }
 
     public static function utilisateurDetail(){
-        $pagetitle = "Utilisateur " . ModelUtilisateurs::getUtilisateurById($_GET['id_utilisateur'])->get('nom_utilisateur');
+        $pagetitle = "Utilisateur " . ModelUtilisateur::getUtilisateurById($_GET['id_utilisateur'])->get('nom_utilisateur');
         $view = "viewUtilisateur";
         require File::build_path(array('view','view.php'));
     }
@@ -24,10 +24,12 @@ class ControllerUtilisateur
     }
 
     public static function supprimerUtilisateur(){
-        if(!empty(ModelUtilisateurs::getUtilisateurById(htmlspecialchars($_GET['id_utilisateur'])))) {
-            $utilisateur = ModelUtilisateurs::getUtilisateurById(htmlspecialchars($_GET['id_utilisateur']));
+        if(!empty(ModelUtilisateur::getUtilisateurById(htmlspecialchars($_GET['id_utilisateur'])))) {
+            $utilisateur = ModelUtilisateur::getUtilisateurById(htmlspecialchars($_GET['id_utilisateur']));
             $urlImage_utilisateur = $utilisateur->get("urlImage_utilisateur");
-            unlink ($urlImage_utilisateur);
+            if($urlImage_utilisateur != NULL) {
+                unlink ($urlImage_utilisateur);
+            }
             $utilisateur->deleteGen();
             $pagetitle = "Liste utilisateurs";
             $view = "viewListeUtil";
@@ -53,11 +55,11 @@ class ControllerUtilisateur
         $mdp_utilisateur = htmlspecialchars($_POST["mdp_utilisateur"]);
         $mail_utilisateur = htmlspecialchars($_POST["mail_utilisateur"]);
 
-        if (ModelUtilisateurs::checkPassword($mail_utilisateur, $mdp_utilisateur)) {
-                if((ModelUtilisateurs::getUtilisateurByMail($mail_utilisateur)->get('nonce_utilisateur'))==NULL){
-                        $id = ModelUtilisateurs::getUtilisateurByMail($mail_utilisateur)->get('id_utilisateur');
-                        $_SESSION['id_utilisateur'] = ModelUtilisateurs::getUtilisateurById($id)->get('id_utilisateur');
-                        $_SESSION['admin_utilisateur'] = ModelUtilisateurs::getUtilisateurById($id)->get('admin_utilisateur');
+        if (ModelUtilisateur::checkPassword($mail_utilisateur, $mdp_utilisateur)) {
+                if((ModelUtilisateur::getUtilisateurByMail($mail_utilisateur)->get('nonce_utilisateur'))==NULL){
+                        $id = ModelUtilisateur::getUtilisateurByMail($mail_utilisateur)->get('id_utilisateur');
+                        $_SESSION['id_utilisateur'] = ModelUtilisateur::getUtilisateurById($id)->get('id_utilisateur');
+                        $_SESSION['admin_utilisateur'] = ModelUtilisateur::getUtilisateurById($id)->get('admin_utilisateur');
                         if(isset($_POST['souvenir_utilisateur'])) {
                             setcookie('mail_utilisateur',htmlspecialchars($_POST["mail_utilisateur"]),time()+365*24*3600,null,null,false,true);
                             setcookie('mdp_utilisateur',htmlspecialchars($_POST["mdp_utilisateur"]),time()+365*24*3600,null,null,false,true);
@@ -95,7 +97,7 @@ class ControllerUtilisateur
     }
 
     public static function senregistrer(){
-        $utilisateur = new ModelUtilisateurs();
+        $utilisateur = new ModelUtilisateur();
 
         $htmlSpecialNom = htmlspecialchars($_POST['nom_utilisateur']);
         $htmlSpecialPrenom = htmlspecialchars($_POST['prenom_utilisateur']);
@@ -131,7 +133,7 @@ class ControllerUtilisateur
             $urlImage = $utilisateur->get("urlImage_utilisateur");
         } 
 
-        if(ModelUtilisateurs::verifieMailUtilisateur($htmlSpecialMail) < 1) {
+        if(ModelUtilisateur::verifieMailUtilisateur($htmlSpecialMail) < 1) {
             if(!empty($_POST['admin_utilisateur']) && $_POST['admin_utilisateur']=="on"){
                 $isadmin_utilisateur = 1;
             }
@@ -195,8 +197,8 @@ class ControllerUtilisateur
     }
 
     public static function updated(){
-        $id = ModelUtilisateurs::getUtilisateurByMail($_SESSION['ancienMail'])->get('id_utilisateur');
-        $utilisateur = ModelUtilisateurs::getUtilisateurByMail($_SESSION['ancienMail']);
+        $id = ModelUtilisateur::getUtilisateurByMail($_SESSION['ancienMail'])->get('id_utilisateur');
+        $utilisateur = ModelUtilisateur::getUtilisateurByMail($_SESSION['ancienMail']);
 
         $htmlSpecialNom = htmlspecialchars($_POST['nom_utilisateur']);
         $htmlSpecialPrenom = htmlspecialchars($_POST['prenom_utilisateur']);

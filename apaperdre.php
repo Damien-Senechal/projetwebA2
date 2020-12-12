@@ -9,7 +9,7 @@
   <!--Main layout-->
   <?php
     $id_produit = $_GET['id_produit'];
-    $produit = ModelProduits::getProduitById($id_produit);
+    $produit = ModelProduit::getProduitById($id_produit);
     $image = $produit->get('urlImage_produit');
     $nom_produit = $produit->get('nom_produit');
     $categorie_produit = $produit->get('categorie_produit');
@@ -102,7 +102,7 @@
                  Ajouter au panier 
                 
               </button> -->
-            <!-- action=afficherPanier&controller=produits&nom_produit=CookieOGalak&prix_produit=4.5&qaProduit=2 -->
+            <!-- action=afficherPanier&controller=produit&nom_produit=CookieOGalak&prix_produit=4.5&qaProduit=2 -->
             <?php
               //echo $qqt ;
               //var_dump($qqt);
@@ -132,7 +132,7 @@
       <div class="row d-flex justify-content-center wow fadeIn">
 
         <?php 
-          $tab_produits = ModelProduits::getAllProduits();
+          $tab_produits = ModelProduit::getAllProduits();
           $tailleTab = sizeof($tab_produits);
 
           $premierCookie = rand(0, $tailleTab-1);
@@ -181,7 +181,7 @@
         <!--Grid column-->
         <div class="col-lg-4 col-md-12 mb-4">
           <h4 class="my-4 h4"><center>'.$tab_produits[$premierCookie]->get('nom_produit').'</center></h4>
-          <a href="index?action=produitDetail&controller=produits&id_produit='.$id1.'"> <img src= '.$image1.' class="img-fluid"> </a>
+          <a href="index?action=produitDetail&controller=produit&id_produit='.$id1.'"> <img src= '.$image1.' class="img-fluid"> </a>
           <h4 class="my-4 h4"><center>'.$tab_produits[$premierCookie]->get('prix_produit').' €</center></h4>
 
         </div>
@@ -190,7 +190,7 @@
         <!--Grid column-->
         <div class="col-lg-4 col-md-6 mb-4">
           <h4 class="my-4 h4"><center>'.$tab_produits[$deuxiemeCookie]->get('nom_produit').'</center></h4>
-          <a href="index?action=produitDetail&controller=produits&id_produit='.$id2.'"> <img src= '.$image2.' class="img-fluid"> </a>
+          <a href="index?action=produitDetail&controller=produit&id_produit='.$id2.'"> <img src= '.$image2.' class="img-fluid"> </a>
           <h4 class="my-4 h4"><center>'.$tab_produits[$deuxiemeCookie]->get('prix_produit').' €</center></h4>
 
         </div>
@@ -199,7 +199,7 @@
         <!--Grid column-->
         <div class="col-lg-4 col-md-6 mb-4">
           <h4 class="my-4 h4"><center>'.$tab_produits[$troisiemeCookie]->get('nom_produit').'</center></h4>
-          <a href="index?action=produitDetail&controller=produits&id_produit='.$id3.'"> <img src= '.$image3.' class="img-fluid"> </a>
+          <a href="index?action=produitDetail&controller=produit&id_produit='.$id3.'"> <img src= '.$image3.' class="img-fluid"> </a>
           <h4 class="my-4 h4"><center>'.$tab_produits[$troisiemeCookie]->get('prix_produit').' €</center></h4>
 
         </div>
@@ -231,7 +231,7 @@ echo '<div class="col-lg-3 col-md-6 mb-4">
                                   <div class="card-body text-center">
                               Produit n°'.$i.' : <br><br>
                               '.$nom_produit.' <br>
-                              <a href="index?action=produitDetail&controller=produits&id_produit='.$id_produit.'">
+                              <a href="index?action=produitDetail&controller=produit&id_produit='.$id_produit.'">
                               <img src="'.$image_produit.'" class="img-fluid" alt=""><br></a>';
                               if ($quantite_produit_detail == 1) 
                                 echo $quantite_produit_detail.' produit acheté <br><br>';
@@ -255,7 +255,7 @@ echo '
                                     <div class="card-body text-center">
                                     Produit n°'.($i + 1).' : <br><br>
                                     '.$nom_produit.' <br>
-                                    <a href="index?action=produitDetail&controller=produits&id_produit='.$id_produit.'">
+                                    <a href="index?action=produitDetail&controller=produit&id_produit='.$id_produit.'">
                                     <img src="'.$image_produit.'" class="img-fluid" alt=""><br></a>'; 
                                     if (htmlspecialchars($_SESSION['panier'][$i]['qaProduit']) == 1) 
                                       echo htmlspecialchars($_SESSION['panier'][$i]['qaProduit']).' produit <br><br>';
@@ -293,7 +293,7 @@ echo '
                 <strong>
                   <a class="dark-grey-text">
                     <?php
-                    if (ControllerProduits::creerPanier())
+                    if (ControllerProduit::creerPanier())
                     { 
                       $nbArticles=count($_SESSION['panier']);
                       if ($nbArticles <= 0)
@@ -301,12 +301,12 @@ echo '
                       else
                       {
                       echo '
-                      <span class="badge badge-pill danger-color" style="font-size : 130%"> Montant du panier : '.ControllerProduits::totalPrix().'€</span>
+                      <span class="badge badge-pill danger-color" style="font-size : 130%"> Montant du panier : '.ControllerProduit::totalPrix().'€</span>
                       ';
                         for ($i=0 ;$i < $nbArticles ; $i++)
                         {
                           $id_produit = htmlspecialchars($_SESSION['panier'][$i]['idProduit']);
-                          $produit = ModelProduits::getProduitById($id_produit);
+                          $produit = ModelProduit::getProduitById($id_produit);
                             $nom_produit = $produit->get('nom_produit');
                             $image_produit = $produit->get('urlImage_produit');
                             $prix_produit = $produit->get('prix_produit');
@@ -318,7 +318,7 @@ echo '
                                     <div class="card-body text-center">
                                 Produit n°'.$i.' : <br><br>
                                 '.$nom_produit.' <br>
-                                <a href="index?action=produitDetail&controller=produits&id_produit='.$id_produit.'">
+                                <a href="index?action=produitDetail&controller=produit&id_produit='.$id_produit.'">
                                 <img src="'.$image_produit.'" class="img-fluid" alt=""><br></a>';
                                 if ($quantite_produit_detail == 1) 
                                   echo $quantite_produit_detail.' produit acheté <br><br>';
@@ -369,12 +369,12 @@ viewListeCommande :
     <div class="container" style="margin-top: 5%">
     <?php
     foreach ((array) $listeCommandes as $key => $value) {
-      $commande = ModelCommandes::getCommandeById($value[0]);
+      $commande = ModelCommande::getCommandeById($value[0]);
       $id = $commande->get('id_commande');
       $id_client = $commande->get('id_client');
       $date = $commande->get('date_commande');
       $prix = $commande->get('prix_commande');
-        $utilisateur = ModelUtilisateurs::getUtilisateurById($id_client);
+        $utilisateur = ModelUtilisateur::getUtilisateurById($id_client);
           $nom = $utilisateur->get('nom_utilisateur');
           $prenom = $utilisateur->get('prenom_utilisateur');
           $image = $utilisateur->get('image_utilisateur');
@@ -398,7 +398,7 @@ viewListeCommande :
                             $detail = ModelDetail::getDetailById($value[0]);
                               $id_detail = $detail->get("id_detail");
                               $id_produit = $detail->get("id_produit");
-                              $produit = ModelProduits::getProduitById($id_produit);
+                              $produit = ModelProduit::getProduitById($id_produit);
                                 $nom_produit = $produit->get("nom_produit");
                                 $image_produit = $produit->get("urlImage_produit");
                                 $prix_produit = $produit->get("prix_produit");
@@ -411,7 +411,7 @@ viewListeCommande :
                                   <div class="card-body text-center">
                               Produit n°'.$i.' : <br><br>
                               '.$nom_produit.' <br>
-                              <a href="index?action=produitDetail&controller=produits&id_produit='.$id_produit.'">
+                              <a href="index?action=produitDetail&controller=produit&id_produit='.$id_produit.'">
                               <img src="'.$image_produit.'" class="img-fluid" alt=""><br></a>';
                               if ($quantite_produit_detail == 1) 
                                 echo $quantite_produit_detail.' produit acheté <br><br>';

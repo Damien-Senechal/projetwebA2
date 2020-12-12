@@ -1,15 +1,15 @@
 <?php
 
-require_once File::build_path(array('model','ModelCommandes.php'));
-require_once File::build_path(array('model','ModelUtilisateurs.php'));
+require_once File::build_path(array('model','ModelCommande.php'));
+require_once File::build_path(array('model','ModelUtilisateur.php'));
 require_once File::build_path(array('model','ModelDetail.php'));
 
 class ControllerCommande
 {
     protected static $object = "commande";
     public static function listeCommande() {
-        $listeCommandes = ModelCommandes::getListeCommandeUtilisateur($_GET['id_utilisateur']);
-        $pagetitle = "Liste commande(s) de " . ModelUtilisateurs::getUtilisateurById($_GET['id_utilisateur'])->get('nom_utilisateur');
+        $listeCommandes = ModelCommande::getListeCommandeUtilisateur($_GET['id_utilisateur']);
+        $pagetitle = "Liste commande(s) de " . ModelUtilisateur::getUtilisateurById($_GET['id_utilisateur'])->get('nom_utilisateur');
         if ($listeCommandes != null){
             $view = 'viewListeCommande';
         } else {
@@ -19,7 +19,7 @@ class ControllerCommande
     }
 
     public static function listeToutesCommandes() {
-        $listeToutesCommandes = ModelCommandes::getAllCommandes();
+        $listeToutesCommandes = ModelCommande::getAllCommandes();
         $pagetitle = "Liste toutes les commandes";
         if ($listeToutesCommandes != null){
             $view = 'viewListeToutesCommandes';
@@ -31,12 +31,12 @@ class ControllerCommande
 
     public static function validerPanier(){
         if(!empty($_SESSION['panier'])) {
-            $commande = new ModelCommandes(); 
+            $commande = new ModelCommande(); 
             if(!empty($_SESSION['id_utilisateur']))
                 $id_client = $_SESSION['id_utilisateur'];
             else 
                 $id_client = NULL;
-            $prix_commande = ControllerProduits::totalPrix();
+            $prix_commande = ControllerProduit::totalPrix();
             $date_commande = date("Y-m-d");
             if ($commande->save(array("id_commande" => NULL,
                                           "id_client" => $id_client,
@@ -51,18 +51,18 @@ class ControllerCommande
                     $id_produit = $_SESSION['panier'][$key]['idProduit'];
                     $quantite_produit_detail = $_SESSION['panier'][$key]['qaProduit'];
                     $id_produit = $_SESSION['panier'][$key]['idProduit'];
-                        $prix_produit = ModelProduits::getProduitById($id_produit)->get("prix_produit");
+                        $prix_produit = ModelProduit::getProduitById($id_produit)->get("prix_produit");
                     $prix_detail = $_SESSION['panier'][$key]['qaProduit'] * $prix_produit;
 
                     if ($detail->save(array("id_detail" => NULL,
-                                              "id_commande" => ModelCommandes::getIdNouvelleCommande(),
+                                              "id_commande" => ModelCommande::getIdNouvelleCommande(),
                                               "id_produit" => $id_produit,
                                               "quantite_produit_detail" => $quantite_produit_detail,
                                               "prix_detail" => $prix_detail)) == false) {
                         self::error("Erreur lors de la création du détail n°" . $key ." !");
                     }
                     else {
-                        ModelProduits::updateQuantiteProduit($quantite_produit_detail, $id_produit);
+                        ModelProduit::updateQuantiteProduit($quantite_produit_detail, $id_produit);
                     }            
                 }
             }

@@ -10,7 +10,7 @@
         <div class="row wow fadeIn">
 
           <?php
-            $tab_utilisateur = ModelUtilisateurs::getAllUtilisateurs();
+            $tab_utilisateur = ModelUtilisateur::getAllUtilisateurs();
             foreach ($tab_utilisateur as $key => $value) {
             $id = $value->get('id_utilisateur');
             $nom = $value->get('nom_utilisateur');
@@ -18,7 +18,7 @@
             $mail = $value->get('mail_utilisateur');
             $url = $value->get('urlImage_utilisateur');
             $nbrCommandes = $value->getNbrCommandeUtilisateur($id);
-            $age = ModelUtilisateurs::age($value->get('ddn_utilisateur'));
+            $age = ModelUtilisateur::age($value->get('ddn_utilisateur'));
             
             echo '<div class="col-lg-3 col-md-6 mb-4">
               <!--Card-->

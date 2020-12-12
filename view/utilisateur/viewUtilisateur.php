@@ -8,7 +8,7 @@
 <body>
   <!--Main layout-->
   <?php
-    $utilisateur = ModelUtilisateurs::getUtilisateurById($_GET['id_utilisateur']);
+    $utilisateur = ModelUtilisateur::getUtilisateurById($_GET['id_utilisateur']);
     $id = $utilisateur->get('id_utilisateur');
     $admin = $utilisateur->get('admin_utilisateur');
     $nom = $utilisateur->get('nom_utilisateur');
@@ -51,7 +51,7 @@
                 <?php echo "Date de naissance - ".$ddn ?>
               </span>   
               <span class="mr-1">
-                <?php echo "<br>Age - ".ModelUtilisateurs::age($ddn) . " ans" ?>
+                <?php echo "<br>Age - ".ModelUtilisateur::age($ddn) . " ans" ?>
               </span>     
             </p>
 

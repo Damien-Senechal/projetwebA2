@@ -76,7 +76,7 @@
                 <!--Category & Title-->
                 <a href="" class="grey-text">
                   <h5> STONKS : <?php 
-                                  $produit = ModelProduits::getProduitById('01coo2B');
+                                  $produit = ModelProduit::getProduitById('01coo2B');
                                   echo $produit->get('stock_produit');
                                 ?>
                                   
@@ -424,9 +424,9 @@
 
 
           <?php 
-          $tab_produits = ModelProduits::getAllProduits();
+          $tab_produits = ModelProduit::getAllProduits();
           foreach ($tab_produits as $key => $value) {
-            $produit = ModelProduits::getProduitById($value->get('id_produit'));
+            $produit = ModelProduit::getProduitById($value->get('id_produit'));
             $image = $produit->get('urlImage_produit');
             $stock = $produit->get('stock_produit');
             $nom = $produit->get('nom_produit');

@@ -11,12 +11,12 @@
     <div class="container" style="margin-top: 5%">
     <?php
     foreach ((array) $listeCommandes as $key => $value) {
-      $commande = ModelCommandes::getCommandeById($value[0]);
+      $commande = ModelCommande::getCommandeById($value[0]);
       $id = $commande->get('id_commande');
       $id_client = $commande->get('id_client');
       $date = $commande->get('date_commande');
       $prix = $commande->get('prix_commande');
-        $utilisateur = ModelUtilisateurs::getUtilisateurById($id_client);
+        $utilisateur = ModelUtilisateur::getUtilisateurById($id_client);
           $nom = $utilisateur->get('nom_utilisateur');
           $prenom = $utilisateur->get('prenom_utilisateur');
           $image = $utilisateur->get('image_utilisateur');
@@ -40,7 +40,7 @@
                             $detail = ModelDetail::getDetailById($value[0]);
                               $id_detail = $detail->get("id_detail");
                               $id_produit = $detail->get("id_produit");
-                              $produit = ModelProduits::getProduitById($id_produit);
+                              $produit = ModelProduit::getProduitById($id_produit);
                                 $nom_produit = $produit->get("nom_produit");
                                 $image_produit = $produit->get("urlImage_produit");
                                 $prix_produit = $produit->get("prix_produit");
@@ -53,7 +53,7 @@
                                   <div class="card-body text-center">
                               Produit n°'.$i.' : <br><br>
                               '.$nom_produit.' <br>
-                              <a href="index?action=produitDetail&controller=produits&id_produit='.$id_produit.'">
+                              <a href="index?action=produitDetail&controller=produit&id_produit='.$id_produit.'">
                               <img src="'.$image_produit.'" class="img-fluid" alt=""><br></a>';
                               if ($quantite_produit_detail == 1) 
                                 echo $quantite_produit_detail.' produit acheté <br><br>';

@@ -7,9 +7,9 @@
 <body>
   <?php
     require_once '../lib/File.php';
-    require_once File::build_path(array("model","ModelProduits.php"));
+    require_once File::build_path(array("model","ModelProduit.php"));
     $id_produit = $_GET['id_produit'];
-    $produit = ModelProduits::getProduitById($id_produit);
+    $produit = ModelProduit::getProduitById($id_produit);
     $nom_produit = $produit->get('nom_produit');
 
     $image = $produit->get('urlImage_produit');
@@ -81,7 +81,7 @@
       <div class="row d-flex justify-content-center wow fadeIn">
 
       	<?php 
-          $tab_produits = ModelProduits::getAllProduits();
+          $tab_produits = ModelProduit::getAllProduits();
           $tailleTab = sizeof($tab_produits);
 
           $premierCookie = rand(0, $tailleTab-1);
