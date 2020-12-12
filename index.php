@@ -10,6 +10,6 @@
 		}
 		else {
 			$_SESSION['admin_utilisateur'] = 0;
-		}
+		}	
 	}
 ?>

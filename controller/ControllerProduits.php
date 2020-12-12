@@ -11,6 +11,7 @@ class ControllerProduits
     }
 
     public static function produitDetail(){
+        setcookie("dureeDeViePanier", "OK", time()+10);
         $pagetitle = "Achat d'un ".ModelProduits::getProduitById($_GET['id_produit'])->get('nom_produit')." ";
         $view = "viewProduit";
         require File::build_path(array('view', 'view.php'));
@@ -127,12 +128,14 @@ class ControllerProduits
     }
 
     public static function afficherPanier() {
+        setcookie("dureeDeViePanier", "OK", time()+10);
         $pagetitle = "Panier";
         $view = "viewPanier";
         require File::build_path(array('view','view.php'));
     }
 
     public static function ajouterObjetPanier(){
+        setcookie("dureeDeViePanier", "OK", time()+10);
         if (self::creerPanier())
         {  
             $idProduit = $_GET['id_produit'];
