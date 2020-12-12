@@ -44,22 +44,58 @@
                   </a>
                   <h5>
                     <strong>
-                      <a href="index?action=produitDetail&controller=produits&id_produit='.$id.'" class="dark-grey-text"> ' .$nom. '
-                        <span class="badge badge-pill danger-color">'.$categorie.'</span>
-                      </a>
-                    </strong>
+                    <a href="index?action=produitDetail&controller=produits&id_produit='.$id.'" class="dark-grey-text"> ' .$nom . ' ';
+                        if($categorie != NULL) {
+                          echo '<span class="badge badge-pill danger-color"> '.$categorie.'</span>';
+                        } else
+                        echo '<br>';
+
+                  echo '</a>';
+                    
+                  echo '</strong>
                   </h5>
 
                   <h4 class="font-weight-bold blue-text">
                     <strong>prix : '.$prix.' €</strong>
-                  </h4>
+                  </h4>';
 
-                </div>
+                  if(Session::is_admin()) {
+                    echo '
+                    <div style = "font-size : 90%; margin-top : 5%">
+                      <a href="index?action=modifCookie&controller=produits&id_produit='.$id.'" class="nav-link border border-light rounded waves-effect" style="color : #2196f3; box-shadow: 1px 1px 1px gray; width : 49%">
+                      <i class=""></i>Modifier
+                      </a>
+                      <a href="index?action=supprimerCookie&controller=produits&id_produit='.$id.'" class="nav-link border border-light rounded waves-effect" style="color : red; box-shadow: 1px 1px 1px gray; width : 49%">
+                      <i class=""></i>Supprimer
+                      </a>
+                    </div>';
+                  }
+                echo '</div>
                 <!--Card content-->
 
               </div>
               <!--Card-->
 
+            </div>';
+          }
+          //rajouter cookie :
+          if(Session::is_admin()) {
+          echo '<div class="col-lg-3 col-md-6 mb-4">
+              <!--Card-->
+              <div class="card">
+                <!--Card image-->
+                <div class="view overlay">
+                <h4 style="padding-top: 50%" class="font-weight-bold blue-text">
+                    <strong>Creer cookie</strong>
+                  </h4>
+                  <a href="index?action=creerCookie&controller=produits">
+                    <img style="padding-top: 10%; padding-bottom: 60%; padding-right: 30%; padding-left: 30%;"
+                    src="template/img/plus-rouge.png" class="card-img-top"
+                    alt="">
+                    </a>
+                  </div>
+                </div>
+              </div>
             </div>';
           }
         ?>

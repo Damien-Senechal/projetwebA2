@@ -6,7 +6,7 @@
     html,
     body,
     .carousel {
-      height: 60vh;
+      height: 90vh;
     }
 
     @media (max-width: 740px) {
@@ -182,12 +182,13 @@
                 $prenom = $utilisateur->get('prenom_utilisateur');
                 $mail = $utilisateur->get('mail_utilisateur');
                 $ddn = $utilisateur->get('ddn_utilisateur');
+                $url = $utilisateur->get('urlImage_utilisateur');
                 $age = ModelUtilisateurs::age($ddn); 
 
                 echo '<div class="col-lg-3 col-md-6 mb-4">
                   <div class="card">
                     <div class="view overlay">
-                      <img src="template/img/imagesUtilisateur/'.$prenom.'.png" class="card-img-top"
+                      <img src="'.$url.'" class="card-img-top"
                         alt="">
                       <a href="index?action=utilisateurDetail&controller=utilisateur&id_utilisateur='.$id.'">
                         <div class="mask rgba-white-slight">Présentation</div>

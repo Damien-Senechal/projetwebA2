@@ -111,7 +111,7 @@
 	      	$primary_key = static::$primary;
 	      	$primary_key_value = $_GET["$primary_key"];
 	      	try {
-	        	$sql = "DELETE FROM $table_name WHERE $primary_key= :value;";
+	        	$sql = "DELETE FROM p_$table_name"."s WHERE $primary_key= :value;";
 	        	$req_prep = Model::$pdo->prepare($sql);
 	        	$values = array(
 	          	"value"=>$primary_key_value,
@@ -133,7 +133,6 @@
 		    $table_name = static::$object;
 		    $class_name = 'Model' . ucfirst($table_name);
 		    $primary_key = static::$primary;
-		    $primary_key_value = $_SESSION["$primary_key"];
 		    $string = '';
 		    try {
 		        foreach ($data as $key => $value) {$string =  $string . $key . '="' . $value . '",';}

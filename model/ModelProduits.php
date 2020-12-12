@@ -10,18 +10,16 @@ class ModelProduits extends Model {
   private $stock_produit;
   private $urlimage_produit;
   private $categorie_produit;
+  protected static $object = "produit";
+  protected static $primary = "id_produit";
       
   // un constructeur
-  public function __construct($id_produit = NULL, $nom_produit = NULL, $desc_produit = NULL, $prix_produit = NULL, $stock_produit = NULL, $urlimage_produit = NULL, $categorie_produit = NULL) {
-    if (!is_null($id_produit) && !is_null($nom_produit) && !is_null($desc_produit) && !is_null($prix_produit) && !is_null($stock_produit) && !is_null($urlimage_produit) && !is_null($categorie_produit)) {
-      $this->id_produit = $id_produit;
-      $this->nom_produit = $nom_produit;
-      $this->desc_produit = $desc_produit;
-      $this->prix_produit = $prix_produit;
-      $this->stock_produit = $stock_produit;
-      $this->urlimage_produit = $urlimage_produit;
-      $this->categorie_produit = $categorie_produit;
-    }
+  public function __construct($data = array())  {
+      foreach ($data as $key => $value){
+          if($key != 'action') {
+              $this->$key = $value;
+          }
+      }
   }
    
   public function get($nom_attribut) {
@@ -31,66 +29,8 @@ class ModelProduits extends Model {
       return false; 
   }
 
-  public function setIdProduit($id)  {
-    if (strlen($id) > 10) {
-      echo "Id non valide (taille > 10)\n";
-    }
-    else {
-      $this->id_produit = $id_produit;
-    }
-  }
-
-  public function setNomProduit($nom)  {
-    if (strlen($nom) > 25) {
-      echo "Nom non valide (taille > 25)\n";
-    }
-    else {
-      $this->nom_produit = $nom_produit;
-    }
-  }
-
-  public function setDescProduit($desc)  {
-    if (strlen($desc) > 25) {
-      echo "Description non valide (taille > 2000)\n";
-    }
-    else {
-      $this->desc_produit = $desc_produit;
-    }
-  }
-
-  public function setPrixProduit($prix)  {
-    $this->prix_produit = $prix_produit;
-  }
-
-  public function setStockProduit($stock)  {
-    if (strlen($stock) > 10) {
-      echo "Stock non valide (taille > 10)\n";
-    }
-    else {
-      $this->stock_produit = $stock_produit;
-    }
-  }
-
-  public function setUrlProduit($url)  {
-    if (strlen($url) > 250) {
-      echo "Url non valide (taille > 250)\n";
-    }
-    else {
-      $this->url_produit = $urlimage_produit;
-    }
-  }
-
-  public function setCategorieProduit($categorie)  {
-    if (strlen($categorie) > 25) {
-      echo "Catégorie non valide (taille > 25)\n";
-    }
-    else {
-      $this->categorie_produit = $categorie_produit;
-    }
-  }
-
-  public function afficher() {
-      echo "Le cookie n° $this->id_produit, de nom : $this->nom_produit, avec la description $this->desc_produit, qui coûte $this->prix_produit, en quantite de $this->stock_produit, avec l'url : $this->urlimage_produit et de catégorie $this->categorie_produit";
+  public function set($attribut,$valeur){
+        $this->$attribut = $valeur;
   }
 
   public static function getAllProduits() {

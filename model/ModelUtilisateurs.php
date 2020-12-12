@@ -15,17 +15,17 @@ class ModelUtilisateurs extends Model {
   private $mdp_utilisateur;
   private $admin_utilisateur;
   private $nonce_utilisateur;
+  private $urlImage_utilisateur;
   protected static $object = "utilisateur";
   protected static $primary = "id_utilisateur";
   
   public function __construct($data = array())  {
-        foreach ($data as $key => $value){
-            if($key != 'action') {
-                $this->$key = $value;
-            }
-        }
-
-    }
+      foreach ($data as $key => $value){
+          if($key != 'action') {
+              $this->$key = $value;
+          }
+      }
+  }
    
   public function get($nom_attribut) {
       if (property_exists($this, $nom_attribut))
@@ -33,101 +33,8 @@ class ModelUtilisateurs extends Model {
       return false;
   }
  
-  public function setId($id2) {
-      if (strlen($id2) > 10) {
-        echo "Identifiant non valide (taille > 10)\n";
-      }
-      else {
-        $this->id_utilisateur = $id2;
-      }
-  }
-  public function setNom($nom2)  {
-      if (strlen($nom2) > 25) {
-        echo "Nom non valide (taille > 25)\n";
-      }
-      else {
-        $this->nom_utilisateur = $nom2;
-      }
-  }
-  public function setPrenom($prenom2)  {
-      if (strlen($prenom2) > 25) {
-        echo "Prenom non valide (taille > 25)\n";
-      }
-      else {
-        $this->prenom_utilisateur = $prenom2;
-      }
-  }
-  public function setMail($mail2)  {
-      if (strlen($mail2) > 64) {
-        echo "Mail non valide (taille > 64)\n";
-      }
-      else {
-        $this->mail_utilisateur = $mail2;
-      }
-  }
-  public function setMdp($mdp2)  {
-      if (strlen($mdp2) > 10) {
-        echo "Mdp non valide (taille > 10)\n";
-      }
-      else {
-        $this->mdp_utilisateur = $mdp2;
-      }
-  }
-  public function setAdresse($adresse2)  {
-      if (strlen($adresse2) > 64) {
-        echo "Adresse non valide (taille > 64)\n";
-      }
-      else {
-        $this->adresse_utilisateur = $adresse2;
-      }
-  }
-  public function setDdn($Ddn2)  {
-      try {
-        $this->ddn_utilisateur = $Ddn2;
-    } 
-    catch (PDOException $e) {
-          echo $e->getMessage(); // affiche un message d'erreur
-          die();
-      }
-  }
-
-  public function setPp($pp2)  {
-      try {
-        $this->pp_utilisateur = $pp2;
-      } catch(PDOException $e) {
-        echo $e->getMessage();
-        die();
-      }
-  }
-
-  public function setAdmin($admin2)  {
-      if (strlen($admin2) > 1) {
-        echo "Admin non valide (taille > 1)\n";
-      }
-      else {
-        $this->admin_utilisateur = $admin2;
-      }
-  }
-  public function setHistoire($histoire2)  {
-      if (strlen($histoire2) > 2000) {
-        echo "Histoire non valide (taille > 2000)\n";
-      }
-      else {
-        $this->histoire_utilisateur = $histoire2;
-      }
-  }
-  public function setNonce($nonce2)  {
-      if (strlen($nonce2) > 2000) {
-        echo "Nonce non valide (taille > 32)\n";
-      }
-      else {
-        $this->nonce_utilisateur = $nonce2;
-      }
-  }
-
-  // une methode d'affichage.
-  public function afficher() {
-      echo "L'utilisateur $this->id_utilisateur, $this->nom_utilisateur, $this->prenom_utilisateur, adresse mail : $this->mail_utilisateur, mot de passe : $this->mdp_utilisateur, adresse $this->adresse_utilisateur, date de naissance : $this->ddn_utilisateur, admin : $this->admin_utilisateur";
+  public function set($attribut,$valeur){
+        $this->$attribut = $valeur;
   }
 
   public static function age($date) { 
@@ -198,6 +105,29 @@ class ModelUtilisateurs extends Model {
       return $tab_uti[0];
   }
 
+  public static function verifieMailUtilisateur($mail) {
+    try {
+        $sql = "SELECT COUNT(id_utilisateur) FROM p_utilisateurs WHERE mail_utilisateur=:adresse_mail";
+
+        $req_prep = Model::$pdo->prepare($sql); 
+
+      $values = array(
+        "adresse_mail" => $mail, 
+      );
+      $req_prep->execute($values);
+      $tab_uti = $req_prep->fetch();
+      return $tab_uti[0];
+
+     }catch (PDOException $e) {
+        if (Conf::getDebug()) {
+          echo $e->getMessage(); // affiche un message d'erreur
+        }else {
+          echo 'Une erreur est survenue <a href="../index.php"> retour a la page d\'accueil </a>';
+        }
+        die();
+    }
+  }
+
   public static function getNbrCommandeUtilisateur($id) {
       try {
       $sql = "SELECT COUNT(id_commande) FROM p_commandes c JOIN p_utilisateurs u ON c.id_client = u.id_utilisateur WHERE id_utilisateur = :id_utilisateur;";
@@ -221,8 +151,8 @@ class ModelUtilisateurs extends Model {
           }
   }
 
-  public static function checkPassword($mail,$mot_de_passe_hache){
-        $mot_de_passe_hache = Security::hacher($mot_de_passe_hache);
+  public static function checkPassword($mail,$mot_de_passe_non_hache){
+        $mot_de_passe_hache = Security::hacher($mot_de_passe_non_hache);
         try
         {
             $sql = "SELECT COUNT(*) FROM p_utilisateurs WHERE mdp_utilisateur = :mdp AND mail_utilisateur = :mail";

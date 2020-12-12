@@ -19,7 +19,10 @@
                     <div style = "display : flex; justify-content: center; margin-bottom : 5%">
                       <span class="badge badge-pill danger-color" style="font-size : 130%"> Votre panier est vide </span>
                     </div>
-                    <img style = "display: block; margin : auto" src="template/img/hrugPapi.png" class="img-fluid" alt="¯\_(ツ)_/¯">';
+                    <img style = "display: block; margin : auto" src="template/img/hrugPapi.png" class="img-fluid" alt="¯\_(ツ)_/¯">
+                    <center>
+                    <a style="margin-top : 2%; color : red" class="nav-link border border-light rounded waves-effect" href="index?action=accueil&controller=utilisateur">➡ revenir à l\'accueil ⬅</a>
+                    </center>';
                   else
                   {
                   echo '
@@ -76,7 +79,7 @@
                                 Prix produit : '.$prix_produit.'€
                                 <div style="color : red; margin-top : 5%"> Prix total : '.$prix_total.'€ 
                                 <div style="display : flex; font-size : 73%; margin-top : 5%; justify-content: center;">
-                                  <button type="submit" style = "border-color : #e0e0e0; background-color : white; outline : none;  border-radius: 0.25rem; background-color:transperant; outline:none; ">
+                                  <button type="submit" style = "color : #2196f3; border-color : #e0e0e0; background-color : white; outline : none;  border-radius: 0.25rem; background-color:transperant; outline:none; ">
                                       <i class="">Actualiser</i>
                                   </button>';?>
                                   <?php 
@@ -100,6 +103,8 @@
                               </div>
                               <a href="index?action=magasinProduit&controller=produits">
                                 <span class="badge badge-pill blue" style="font-size : 130%; margin-right : 5%"> ⬅ Poursuivre les achats</span>
+                              </a>
+                              <a href="index?action=validerPanier&controller=commande">
                                 <span class="badge badge-pill danger-color" style="font-size : 130%"> Proceder au paiement ➡</span>
                               </a>
                               </section>

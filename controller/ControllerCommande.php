@@ -18,6 +18,12 @@ class ControllerCommande
         require File::build_path(array('view','view.php'));
     }
 
+    public static function validerPanier(){
+    $pagetitle = "Magasin";
+    $view = "viewMagasin";
+    require File::build_path(array('view', 'view.php'));
+    }
+
     public static function read(){
         $u = ModelCommande::select($_GET['id_commande']);
         $pagetitle = "Détail Commande";

@@ -16,9 +16,104 @@ class ControllerProduits
         require File::build_path(array('view', 'view.php'));
     }
 
-    public static function create(){
-        $pagetitle = "Créer Produits";
-        $view = 'update';
+    public static function supprimerCookie(){
+        $produit = ModelProduits::getProduitById(htmlspecialchars($_GET['id_produit']));
+        $urlImage_produit = $produit->get("urlImage_produit");
+        unlink ($urlImage_produit);
+        $produit->deleteGen();
+        $pagetitle = "Magasin";
+        $view = "viewMagasin";
+        require File::build_path(array('view', 'view.php'));
+    }
+
+    public static function creerCookie(){
+        $pagetitle = "Création produit";
+        $view = 'viewEditProduit';
+        require File::build_path(array('view','view.php'));
+    }
+
+    public static function creationCookie(){
+        $produit = new ModelProduits();
+
+        $htmlSpecialId = htmlspecialchars($_POST['id_produit']);
+        $htmlSpecialNom = htmlspecialchars($_POST['nom_produit']);
+        $htmlSpecialDesc = htmlspecialchars($_POST['desc_produit']);
+        $htmlSpecialPrix = htmlspecialchars($_POST['prix_produit']);
+        $htmlSpecialStock = htmlspecialchars($_POST['stock_produit']);
+        $htmlSpecialCategorie = htmlspecialchars($_POST['categorie_produit']);
+
+        $randomText = Security::generateRandomHex();
+
+        if(!empty($_FILES["photo_produit"])) {
+            if (move_uploaded_file($_FILES["photo_produit"]["tmp_name"], "template/img/cookiesMagasin/". $randomText . ".png")) {
+                $urlImage = "template/img/cookiesMagasin/". $randomText . ".png";
+            } else {
+                $urlImage = $produit->get("urlImage_produit");
+            }
+        }
+        else {
+            $urlImage = $produit->get("urlImage_produit");
+        } 
+
+        if ($produit->save(array("id_produit" => $htmlSpecialId,
+                                      "nom_produit" => $htmlSpecialNom,
+                                      "desc_produit" => $htmlSpecialDesc,
+                                      "prix_produit" => $htmlSpecialPrix,
+                                      "stock_produit" => $htmlSpecialStock,
+                                      "urlImage_produit" => $urlImage,
+                                      "categorie_produit" => $htmlSpecialCategorie)) == false) {
+            self::error("Produit déjà créé");
+        }
+        else {
+            $pagetitle = "Magasin";
+            $view = 'viewMagasin';
+            require File::build_path(array('view','view.php'));
+        } 
+    }
+
+        public static function modifCookie(){
+        if(Session::is_admin()){
+            $pagetitle = "Modifier compte";
+            $view = 'viewEditProduit';
+            require File::build_path(array('view','view.php'));
+        }
+        else
+        {
+            echo "erreur";
+        }
+    }
+
+    public static function modificationCoockie(){
+        $produit = ModelProduits::getProduitById(htmlspecialchars($_POST['id_produit']));
+
+        $htmlSpecialNom = htmlspecialchars($_POST['nom_produit']);
+        $htmlSpecialDesc = htmlspecialchars($_POST['desc_produit']);
+        $htmlSpecialPrix = htmlspecialchars($_POST['prix_produit']);
+        $htmlSpecialStock = htmlspecialchars($_POST['stock_produit']);
+        $htmlSpecialCategorie = htmlspecialchars($_POST['categorie_produit']);
+
+        $randomText = Security::generateRandomHex();
+
+        if(!empty($_FILES["photo_produit"])) {
+            if (move_uploaded_file($_FILES["photo_produit"]["tmp_name"], "template/img/cookiesMagasin/". $randomText . ".png")) {
+                $urlImage = "template/img/cookiesMagasin/". $randomText . ".png";
+            } else {
+                $urlImage = $produit->get("urlImage_produit");
+            }
+        }
+        else {
+            $urlImage = $produit->get("urlImage_produit");
+        }  
+
+        $produit->updateGen(array("id_produit" => $_POST['id_produit'],
+                                 "nom_produit" => $htmlSpecialNom,
+                                 "desc_produit" => $htmlSpecialDesc,
+                                 "prix_produit" => $htmlSpecialPrix,
+                                 "stock_produit" => $htmlSpecialStock,
+                                 "urlImage_produit" => $urlImage,
+                                 "categorie_produit" => $htmlSpecialCategorie));
+        $pagetitle = "Magasin";
+        $view = 'viewMagasin';
         require File::build_path(array('view','view.php'));
     }
 

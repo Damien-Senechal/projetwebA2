@@ -8,13 +8,15 @@ class ModelCommandes extends Model {
     private $id_client;
     private $prix_commande;
     private $date_commande;
+    protected static $object = "commandes";
+    protected static $primary = "id_commande";
         
     // un constructeur
-    public function __construct($id_client = NULL, $date_commande = NULL, $prix_commande = NULL) {
-      if (!is_null($id_client) && !is_null($date_commande) && !is_null($prix_commande)) {
-        $this->id_client = $id_client;
-        $this->date_commande = $date_commande;
-        $this->prix_commande = $prix_commande;
+    public function __construct($data = array())  {
+      foreach ($data as $key => $value){
+          if($key != 'action') {
+              $this->$key = $value;
+          }
       }
     }
      
@@ -25,44 +27,11 @@ class ModelCommandes extends Model {
     }
 
 
-    public function setIdCommande($id)  {
-      if (strlen($id) > 10) {
-        echo "Id non valide (taille > 10)\n";
-      }
-      else {
-        $this->id_commande = $id_commande;
-      }
+    public function set($attribut,$valeur){
+        $this->$attribut = $valeur;
     }
-
-    public function setIdClient($id)  {
-      if (strlen($id) > 10) {
-        echo "Id non valide (taille > 10)\n";
-      }
-      else {
-        $this->id_client = $id_client;
-      }
-    }
-
-    public function setDateCommande($qtt)  {
-      if (strlen($qtt) > 25) {
-        echo "Date non valide (taille > 25)\n";
-      }
-      else {
-        $this->date_commande = $date_commande;
-      }
-    }
-
-    public function setPrixCommande($prix)  {
-        $this->prix_commande = $prix_commande;
-    }
-
-    public function afficher() {
-        echo "La commande $this->id_commande, de $this->id_client, en date de $this->date_commande et au prix de $this->prix_commande";
-    }
-
 
     public static function getAllCommandes() {
-
       try {
         $rep = Model::$pdo->query('SELECT * FROM p_commandes');
 

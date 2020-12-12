@@ -24,7 +24,7 @@
     $nom_produit = $produit->get('nom_produit');
     $categorie_produit = $produit->get('categorie_produit');
     $prix_produit = $produit->get('prix_produit');
-    $description_produit = $produit->get('desc_produit');
+    $desc_produit = $produit->get('desc_produit');
     $stock_produit = $produit->get('stock_produit');
   ?>
   <main class="mt-5 pt-4">
@@ -62,9 +62,10 @@
               <span><?php echo $prix_produit . '€' ?> </span>
             </p>
 
-            <p class="lead font-weight-bold">Description</p>
+            <div class="lead font-weight-bold">Description : </div>
+            <?php echo $desc_produit ?>
 
-              <form method="get" class="d-flex justify-content-left" action="index.php">
+              <form style="margin-top: 5%" method="get" class="d-flex justify-content-left" action="index.php">
                  <input type="hidden" name="action" value="ajouterObjetPanier">
                  <input type="hidden" name="controller" value="produits">
                 <?php

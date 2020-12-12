@@ -13,10 +13,10 @@
             $tab_utilisateur = ModelUtilisateurs::getAllUtilisateurs();
             foreach ($tab_utilisateur as $key => $value) {
             $id = $value->get('id_utilisateur');
-            $image = $value->get('urlImage_produit');
             $nom = $value->get('nom_utilisateur');
             $prenom = $value->get('prenom_utilisateur');
             $mail = $value->get('mail_utilisateur');
+            $url = $value->get('urlImage_utilisateur');
             $nbrCommandes = $value->getNbrCommandeUtilisateur($id);
             $age = ModelUtilisateurs::age($value->get('ddn_utilisateur'));
             
@@ -25,7 +25,7 @@
               <div class="card">
                 <!--Card image-->
                 <div class="view overlay">
-                  <img src="'.$image.'" class="card-img-top"
+                  <img src="'.$url.'" class="card-img-top"
                     alt="">
                   <a href="index?action=utilisateurDetail&controller=utilisateur&id_utilisateur='.$id.'">
                     <div class="mask rgba-white-slight">Acheter</div>
@@ -69,6 +69,17 @@
             else {
               echo '<a class="lead font-weight-bold"> Aucune commande </a>';
             }
+            if(Session::is_admin()) {
+                    echo '
+                    <div style = "font-size : 90%; margin-top : 5%">
+                      <a href="index?action=update&controller=utilisateur&id_utilisateur='.$id.'" class="nav-link border border-light rounded waves-effect" style="color : #2196f3; box-shadow: 1px 1px 1px gray; width : 49%">
+                      <i class=""></i>Modifier
+                      </a>
+                      <a href="index?action=supprimerUtilisateur&controller=utilisateur&id_utilisateur='.$id.'" class="nav-link border border-light rounded waves-effect" style="color : red; box-shadow: 1px 1px 1px gray; width : 49%">
+                      <i class=""></i>Supprimer
+                      </a>
+                    </div>';
+            }
             echo '
                 </div>
                 <!--Card content-->
@@ -77,6 +88,26 @@
               </div>
               <!--Card-->
 
+            </div>';
+          }
+          //rajouter cookie :
+          if(Session::is_admin()) {
+          echo '<div class="col-lg-3 col-md-6 mb-4">
+              <!--Card-->
+              <div class="card">
+                <!--Card image-->
+                <div class="view overlay">
+                <h4 style="padding-top: 70%" class="font-weight-bold blue-text">
+                    <strong>Enregistrer utilisateur</strong>
+                  </h4>
+                  <a href="index?action=enregistrer&controller=utilisateur">
+                    <img style="padding-top: 15%; padding-bottom: 80%; padding-right: 30%; padding-left: 30%;"
+                    src="template/img/plus-rouge.png" class="card-img-top"
+                    alt="">
+                    </a>
+                  </div>
+                </div>
+              </div>
             </div>';
           }
         ?>

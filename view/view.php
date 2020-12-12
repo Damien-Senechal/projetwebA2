@@ -55,7 +55,10 @@
             echo '
             <li class="nav-item">
               <a class="nav-link waves-effect" href="index?action=listeUtilisateur&controller=utilisateur">Utilisateur</a>
-            </li> ';
+            </li>
+            <li class="nav-item">
+              <a class="nav-link waves-effect" href="https://webinfo.iutmontp.univ-montp2.fr/my/">Base de données</a>
+            </li>';
           }
           ?>
         </ul>
@@ -97,12 +100,13 @@
           $u = ModelUtilisateurs::getUtilisateurById($_SESSION['id_utilisateur']);
           $id = $u->get('id_utilisateur');
           $prenom_utilisateur = $u->get('prenom_utilisateur');
+          $url = $u->get('urlImage_utilisateur');
           echo '<li style = "margin-left : 10px; display: flex;" class="nav-item">
                 <a style = "display: flex; align-items: center;">
                 Bonjour ' . $prenom_utilisateur. ' 
                 <a>
             <a href="index?action=utilisateurDetail&controller=utilisateur&id_utilisateur='. $id .'">
-            <img style = "margin-left : 10px; width : 40px; height : 40px; align-items : center;" src="template/img/imagesUtilisateur/'.$prenom_utilisateur.'.png" class="card-img-top">
+            <img style = "margin-left : 10px; width : 40px; height : 40px; align-items : center;" src="'.$url.'" class="card-img-top">
           </a>';
           if (Session::is_admin()) {
             echo '<i style="margin-top : 4%; color : red; margin-left : 10px;"><strong> IS ADMIN </strong></i>';
@@ -127,7 +131,7 @@
     <!--Call to action-->
     <div class="pt-4">
       
-      <p><strong> Regalez vous :D </strong></p>
+      <strong> Regalez vous :D </strong>
     </div>
     <!--/.Call to action-->
     <hr class="my-4">

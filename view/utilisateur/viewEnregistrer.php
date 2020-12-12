@@ -51,7 +51,7 @@
 <body>
     <?php
         if ($_GET['action'] == "enregistrer"){
-            $vue = "enregistrer";
+            $vue = "senregistrer";
         }else{
             $vue = "updated";
             $mailSession = ModelUtilisateurs::getUtilisateurById($_GET['id_utilisateur'])->get('mail_utilisateur');
@@ -59,7 +59,13 @@
         }
     ?>
 <div id="container">
-    <form method="get" action="index.php">
+    <form method="post" <?php  if($_GET['action'] == "enregistrer") {
+        echo 'action="index?action=senregistrer&controller=utilisateur"';
+    }
+    else {
+        echo 'action="index?action=updated&controller=utilisateur"';
+    }
+    ?> enctype="multipart/form-data">
 
         <fieldset>
             <?php
@@ -67,34 +73,29 @@
                     echo '<legend style="text-align : center;">Création de compte :</legend>
                     <p>
                     <label>Nom :</label>
-                    <input type="text" name="nom_utilisateur" id="nom_utilisateur" required/>
+                    <input type="text" name="nom_utilisateur" required/>
                     <label>Prenom :</label>
-                    <input type="text" name="prenom_utilisateur" id="prenom_utilisateur" required/>
+                    <input type="text" name="prenom_utilisateur" required/>
                     <label>Email :</label>
-                    <input type="email" name="mail_utilisateur" id="mail_utilisateur" required/>
+                    <input type="email" name="mail_utilisateur" required/>
                     <label>Adresse :</label>
-                    <input type="text" name="adresse_utilisateur" id="adresse_utilisateur" required/>
+                    <input type="text" name="adresse_utilisateur"  required/>
                     <label>Date de naissance :</label>
-                    <input type="text" pattern="[0-9]{4}-(01|02|03|04|05|06|07|08|09|10|11|12)-([0,1,2][1-9]|10|20|30|31)" name="ddn_utilisateur" id="ddn_utilisateur" placeholder="(aaaa-mm-jj)" />
+                    <input type="date" name="ddn_utilisateur"/>
                     <label>Histoire :</label>
-                    <input type="text" name="histoire_utilisateur" id="histoire_utilisateur"/>
+                    <input type="text" name="histoire_utilisateur"/>
                     <label>Photo de profil</label>
-                    <input type="file" name="pp_utilisateur" id="pp_utilisateur"/>
+                    <input type="file" name="photo_utilisateur" accept=".png, .jpeg, .jpg"/>
                     <label>Mot de passe :</label>
-                    <input type="password" name="mdp_utilisateur" id="mdp_utilisateur" required/>
+                    <input type="password" name="mdp_utilisateur" '; if(!Session::is_admin()) { echo 'required';} echo '/>
                     <label>Confirmer le mot de passe :</label>
-                    <input type="password" name="mdp_utilisateur2" id="mdp_utilisateur2" required/>';
-                    if(isset($_SESSION['admin_utilisateur']))
+                    <input type="password" name="mdp_utilisateur2" required/>';
+                    if(!empty($_SESSION['admin_utilisateur']) && $_SESSION['admin_utilisateur'])
                     {
-                        if($_SESSION['admin_utilisateur'])
-                        {
-                            echo '<label for="admin">setAdmin</label>
-                                  <input type="checkbox" name="admin" id="admin"/>';
-                        }
+                        echo '<label>setAdmin</label>
+                                  <input type="checkbox" name="admin_utilisateur" id="admin_utilisateur"/>';
                     }
-                    echo '<input type="hidden" name="action" value=' .$vue .'>
-                    <input type="hidden" name="controller" value="utilisateur">
-                    </p>
+                    echo '</p>
                     <p>
                         <input type="submit" value="Envoyer"/>
                     </p>';
@@ -113,41 +114,37 @@
                     echo '<legend style="text-align : center;">Modification de compte :</legend>
                     <p>
                     <label>Nom :</label>
-                    <input type="text" name="nom_utilisateur" id="nom_utilisateur" value="'. $nom_utilisateur.'"/>
+                    <input type="text" name="nom_utilisateur" value="'. $nom_utilisateur.'"/>
                     <label>Prenom :</label>
-                    <input type="text" name="prenom_utilisateur" id="prenom_utilisateur" value="'. $prenom_utilisateur.'"/>
+                    <input type="text" name="prenom_utilisateur" value="'. $prenom_utilisateur.'"/>
                     <label>Email :</label>
-                    <input type="email" name="mail_utilisateur" id="mail_utilisateur" value="'. $mail_utilisateur.'"/>
+                    <input type="email" name="mail_utilisateur" value="'. $mail_utilisateur.'"/>
                     <label>Adresse :</label>
-                    <input type="text" name="adresse_utilisateur" id="adresse_utilisateur" value="'. $adresse_utilisateur.'"/>
+                    <input type="text" name="adresse_utilisateur" value="'. $adresse_utilisateur.'"/>
                     <label>Date de naissance :</label>
-                    <input type="text" pattern="[0-9]{4}-(01|02|03|04|05|06|07|08|09|10|11|12)-([0,1,2][1-9]|10|20|30|31)" name="ddn_utilisateur" id="ddn_utilisateur" placeholder="(aaaa-mm-jj)" value="'. $ddn_utilisateur.'" />
+                    <input type="date" name="ddn_utilisateur" value="'. $ddn_utilisateur.'" />
                     <label>Histoire :</label>
-                    <input type="text" name="histoire_utilisateur" id="histoire_utilisateur" value="'. $histoire_utilisateur.'"/>
+                    <input type="text" name="histoire_utilisateur" value="'. $histoire_utilisateur.'"/>
+                    <label>Photo de profil</label>
+                    <input type="file" name="photo_utilisateur" accept=".png, .jpeg, .jpg"/>
                     <label style = "color : red";>Ancien mot de passe :</label>
-                    <input type="password" name="ancien_mdp_utilisateur" id="ancien_mdp_utilisateur" required/>
+                    <input type="password" name="ancien_mdp_utilisateur" id="ancien_mdp_utilisateur" '; if(!Session::is_admin()) { echo 'required';} echo '/>
                     <label>Nouveau mot de passe :</label>
                     <input type="password" name="mdp_utilisateur" id="mdp_utilisateur"/>
                     <label>Confirmer le mot de passe :</label>
                     <input type="password" name="mdp_utilisateur2" id="mdp_utilisateur2"/>';
-                    if(isset($_SESSION['admin_utilisateur']))
+                    if(!empty($_SESSION['admin_utilisateur']) && $_SESSION['admin_utilisateur'])
                     {
-                        if($_SESSION['admin_utilisateur'])
-                        {
-                            echo '<label for="admin">setAdmin</label>
-                                  <input type="checkbox" name="admin" ';
+                        echo '<label>setAdmin</label>
+                                  <input type="checkbox" name="admin_utilisateur" ';
                                   if ($admin_utilisateur == 1) {
                                     echo 'checked/>';
                                     }
                                     else {
                                         echo '/>';
                                     }
-
-                        }
                     }
-                    echo '<input type="hidden" name="action" value=' .$vue .'>
-                    <input type="hidden" name="controller" value="utilisateur">
-                    </p>
+                    echo '</p>
                     <p>
                         <input type="submit" value="Envoyer"/>
                     </p>';
