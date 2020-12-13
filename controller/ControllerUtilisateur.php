@@ -147,6 +147,7 @@ class ControllerUtilisateur
         if(ModelUtilisateur::verifieMailUtilisateur($htmlSpecialMail) < 1) {
             if(!empty($_POST['admin_utilisateur']) && $_POST['admin_utilisateur']=="on"){
                 $isadmin_utilisateur = 1;
+                $nonce = NULL;
             }
             else{
                 $isadmin_utilisateur = 0;

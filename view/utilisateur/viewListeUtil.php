@@ -51,10 +51,16 @@
                     <strong>
                       <a href="index.php?action=utilisateurDetail&controller=utilisateur&id_utilisateur='.$id.'" class="dark-grey-text">';
                       	if ($value->get('admin_utilisateur') == 1) {
-			            	echo '<span class="badge badge-pill danger-color"> admin </span> ';
+			            	echo '<span class="badge badge-pill danger-color"> admin ';
+                    if ($value->get('nonce_utilisateur') != NULL) {
+                    echo '<i>(email non validé)</i>'; }
+                    echo '</span> ';
 			            }
                   else{
-                    echo '<span class="badge badge-pill blue"> Client </span> ';
+                    echo '<span class="badge badge-pill blue"> Client ';
+                    if ($value->get('nonce_utilisateur') != NULL) {
+                    echo '<i>(email non validé)</i>'; }
+                    echo '</span> ';
                   }
                         echo '
                       </a>
