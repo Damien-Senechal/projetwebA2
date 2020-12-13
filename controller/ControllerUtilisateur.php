@@ -168,7 +168,7 @@ class ControllerUtilisateur
                                               "nonce_utilisateur" => $nonce,
                                               "ddn_utilisateur" => $htmlSpecialDDN,
                                               "urlImage_utilisateur" => $urlImage)) == false) {
-                self::error("utilisateur déjà créé");
+                self::error("Utilisateur déjà créé", "enregistrer", self::$object);
             }
             else {
                 unset($_SESSION['formNom']);
