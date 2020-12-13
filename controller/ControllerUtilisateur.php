@@ -192,7 +192,7 @@ class ControllerUtilisateur
         }
         else
         {
-            self::error("Problème dans la création de compte", "accueil", "utilisateur"); 
+            self::error("Problème dans la création de compte", "seConnecter", "utilisateur"); 
         }
     }
 

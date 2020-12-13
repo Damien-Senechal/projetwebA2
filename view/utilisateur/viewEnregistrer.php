@@ -59,7 +59,7 @@
         }
     ?>
 <div id="container">
-    <form method="post" <?php  if($_GET['action'] == "enregistrer") {
+    <form method="POST" <?php  if($_GET['action'] == "enregistrer") {
         echo 'action="index?action=senregistrer&controller=utilisateur"';
     }
     else {
