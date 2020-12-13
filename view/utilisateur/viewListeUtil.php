@@ -29,7 +29,7 @@
             
             echo '<div class="col-lg-3 col-md-6 mb-4">
               <!--Card-->
-              <div class="card">
+              <div class="card" style="height : 100%; width : 100%;">
                 <!--Card image-->
                 <div class="view overlay">
                   <img src="'.$url.'" class="card-img-top"
