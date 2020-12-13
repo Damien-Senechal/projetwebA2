@@ -98,10 +98,10 @@ class ControllerUtilisateur
 
     public static function valider()
     {
-        if(ModelUtilisateur::getUtilisateurByMail($_GET['mail_utilisateur'])) {
-            $utilisateur = ModelUtilisateur::getUtilisateurByMail($_GET['mail_utilisateur']);
+        if(ModelUtilisateur::getUtilisateurByMail(htmlspecialchars($_GET['mail_utilisateur'])) {
+            $utilisateur = ModelUtilisateur::getUtilisateurByMail(htmlspecialchars($_GET['mail_utilisateur']));
             $nonce_utilisateur = $utilisateur->get('nonce_utilisateur');
-            if ($_GET['nonce_utilisateur'] == $nonce_utilisateur) {
+            if (htmlspecialchars($_GET['nonce_utilisateur']) == $nonce_utilisateur) {
                 ModelUtilisateur::setNonceNull($nonce_utilisateur);
             }
         }
@@ -190,7 +190,7 @@ class ControllerUtilisateur
     }
 
     public static function update(){
-        if($_GET['id_utilisateur']==$_SESSION['id_utilisateur'])
+        if(htmlspecialchars($_GET['id_utilisateur'])==$_SESSION['id_utilisateur'])
         {
             $pagetitle = "Modifier compte";
             $view = 'viewEnregistrer';
@@ -251,7 +251,7 @@ class ControllerUtilisateur
         }
 
 
-        if(!filter_var($_POST['mail_utilisateur'], FILTER_VALIDATE_EMAIL)){
+        if(!filter_var(htmlspecialchars($_POST['mail_utilisateur']), FILTER_VALIDATE_EMAIL)){
             self::error("Mail incorrect !", "update", "utilisateur");
         }
         else if (!Session::is_admin() && Security::hacher(htmlspecialchars($_POST['ancien_mdp_utilisateur'])) != $utilisateur->get('mdp_utilisateur')) {
@@ -259,7 +259,7 @@ class ControllerUtilisateur
         }
         else{
             if($id==$_SESSION['id_utilisateur'] | Session::is_admin()){
-                if(isset($_POST['admin_utilisateur'])){
+                if(isset(htmlspecialchars($_POST['admin_utilisateur']))){
                     if(htmlspecialchars($_POST['admin_utilisateur'])=="on"){
                         $isadmin = 1;
                     }

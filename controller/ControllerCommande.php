@@ -8,8 +8,8 @@ class ControllerCommande
 {
     protected static $object = "commande";
     public static function listeCommande() {
-        $listeCommandes = ModelCommande::getListeCommandeUtilisateur($_GET['id_utilisateur']);
-        $pagetitle = "Liste commande(s) de " . ModelUtilisateur::getUtilisateurById($_GET['id_utilisateur'])->get('nom_utilisateur');
+        $listeCommandes = ModelCommande::getListeCommandeUtilisateur(htmlspecialchars($_GET['id_utilisateur']));
+        $pagetitle = "Liste commande(s) de " . ModelUtilisateur::getUtilisateurById(htmlspecialchars($_GET['id_utilisateur']))->get('nom_utilisateur');
         if ($listeCommandes != null){
             $view = 'viewListeCommande';
         } else {
@@ -39,17 +39,17 @@ class ControllerCommande
                 $prenomClient_NC_commande = NULL;
                 $mailClient_NC_commande = NULL;
                 $adresse_livraison_commande = $utilisateur->get("adresse_utilisateur");
-            } else if(!isset($_GET['connexionRapide'])) {
+            } else if(!isset(htmlspecialchars($_GET['connexionRapide']))) {
                 $pagetitle = "Connexion rapide";
                 $view = 'viewQuickConnect';
                 require File::build_path(array('view','view.php'));
                 die();
             } else {
                 $id_client = NULL;
-                $nomClient_NC_commande = $_POST["nom_utilisateur"];
-                $prenomClient_NC_commande = $_POST["prenom_utilisateur"];
-                $mailClient_NC_commande = $_POST["mail_utilisateur"];
-                $adresse_livraison_commande = $_POST["adresse_utilisateur"];
+                $nomClient_NC_commande = htmlspecialchars($_POST["nom_utilisateur"]);
+                $prenomClient_NC_commande = htmlspecialchars($_POST["prenom_utilisateur"]);
+                $mailClient_NC_commande = htmlspecialchars($_POST["mail_utilisateur"]);
+                $adresse_livraison_commande = htmlspecialchars($_POST["adresse_utilisateur"]);
             }
             $prix_commande = ControllerProduit::totalPrix();
             $date_commande = date('Y-m-d H:i:s', time() + 3600);
@@ -93,7 +93,7 @@ class ControllerCommande
     }
 
     public static function read(){
-        $u = ModelCommande::select($_GET['id_commande']);
+        $u = ModelCommande::select(htmlspecialchars($_GET['id_commande']));
         $pagetitle = "Détail Commande";
         if ($u != null){
             $view = 'detail';
@@ -110,7 +110,7 @@ class ControllerCommande
     }
 
     public static function created(){
-        $commande = new ModelCommande($_GET);
+        $commande = new ModelCommande(htmlspecialchars($_GET));
         if ($commande->save(array("id_commande" => $commande->get("id_commande"),
                                        "id_client" => $commande->get("id_client"),
                                        "date_commande" => $commande->get("date_commande"),
@@ -131,18 +131,18 @@ class ControllerCommande
     }
 
     public static function updated(){
-        $utilisateur->update(array("id_commande" => $_GET["id_commande"],
-                                       "id_client" => $_GET["id_client"],
-                                       "date_commande" => $_GET["date_commande"],
-                                       "prix_commande" => $_GET["prix_commande"]));
+        $utilisateur->update(array("id_commande" => htmlspecialchars($_GET["id_commande"]),
+                                       "id_client" => htmlspecialchars($_GET["id_client"]),
+                                       "date_commande" => htmlspecialchars($_GET["date_commande"]),
+                                       "prix_commande" => htmlspecialchars($_GET["prix_commande"])));
         $pagetitle = "Modifier commande";
         $view = 'updated';
         require File::build_path(array('view','view.php'));
     }
 
     public static function delete(){
-        if (isset($_GET["id_commande"])) {
-            ModelCommande::delete($_GET["id_commande"]);
+        if (isset(htmlspecialchars($_GET["id_commande"]))) {
+            ModelCommande::delete(htmlspecialchars($_GET["id_commande"]));
             $pagetitle = "Delete Commande";
             $view = 'deleted';
             require File::build_path(array('view','view.php'));
