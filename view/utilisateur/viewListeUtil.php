@@ -1,7 +1,14 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title></title>
+	<style type="text/css">
+   #modifsupri:hover{
+      font-size : 107%;
+    }
+    #text:hover{
+      text-shadow: 1px 1px 3px blue; 
+    } 
+  </style>
 </head>
 <body>
 	<div class="container" style="margin-top: 5%">
@@ -72,10 +79,10 @@
             if(Session::is_admin()) {
                     echo '
                     <div style = "font-size : 90%; margin-top : 5%">
-                      <a href="index.php?action=update&controller=utilisateur&id_utilisateur='.$id.'" class="nav-link border border-light rounded waves-effect" style="color : #2196f3; box-shadow: 1px 1px 1px gray; width : 49%">
+                      <a id="modifsupri" href="index.php?action=update&controller=utilisateur&id_utilisateur='.$id.'" class="nav-link border border-light rounded waves-effect" style="color : #2196f3; box-shadow: 1px 1px 1px gray; width : 49%">
                       <i class=""></i>Modifier
                       </a>
-                      <a href="index.php?action=supprimerUtilisateur&controller=utilisateur&id_utilisateur='.$id.'" class="nav-link border border-light rounded waves-effect" style="color : red; box-shadow: 1px 1px 1px gray; width : 49%">
+                      <a id="modifsupri" href="index.php?action=supprimerUtilisateur&controller=utilisateur&id_utilisateur='.$id.'" class="nav-link border border-light rounded waves-effect" style="color : red; box-shadow: 1px 1px 1px gray; width : 49%">
                       <i class=""></i>Supprimer
                       </a>
                     </div>';
@@ -97,7 +104,7 @@
               <div class="card">
                 <!--Card image-->
                 <div class="view overlay">
-                <h4 style="padding-top: 70%" class="font-weight-bold blue-text">
+                <h4 id="text" style="padding-top: 70%" class="font-weight-bold blue-text">
                     <strong>Enregistrer utilisateur</strong>
                   </h4>
                   <a href="index.php?action=enregistrer&controller=utilisateur">

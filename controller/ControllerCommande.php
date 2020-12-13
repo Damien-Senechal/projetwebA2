@@ -39,7 +39,7 @@ class ControllerCommande
                 $prenomClient_NC_commande = NULL;
                 $mailClient_NC_commande = NULL;
                 $adresse_livraison_commande = $utilisateur->get("adresse_utilisateur");
-            } else if(!isset(htmlspecialchars($_GET['connexionRapide']))) {
+            } else if(!isset($_GET['connexionRapide'])) {
                 $pagetitle = "Connexion rapide";
                 $view = 'viewQuickConnect';
                 require File::build_path(array('view','view.php'));
@@ -141,7 +141,7 @@ class ControllerCommande
     }
 
     public static function delete(){
-        if (isset(htmlspecialchars($_GET["id_commande"]))) {
+        if (isset($_GET["id_commande"])) {
             ModelCommande::delete(htmlspecialchars($_GET["id_commande"]));
             $pagetitle = "Delete Commande";
             $view = 'deleted';
@@ -152,7 +152,7 @@ class ControllerCommande
     }
 
     public static function error($message){
-        $pagetitle = "Delete Commande";
+        $pagetitle = "Erreur Commande";
         $view = 'error';
         require File::build_path(array('view','view.php'));
     }

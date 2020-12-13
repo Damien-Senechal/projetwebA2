@@ -98,7 +98,7 @@ class ControllerUtilisateur
 
     public static function valider()
     {
-        if(ModelUtilisateur::getUtilisateurByMail(htmlspecialchars($_GET['mail_utilisateur'])) {
+        if(ModelUtilisateur::getUtilisateurByMail(htmlspecialchars($_GET['mail_utilisateur']))) {
             $utilisateur = ModelUtilisateur::getUtilisateurByMail(htmlspecialchars($_GET['mail_utilisateur']));
             $nonce_utilisateur = $utilisateur->get('nonce_utilisateur');
             if (htmlspecialchars($_GET['nonce_utilisateur']) == $nonce_utilisateur) {
@@ -137,7 +137,7 @@ class ControllerUtilisateur
             if (move_uploaded_file($_FILES["photo_utilisateur"]["tmp_name"], "template/img/imagesUtilisateurs/". $randomText . ".png")) {
                 $urlImage = "template/img/imagesUtilisateurs/". $randomText . ".png";
             } else {
-                $urlImage = $utilisateur->get("urlImage_utilisateur");
+                $urlImage = "template/img/user.png";
             }
         }
         else {
@@ -259,7 +259,7 @@ class ControllerUtilisateur
         }
         else{
             if($id==$_SESSION['id_utilisateur'] | Session::is_admin()){
-                if(isset(htmlspecialchars($_POST['admin_utilisateur']))){
+                if(isset($_POST['admin_utilisateur'])){
                     if(htmlspecialchars($_POST['admin_utilisateur'])=="on"){
                         $isadmin = 1;
                     }
