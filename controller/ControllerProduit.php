@@ -12,7 +12,7 @@ class ControllerProduit
 
     public static function produitDetail(){
         setcookie("dureeDeViePanier", "OK", time() + 600);
-        $pagetitle = "Achat d'un ".ModelProduit::getProduitById($_GET['id_produit'])->get('nom_produit')." ";
+        $pagetitle = "Achat d'un ". ModelProduit::getProduitById($_GET['id_produit'])->get('nom_produit')." ";
         $view = "viewProduit";
         require File::build_path(array('view', 'view.php'));
     }
@@ -21,7 +21,7 @@ class ControllerProduit
         $produit = ModelProduit::getProduitById(htmlspecialchars($_GET['id_produit']));
         $urlImage_produit = $produit->get("urlImage_produit");
         if($urlImage_produit != NULL) {
-                unlink ($urlImage_produit);
+                unlink($urlImage_produit);
             }
         $produit->deleteGen();
         $pagetitle = "Magasin";
@@ -65,7 +65,7 @@ class ControllerProduit
                                       "stock_produit" => $htmlSpecialStock,
                                       "urlImage_produit" => $urlImage,
                                       "categorie_produit" => $htmlSpecialCategorie)) == false) {
-            self::error("Produit déjà créé");
+            self::error("Produit déjà créé", "creerCookie", self::$object);
         }
         else {
             $pagetitle = "Magasin";
@@ -154,7 +154,7 @@ class ControllerProduit
             }
             self::afficherPanier();
         } else{
-            self::error("Y a un problème chef");
+            self::error("Erreur lors de la création du panier !", "magasinProduit", self::$object);
         }  
     }
 
@@ -175,7 +175,7 @@ class ControllerProduit
             self::afficherPanier();
         }
         else {
-            self::error("Panier inexistant");
+            self::error("Panier inexistant !", "magasinProduit", self::$object);
         }
     }
 
@@ -198,7 +198,7 @@ class ControllerProduit
             }
             self::afficherPanier();
         } else{
-            self::error("Ca commence a faire beaucoup, calme toi un peu et respire lentement.");
+            self::error("Erreur lors de la modification des quantitées !", "magasinProduit", self::$object);
         }
     }
 
@@ -254,7 +254,7 @@ class ControllerProduit
         }
     }
 
-    public static function error($message){
+    public static function error($message, $action, $controller){
         $pagetitle = "Erreur Produits";
         $view = 'error';
         require File::build_path(array('view','view.php'));
