@@ -63,7 +63,7 @@
               <a class="nav-link waves-effect" href="index.php?action=listeUtilisateur&controller=utilisateur">Utilisateurs</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link waves-effect" href="https://webinfo.iutmontp.univ-montp2.fr/my/">BDD</a>
+              <a class="nav-link waves-effect" href="https://webinfo.iutmontp.univ-montp2.fr/my/" target="_blank">BDD</a>
             </li>';
           }
           ?>
