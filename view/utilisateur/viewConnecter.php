@@ -49,7 +49,7 @@
         <div id="container">
             <!-- zone de connexion -->
             
-            <form  method="post" action="index?action=connected&controller=utilisateur">
+            <form  method="post" action="index.php?action=connected&controller=utilisateur">
                 <h1>Connexion</h1>
                 <?php if (isset($_SESSION['msgErreur'])){
                     echo '<p style="text-align : center; color : red;">' . $_SESSION['msgErreur'] . '</p>';

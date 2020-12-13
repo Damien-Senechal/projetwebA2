@@ -59,11 +59,11 @@
         }
     ?>
 <div id="container">
-    <form method="POST" <?php  if($_GET['action'] == "enregistrer") {
-        echo 'action="index?action=senregistrer&controller=utilisateur"';
+    <form method="post" <?php  if($_GET['action'] == "enregistrer") {
+        echo 'action="index.php?action=senregistrer&controller=utilisateur"';
     }
     else {
-        echo 'action="index?action=updated&controller=utilisateur"';
+        echo 'action="index.php?action=updated&controller=utilisateur"';
     }
     ?> enctype="multipart/form-data">
 

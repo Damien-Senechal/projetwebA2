@@ -125,7 +125,7 @@
 	        	die();
       		}
 
-			}
+		}
 
 	  	public static function updateGen($data)
 	  	{
@@ -151,6 +151,6 @@
 		        die();
 		    }
 	    }
-		}
+	}
     Model::Init();
 ?>

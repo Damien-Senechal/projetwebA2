@@ -69,10 +69,10 @@
   <main class="mt-5 pt-4">
     <div id="container">
     <form method="post" <?php  if($_GET['action'] == "creerCookie") {
-        echo 'action="index?action=creationCookie&controller=produit"';
+        echo 'action="index.php?action=creationCookie&controller=produit"';
     }
     else {
-        echo 'action="index?action=modificationCoockie&controller=produit"';
+        echo 'action="index.php?action=modificationCoockie&controller=produit"';
     }
     ?> enctype="multipart/form-data">
 
@@ -131,7 +131,7 @@
                     </p>';
                 }
             ?>
-            <p><center><a href="index?action=magasinProduit&controller=produit"> fermer </a></center></p>
+            <p><center><a href="index.php?action=magasinProduit&controller=produit"> fermer </a></center></p>
         </fieldset>
     </form> 
 </div>

@@ -14,9 +14,10 @@
       $id_client = $value->get('id_client');
       $date = $value->get('date_commande');
       $prix = $value->get('prix_commande');
+      $adresse = $value->get('adresse_livraison_commande');
       if($id_client == NULL) {
-        $nom = 'connecté';
-        $prenom = 'non ';
+        $nom = $value->get('nomClient_NC_commande');
+        $prenom = $value->get('prenomClient_NC_commande');
       } else {
         $utilisateur = ModelUtilisateur::getUtilisateurById($id_client);
         $nom = $utilisateur->get('nom_utilisateur');
@@ -32,7 +33,18 @@
                     </a>
                     <h5>
                       <strong>
-                        <a href="index?action=utilisateurDetail&controller=utilisateur&id_utilisateur='.$id_client.'" class="dark-grey-text"> Commandé par ' .$prenom . ' ' .$nom  .' <br><br>
+                        <a'; if($id_client == NULL) { 
+                          echo 'href="index.php?action=utilisateurDetail&controller=utilisateur&id_utilisateur='.$id_client.'"';
+                          echo' class="dark-grey-text"> Commandé par ' .$prenom . ' ' .$nom . ' <i>(non enregistrer)</i>';
+                          } 
+                          else {
+                            echo' class="dark-grey-text"> Commandé par ' .$prenom . ' ' .$nom;
+                          }
+                          echo '
+                          <br> 
+                          <a class="grey-text">
+                            <h5>Adresse de livraison : '. $adresse .'</h5>
+                          </a><br>
                           <span class="badge badge-pill danger-color" style="font-size : 130%"> (Yves) Montant de la commande - '.$prix.'€</span>
                           <div class="container" style="margin-top: 5%">
                           <section class="text-center mb-4">
@@ -55,7 +67,7 @@
                                   <div class="card-body text-center">
                               Produit n°'.$i.' : <br><br>
                               '.$nom_produit.' <br>
-                              <a href="index?action=produitDetail&controller=produit&id_produit='.$id_produit.'">
+                              <a href="index.php?action=produitDetail&controller=produit&id_produit='.$id_produit.'">
                               <img src="'.$image_produit.'" class="img-fluid" alt=""><br></a>';
                               if ($quantite_produit_detail == 1) 
                                 echo $quantite_produit_detail.' produit acheté <br><br>';

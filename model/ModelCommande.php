@@ -8,6 +8,10 @@ class ModelCommande extends Model {
     private $id_client;
     private $prix_commande;
     private $date_commande;
+    private $adresse_livraison_commande;
+    private $nomClient_NC_commande;
+    private $prenomClient_NC_commande;
+    private $mailClient_NC_commande;
     protected static $object = "commande";
     protected static $primary = "id_commande";
         

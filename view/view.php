@@ -42,25 +42,25 @@
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link waves-effect" href="index?action=magasinProduit&controller=produit">Magasin</a>
+            <a class="nav-link waves-effect" href="index.php?action=magasinProduit&controller=produit">Magasin</a>
           </li>
           <?php 
           if (Session::is_admin()) {
             echo '
             <li class="nav-item">
-              <a class="nav-link waves-effect" href="index?action=listeToutesCommandes&controller=commande">Commandes</a>
+              <a class="nav-link waves-effect" href="index.php?action=listeToutesCommandes&controller=commande">Commandes</a>
             </li>';
           }
           else if (isset($_SESSION['id_utilisateur'])) {
           echo '
           <li class="nav-item">
-            <a class="nav-link waves-effect" href="index?action=utilisateurDetail&controller=utilisateur&id_utilisateur='.$_SESSION['id_utilisateur'].'">Compte</a>
+            <a class="nav-link waves-effect" href="index.php?action=utilisateurDetail&controller=utilisateur&id_utilisateur='.$_SESSION['id_utilisateur'].'">Compte</a>
           </li>';
           }
           if (Session::is_admin()) {
             echo '
             <li class="nav-item">
-              <a class="nav-link waves-effect" href="index?action=listeUtilisateur&controller=utilisateur">Utilisateurs</a>
+              <a class="nav-link waves-effect" href="index.php?action=listeUtilisateur&controller=utilisateur">Utilisateurs</a>
             </li>
             <li class="nav-item">
               <a class="nav-link waves-effect" href="https://webinfo.iutmontp.univ-montp2.fr/my/">BDD</a>
@@ -71,7 +71,7 @@
         <!-- Right -->
         <ul class="navbar-nav nav-flex-icons">
           <li class="nav-item">
-            <a class="nav-link waves-effect" href="index?action=afficherPanier&controller=produit">
+            <a class="nav-link waves-effect" href="index.php?action=afficherPanier&controller=produit">
               <span class="badge red z-depth-1 mr-1"> <?php echo ControllerProduit::nbrProduit() ?> 
               </span>
                 <i class="fas fa-shopping-cart"></i>
@@ -87,19 +87,19 @@
           <?php if(!isset($_SESSION['id_utilisateur'])) {
           echo '
           <li class="nav-item">
-            <a href="index?action=enregistrer&controller=utilisateur" class="nav-link border border-light rounded waves-effect">
+            <a href="index.php?action=enregistrer&controller=utilisateur" class="nav-link border border-light rounded waves-effect">
               <i class=""></i>S\'enregistrer
             </a>
           </li>
           <li class="nav-item">
-            <a href="index?action=seConnecter&controller=utilisateur" class="nav-link border border-light rounded waves-effect">
+            <a href="index.php?action=seConnecter&controller=utilisateur" class="nav-link border border-light rounded waves-effect">
               <i class=""></i>Se connecter
             </a>
           </li>'; }
           else {
             echo '
             <li class="nav-item">
-            <a href="index?action=deconnecter&controller=utilisateur" class="nav-link border border-light rounded waves-effect">
+            <a href="index.php?action=deconnecter&controller=utilisateur" class="nav-link border border-light rounded waves-effect">
               <i class=""></i>Se deconnecter
             </a>
           </li>';
@@ -111,7 +111,7 @@
                 <a style = "display: flex; align-items: center;">
                 Bonjour ' . $prenom_utilisateur. ' 
                 <a>
-            <a href="index?action=utilisateurDetail&controller=utilisateur&id_utilisateur='. $id .'">
+            <a href="index.php?action=utilisateurDetail&controller=utilisateur&id_utilisateur='. $id .'">
             <img style = "margin-left : 10px; width : 40px; height : 40px; align-items : center;" src="'.$url.'" class="card-img-top">
           </a>';
           if (Session::is_admin()) {

@@ -65,6 +65,26 @@ class ModelUtilisateur extends Model {
         }
     }
 
+    public static function setNonceNull($id) {
+      {
+        try {
+            $sql = "UPDATE p_utilisateurs SET nonce_utilisateur = NULL WHERE id_utilisateur = :id_utilisateur ";
+            $req_prep = Model::$pdo->prepare($sql);
+            $values = array(
+              "id_utilisateur"=>$id,
+            );
+            $req_prep->execute($values);
+          } catch (PDOException $e) {
+            if (Conf::getDebug()) {
+              echo $e->getMessage(); // affiche un message d'erreur
+            }else {
+              echo 'Une erreur est survenue <a href="../index.php"> retour a la page d\'accueil </a>';
+            }
+            die();
+          }
+  }
+    }
+
     public static function getUtilisateurById($id) {
       $sql = "SELECT * from p_utilisateurs WHERE id_utilisateur=:nom_tag";
       // Préparation de la requête
@@ -83,7 +103,7 @@ class ModelUtilisateur extends Model {
       // Attention, si il n'y a pas de résultats, on renvoie false
       if (empty($tab_uti)) return false;
       return $tab_uti[0];
-  }
+    }
 
   public static function getUtilisateurByMail($id) {
       $sql = "SELECT * from p_utilisateurs WHERE mail_utilisateur=:nom_tag";

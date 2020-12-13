@@ -32,14 +32,33 @@ class ControllerCommande
     public static function validerPanier(){
         if(!empty($_SESSION['panier'])) {
             $commande = new ModelCommande(); 
-            if(!empty($_SESSION['id_utilisateur']))
+            if(!empty($_SESSION['id_utilisateur'])) {
                 $id_client = $_SESSION['id_utilisateur'];
-            else 
+                $utilisateur = ModelUtilisateur::getUtilisateurById($id_client);
+                $nomClient_NC_commande = NULL;
+                $prenomClient_NC_commande = NULL;
+                $mailClient_NC_commande = NULL;
+                $adresse_livraison_commande = $utilisateur->get("adresse_utilisateur");
+            } else if(!isset($_GET['connexionRapide'])) {
+                $pagetitle = "Connexion rapide";
+                $view = 'viewQuickConnect';
+                require File::build_path(array('view','view.php'));
+                die();
+            } else {
                 $id_client = NULL;
+                $nomClient_NC_commande = $_POST["nom_utilisateur"];
+                $prenomClient_NC_commande = $_POST["prenom_utilisateur"];
+                $mailClient_NC_commande = $_POST["mail_utilisateur"];
+                $adresse_livraison_commande = $_POST["adresse_utilisateur"];
+            }
             $prix_commande = ControllerProduit::totalPrix();
-            $date_commande = date("Y-m-d");
+            $date_commande = date('Y-m-d H:i:s', time() + 3600);
             if ($commande->save(array("id_commande" => NULL,
                                           "id_client" => $id_client,
+                                          "nomClient_NC_commande" => $nomClient_NC_commande,
+                                          "prenomClient_NC_commande" => $prenomClient_NC_commande,
+                                          "mailClient_NC_commande" => $mailClient_NC_commande,
+                                          "adresse_livraison_commande" => $adresse_livraison_commande,
                                           "prix_commande" => $prix_commande,
                                           "date_commande" => $date_commande)) == false) {
             self::error("Erreur lors de la création de la commande !");
@@ -47,7 +66,6 @@ class ControllerCommande
             else {
                 foreach ($_SESSION['panier'] as $key => $value) {
                     $detail = new ModelDetail(); 
-                    $id_commande = $commande->get("id_commande");
                     $id_produit = $_SESSION['panier'][$key]['idProduit'];
                     $quantite_produit_detail = $_SESSION['panier'][$key]['qaProduit'];
                     $id_produit = $_SESSION['panier'][$key]['idProduit'];
@@ -65,11 +83,12 @@ class ControllerCommande
                         ModelProduit::updateQuantiteProduit($quantite_produit_detail, $id_produit);
                     }            
                 }
-            }
             unset($_SESSION['panier']);
+            echo "je suis le dernier else !!!!";
             $pagetitle = "Paiement accepté !";
             $view = 'viewPaiementAccepter';
             require File::build_path(array('view','view.php'));
+            }
         }
     }
 

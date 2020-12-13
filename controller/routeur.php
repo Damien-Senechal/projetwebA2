@@ -2,6 +2,7 @@
     require_once File::build_path(array('controller','ControllerProduit.php'));
     require_once File::build_path(array('controller','ControllerUtilisateur.php'));
     require_once File::build_path(array('controller','ControllerCommande.php'));
+
     if (isset($_GET['action'])) {
         $controller_class = "Controller" . ucfirst($_GET['controller']);
         if (class_exists($controller_class)) {

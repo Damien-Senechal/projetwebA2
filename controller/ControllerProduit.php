@@ -20,7 +20,9 @@ class ControllerProduit
     public static function supprimerCookie(){
         $produit = ModelProduit::getProduitById(htmlspecialchars($_GET['id_produit']));
         $urlImage_produit = $produit->get("urlImage_produit");
-        unlink ($urlImage_produit);
+        if($urlImage_produit != NULL) {
+                unlink ($urlImage_produit);
+            }
         $produit->deleteGen();
         $pagetitle = "Magasin";
         $view = "viewMagasin";
@@ -218,6 +220,9 @@ class ControllerProduit
 
     public static function supprPanier(){
         unset($_SESSION['panier']);
+        $pagetitle = "Panier";
+        $view = "viewPanier";
+        require File::build_path(array('view','view.php'));
     }
 
 

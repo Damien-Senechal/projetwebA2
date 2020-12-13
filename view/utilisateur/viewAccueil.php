@@ -67,7 +67,7 @@
                 <strong>N'hésitez pas à vous faire plaisir avec notre selections de cookies originaux !</strong>
               </p>
 
-              <a href="index?action=magasinProduit&controller=produit" class="btn btn-outline-white btn-lg"> --> Magasin <--
+              <a href="index.php?action=magasinProduit&controller=produit" class="btn btn-outline-white btn-lg"> --> Magasin <--
                 <i class=""></i>
               </a>
             </div>
@@ -101,7 +101,7 @@
                 <strong>N'hésitez pas à vous faire plaisir avec notre selections de cookies originaux !</strong>
               </p>
 
-              <a href="index?action=magasinProduit&controller=produit" class="btn btn-outline-white btn-lg">--> Magasin <--
+              <a href="index.php?action=magasinProduit&controller=produit" class="btn btn-outline-white btn-lg">--> Magasin <--
                 <i class=""></i>
               </a>
             </div>
@@ -135,7 +135,7 @@
                 <strong>N'hésitez pas à vous faire plaisir avec notre selections de cookies originaux !</strong>
               </p>
 
-              <a href="index?action=magasinProduit&controller=produit" class="btn btn-outline-white btn-lg">--> Magasin <--
+              <a href="index.php?action=magasinProduit&controller=produit" class="btn btn-outline-white btn-lg">--> Magasin <--
                 <i class=""></i>
               </a>
             </div>
@@ -190,18 +190,18 @@
                     <div class="view overlay">
                       <img src="'.$url.'" class="card-img-top"
                         alt="">
-                      <a href="index?action=utilisateurDetail&controller=utilisateur&id_utilisateur='.$id.'">
+                      <a href="index.php?action=utilisateurDetail&controller=utilisateur&id_utilisateur='.$id.'">
                         <div class="mask rgba-white-slight">Présentation</div>
                       </a>
                     </div>
                     <div class="card-body text-center">
                      
-                      <a href="index?action=utilisateurDetail&controller=utilisateur&id_utilisateur='.$id.'" class="grey-text">
+                      <a href="index.php?action=utilisateurDetail&controller=utilisateur&id_utilisateur='.$id.'" class="grey-text">
                         <h5>'.$nom.'</h5>
                       </a>
                       <h5>
                         <strong>
-                          <a href="index?action=utilisateurDetail&controller=utilisateur&id_utilisateur='.$id.'" class="dark-grey-text"> ' .$prenom. '
+                          <a href="index.php?action=utilisateurDetail&controller=utilisateur&id_utilisateur='.$id.'" class="dark-grey-text"> ' .$prenom. '
                             <br>
                             <span class="badge badge-pill orange">'.$mail.'</span>
                           </a>

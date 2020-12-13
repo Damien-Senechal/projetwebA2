@@ -6,7 +6,7 @@
     </div>
     <img style = "display: block; margin : auto" src="template/img/mecContent.png" class="img-fluid" alt="¯\_(ツ)_/¯">
     <center>
-    <a style="margin-top : 2%; color : red" class="nav-link border border-light rounded waves-effect" href="index?action=accueil&controller=utilisateur">➡ revenir à l'accueil ⬅</a>
+    <a style="margin-top : 2%; color : red" class="nav-link border border-light rounded waves-effect" href="index.php?action=accueil&controller=utilisateur">➡ revenir à l'accueil ⬅</a>
     </center>
 </body>
 </html>

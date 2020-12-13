@@ -12,7 +12,7 @@ class ControllerUtilisateur
     }
 
     public static function utilisateurDetail(){
-        $pagetitle = "Utilisateur " . ModelUtilisateur::getUtilisateurById($_GET['id_utilisateur'])->get('nom_utilisateur');
+        $pagetitle = "Utilisateur " . ModelUtilisateur::getUtilisateurById(htmlspecialchars($_GET['id_utilisateur']))->get('nom_utilisateur');
         $view = "viewUtilisateur";
         require File::build_path(array('view','view.php'));
     }
@@ -96,6 +96,17 @@ class ControllerUtilisateur
         require File::build_path(array('view','view.php'));
     }
 
+    public static function valider()
+    {
+        if(ModelUtilisateur::getUtilisateurByMail($_GET['mail_utilisateur'])) {
+            $utilisateur = ModelUtilisateur::getUtilisateurByMail($_GET['mail_utilisateur']);
+            $nonce_utilisateur = $utilisateur->get('nonce_utilisateur');
+            if ($_GET['nonce_utilisateur'] == $nonce_utilisateur) {
+                ModelUtilisateur::setNonceNull($nonce_utilisateur);
+            }
+        }
+    }
+
     public static function senregistrer(){
         $utilisateur = new ModelUtilisateur();
 
@@ -118,8 +129,8 @@ class ControllerUtilisateur
         $_SESSION['formMdp1'] = $htmlSpecialmdp1;
         $_SESSION['formMdp2'] = $htmlSpecialmdp2;
 
-        $nonce = NULL;
-        //Security::generateRandomHex()
+        $nonce = Security::generateRandomHex();
+
         $randomText = Security::generateRandomHex();
 
         if(!empty($_FILES["photo_utilisateur"])) {
@@ -130,7 +141,7 @@ class ControllerUtilisateur
             }
         }
         else {
-            $urlImage = $utilisateur->get("urlImage_utilisateur");
+            $urlImage = "template/img/user.png";
         } 
 
         if(ModelUtilisateur::verifieMailUtilisateur($htmlSpecialMail) < 1) {
@@ -169,8 +180,8 @@ class ControllerUtilisateur
                 unset($_SESSION['formMdp1']);
                 unset($_SESSION['formMdp2']);
 
-                $pagetitle = "Cookie paradise";
-                $view = 'viewAccueil';
+                $pagetitle = "Validé utilisateur";
+                $view = 'viewValiderEnregistrement';
                 require File::build_path(array('view','view.php'));
             } 
         }
@@ -192,7 +203,7 @@ class ControllerUtilisateur
         }
         else
         {
-            self::error("Problème dans la création de compte", "seConnecter", "utilisateur"); 
+            self::error("Problème dans la création de compte", "accueil", "utilisateur"); 
         }
     }
 
@@ -241,10 +252,10 @@ class ControllerUtilisateur
 
 
         if(!filter_var($_POST['mail_utilisateur'], FILTER_VALIDATE_EMAIL)){
-            echo 'Mail incorrect <br>!  <a href="index.php">RETOUR A L\'ACCEUIL</a>';
+            self::error("Mail incorrect !", "update", "utilisateur");
         }
         else if (!Session::is_admin() && Security::hacher(htmlspecialchars($_POST['ancien_mdp_utilisateur'])) != $utilisateur->get('mdp_utilisateur')) {
-            echo 'Mot de passe incorrect <br>  <a href="index.php">RETOUR A L\'ACCEUIL</a>';
+            self::error("Mot de passe incorrect !", "update", "utilisateur");
         }
         else{
             if($id==$_SESSION['id_utilisateur'] | Session::is_admin()){
@@ -256,7 +267,7 @@ class ControllerUtilisateur
                 else{
                     $isadmin = 0;
                 }
-                if($htmlSpecialmdp1==$htmlSpecialmdp2 | empty($htmlSpecialmdp1) && empty($htmlSpecialmdp2)) {
+                if($htmlSpecialmdp1==$htmlSpecialmdp2 || empty($htmlSpecialmdp1) && empty($htmlSpecialmdp2)) {
                     $utilisateur->updateGen(array("id_utilisateur" => $id,
                                              "nom_utilisateur" => $htmlSpecialNom,
                                              "prenom_utilisateur" => $htmlSpecialPrenom,
@@ -265,7 +276,7 @@ class ControllerUtilisateur
                                              "adresse_utilisateur" => $htmlSpecialAdresse,
                                              "admin_utilisateur" => $isadmin,
                                              "histoire_utilisateur" => $htmlSpecialHistoire,
-                                             "nonce_utilisateur" => NULL,
+                                             "nonce_utilisateur" => $utilisateur->get('nonce_utilisateur'),
                                              "ddn_utilisateur" => $htmlSpecialDDN,
                                              "urlImage_utilisateur" => $urlImage));
                     unset($_SESSION['formNom']);
@@ -281,12 +292,12 @@ class ControllerUtilisateur
                     require File::build_path(array('view','view.php'));
                 }
                 else{
-                   self::error("Les mots de passe sont different", "senregistrer", "utilisateur"); 
+                   self::error("Les mots de passe sont different", "update", "utilisateur"); 
                 }
             }
             else
             {
-                echo 'Arrete de hacker notre site stp  <a href="index.php">RETOUR A L\'ACCEUIL</a>';
+                self::error("Arrete de hacker notre site", "update", "utilisateur");
             }
         }
     }

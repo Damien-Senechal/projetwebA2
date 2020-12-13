@@ -69,7 +69,7 @@
             if ((!empty($_SESSION['id_utilisateur'])) && ($_GET['id_utilisateur'] == $_SESSION['id_utilisateur']) || (Session::is_admin())) {
               if ($nbrCommandes > 0) {
                 echo '
-                <a href="index?action=listeCommande&controller=commande&id_utilisateur='.$id.'" class="lead font-weight-bold">Nb commandes : '. $nbrCommandes  . '</a>';
+                <a href="index.php?action=listeCommande&controller=commande&id_utilisateur='.$id.'" class="lead font-weight-bold">Nb commandes : '. $nbrCommandes  . '</a>';
                 }
               else {
                 echo '<a class="lead font-weight-bold"> Aucune commande </a>';
@@ -79,10 +79,10 @@
               <br>
               </div>
               <div style = "font-size : 90%; margin-top : 5%">
-                    <a href="index?action=update&controller=utilisateur&id_utilisateur='.$id.'" class="nav-link border border-light rounded waves-effect" style="background-color : #2196f3; color : white; font-weight : bold; box-shadow: 1px 1px 1px gray; width : 35%; text-align : center">
+                    <a href="index.php?action=update&controller=utilisateur&id_utilisateur='.$id.'" class="nav-link border border-light rounded waves-effect" style="background-color : #2196f3; color : white; font-weight : bold; box-shadow: 1px 1px 1px gray; width : 35%; text-align : center">
                     <i class=""></i>Modifier compte
                     </a>
-                    <a href="index?action=supprimerUtilisateur&controller=utilisateur&id_utilisateur='.$id.'" class="nav-link border border-light rounded waves-effect" style="background-color : red; font-weight : bold; color : white; box-shadow: 1px 1px 1px gray; width : 35%; text-align : center">
+                    <a href="index.php?action=supprimerUtilisateur&controller=utilisateur&id_utilisateur='.$id.'" class="nav-link border border-light rounded waves-effect" style="background-color : red; font-weight : bold; color : white; box-shadow: 1px 1px 1px gray; width : 35%; text-align : center">
                     <i class=""></i>Supprimer compte
                     </a>
               </div>';

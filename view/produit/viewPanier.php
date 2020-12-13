@@ -26,7 +26,7 @@
                     </div>
                     <img style = "display: block; margin : auto" src="template/img/hrugPapi.png" class="img-fluid" alt="¯\_(ツ)_/¯">
                     <center>
-                    <a style="margin-top : 2%; color : red" class="nav-link border border-light rounded waves-effect" href="index?action=accueil&controller=utilisateur">➡ revenir à l\'accueil ⬅</a>
+                    <a style="margin-top : 2%; color : red" class="nav-link border border-light rounded waves-effect" href="index.php?action=accueil&controller=utilisateur">➡ revenir à l\'accueil ⬅</a>
                     </center>';
                   else
                   {
@@ -61,7 +61,7 @@
                                 Produit n°'. $i .' :
                                 <br>
                                 <i> '.$nom_produit.' </i>
-                                <a href="index?action=produitDetail&controller=produit&id_produit='.$id_produit.'">
+                                <a href="index.php?action=produitDetail&controller=produit&id_produit='.$id_produit.'">
                                 <img src="'.$image_produit.'" class="img-fluid" alt="">
                                 </a>
 
@@ -89,7 +89,7 @@
                                   </button>';?>
                                   <?php 
                                   echo '
-                                  <a href="index?action=supprimerProduit&controller=produit&id_produit='.$_SESSION['panier'][$key]['idProduit'].'" class="nav-link border border-light rounded waves-effect" style="color : red; box-shadow: 1px 1px 1px gray;;"> '?>
+                                  <a href="index.php?action=supprimerProduit&controller=produit&id_produit='.$_SESSION['panier'][$key]['idProduit'].'" class="nav-link border border-light rounded waves-effect" style="color : red; box-shadow: 1px 1px 1px gray;;"> '?>
                                     <i class=""></i>Supprimer
                                   </a>
                                   </form>
@@ -106,16 +106,17 @@
                                   } 
                               echo '  
                               </div>
-                              <a href="index?action=magasinProduit&controller=produit">
+                              <a href="index.php?action=magasinProduit&controller=produit">
                                 <span class="badge badge-pill blue" style="font-size : 130%; margin-right : 5%; border-radius : 0px"> ⬅ Poursuivre les achats</span>
                               </a>
-                              <a href="index?action=validerPanier&controller=commande">
+                              <a href="index.php?action=validerPanier&controller=commande">
                                 <span class="badge badge-pill danger-color" style="font-size : 130%; border-radius : 0px;"> Proceder au paiement ➡</span>
                               </a>
                               </section>
                             </div>
                             </a>
                             </strong>
+                            <a href="index.php?action=supprPanier&controller=produit"> <span class="badge badge-pill orange" style="font-size : 130%"> Vider votre panier</span> </a>
                         </h5>
                         </div>
                         </section>
