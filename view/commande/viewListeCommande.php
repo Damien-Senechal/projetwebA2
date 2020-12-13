@@ -31,7 +31,7 @@
                     <h5>
                       <strong>
                         <a class="dark-grey-text"> Commandé par ' .$nom. ' <br><br>
-                          <span class="badge badge-pill danger-color" style="font-size : 130%"> (Yves) Montant de la commande - '.$prix.'€</span>
+                          <span class="badge badge-pill danger-color" style="font-size : 130%"> Montant de la commande - '.$prix.'€</span>
                           <div class="container" style="margin-top: 5%">
                           <section class="text-center mb-4">
                             <div class="row wow fadeIn">'; 

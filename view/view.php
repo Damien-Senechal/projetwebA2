@@ -108,7 +108,7 @@
           $prenom_utilisateur = $u->get('prenom_utilisateur');
           $url = $u->get('urlImage_utilisateur');
           echo '<li style = "margin-left : 10px; display: flex;" class="nav-item">
-                <a style = "display: flex; align-items: center;">
+                <a href="index.php?action=utilisateurDetail&controller=utilisateur&id_utilisateur='. $id .'" style = "display: flex; align-items: center; color : black">
                 Bonjour ' . $prenom_utilisateur. ' 
                 <a>
             <a href="index.php?action=utilisateurDetail&controller=utilisateur&id_utilisateur='. $id .'">
